@@ -16,7 +16,7 @@ class TextForm extends StatelessWidget {
 
     final Size screen = MediaQuery.of(context).size;
     if(type == 'email'){
-      return Container(
+      return SizedBox(
         width: screen.width * 0.8,
         child: TextFormField(
           decoration: InputDecoration(
@@ -28,7 +28,7 @@ class TextForm extends StatelessWidget {
         ),
       );
     } else if(type == 'password'){
-      return Container(
+      return SizedBox(
         width: screen.width * 0.8,
         child: TextFormField(
           decoration: InputDecoration(
@@ -41,7 +41,7 @@ class TextForm extends StatelessWidget {
       );
     }
 
-    return Center(child: Container(child: Text('Erro'),));
+    return const Center(child: Text('Erro'));
 
   }
 

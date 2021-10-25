@@ -19,6 +19,28 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return ModularApp(module: AppModule(), child: const AppWidget());
+    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot){
+        if(snapshot.hasError){
+          return Expanded(
+            child: Container(
+              color: Colors.red,
+              child: const Text('Error'),
+            ),
+          );
+        }
+
+        if(snapshot.connectionState == ConnectionState.done){
+          return ModularApp(module: AppModule(), child: const AppWidget());
+        }
+
+        return const CircularProgressIndicator(
+          color: Colors.green,
+        );
+      },
+    );
   }
 }
