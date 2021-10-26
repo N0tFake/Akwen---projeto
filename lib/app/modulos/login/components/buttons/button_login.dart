@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/modulos/login/login_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ButtonLogin extends StatelessWidget {
-  const ButtonLogin({ Key? key }) : super(key: key);
+  final String name;
+  final String route;
+  const ButtonLogin({ Key? key, required this.name, required this.route }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoginStore store = Modular.get();
+    Services service = Modular.get();
+
     final Size screen = MediaQuery.of(context).size;
     return TextButton(
       style: TextButton.styleFrom(
@@ -18,13 +26,16 @@ class ButtonLogin extends StatelessWidget {
         ),
         width: screen.width * 0.4,
         height: screen.height * 0.06,
-        child: const Center(
-          child: Text('Login')
+        child: Center(
+          child: Text(name)
         ),
       ),
 
-      onPressed: () => Modular.to.navigate('/registration'),
+      onPressed: () => name == 'Registrar' 
+        ? Modular.to.navigate(route) 
+        : service.loginUser()
 
     );
   }
+
 }

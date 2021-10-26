@@ -1,4 +1,4 @@
-import 'package:flutter_akwen/app/modulos/registration/service/registration_service.dart';
+import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_store.dart';
@@ -14,7 +14,7 @@ class RegistrationPage extends StatefulWidget {
 
 class RegistrationPageState extends State<RegistrationPage> {
   final RegistrationStore store = Modular.get();
-  RegistrationService service = Modular.get();
+  Services service = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -53,3 +53,20 @@ class RegistrationPageState extends State<RegistrationPage> {
     );
   }
 }
+
+/* TextFormField(
+  decoration: const InputDecoration(labelText: 'Email'),
+  onChanged: store.setEmail,
+),
+TextFormField(
+  decoration: const InputDecoration(labelText: 'username'),
+  onChanged: store.setUsername,
+),
+TextFormField(
+  decoration: const InputDecoration(labelText: 'password'),
+  onChanged: store.setPassword,
+),
+ElevatedButton(
+  onPressed: () => service.cadastrarUser(),
+  child: const Text('testar'),
+) */

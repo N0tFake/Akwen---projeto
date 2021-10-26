@@ -39,6 +39,21 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
+  final _$isLoginAtom = Atom(name: '_LoginStoreBase.isLogin');
+
+  @override
+  bool get isLogin {
+    _$isLoginAtom.reportRead();
+    return super.isLogin;
+  }
+
+  @override
+  set isLogin(bool value) {
+    _$isLoginAtom.reportWrite(value, super.isLogin, () {
+      super.isLogin = value;
+    });
+  }
+
   final _$_LoginStoreBaseActionController =
       ActionController(name: '_LoginStoreBase');
 
@@ -65,10 +80,22 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
+  void setIsLogin(bool value) {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.setIsLogin');
+    try {
+      return super.setIsLogin(value);
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
-password: ${password}
+password: ${password},
+isLogin: ${isLogin}
     ''';
   }
 }

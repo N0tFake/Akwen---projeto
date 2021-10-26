@@ -15,4 +15,8 @@ abstract class _LoginStoreBase with Store {
   @action 
   void setPassword(String value) => password = value;
 
+  @observable 
+  bool isLogin = false;
+  @action 
+  void setIsLogin(bool value) => isLogin = value;
 }
