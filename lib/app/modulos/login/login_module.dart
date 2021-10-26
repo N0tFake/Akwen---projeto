@@ -1,5 +1,5 @@
 import 'package:flutter_akwen/app/modulos/login/login_page.dart';
-import 'package:flutter_akwen/app/modulos/login_store.dart';
+import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginModule extends Module {
