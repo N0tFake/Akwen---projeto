@@ -29,6 +29,10 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  Future deslogarLogin() async{
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
@@ -48,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
             const ButtonLogin(name: 'Login', route: '/home'),
             const ButtonLogin(name: 'Registrar', route: '/registration'),
             ElevatedButton(onPressed: () => teste(), child: Text('testar')),
+            ElevatedButton(onPressed: () => deslogarLogin(), child: Text('deslogar')),
           ],
         ),
       ),

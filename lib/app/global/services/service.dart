@@ -51,7 +51,7 @@ class Services implements IServices{
   @override
   Future<void> loginUser() async {
     try{
-      print(loginStore.email);
+      print('email: ${loginStore.email}, senha: ${loginStore.password}');
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: loginStore.email, 
         password: loginStore.password
@@ -62,7 +62,9 @@ class Services implements IServices{
         print('nenhum usuario encontrado');
       }else if(e.code == 'wrong-password'){
         print('Senha errada');
-      }
+      } 
+    } catch(e){
+      print(e);
     }
   }
   /// [DESLOGAR]
@@ -77,7 +79,28 @@ class Services implements IServices{
   }
 
  /// funções do [Firestore]
- Future getDataUser() async{
+ Future<String> getUidUser() async{
+    try{
+      final user = auth.currentUser;
+      String userUid = user!.uid;
+      return userUid;
+    } catch(e){
+      print(e);
+    }
+    return "Error";
+ }
 
+ Future<DocumentSnapshot> getDataUser(String docUid) async{
+  CollectionReference collectionReference 
+    = FirebaseFirestore
+      .instance
+      .collection('users');
+
+  DocumentSnapshot snapshot = 
+    await collectionReference
+    .doc(docUid)
+    .get();
+
+  return snapshot;
  }
 }

@@ -4,36 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class TextForm extends StatelessWidget {
+class TextForm extends StatefulWidget {
   final String hintText;
   final String type;
   const TextForm({ Key? key, required this.hintText, required this.type }) : super(key: key);
 
+  @override
+  State<TextForm> createState() => _TextFormState();
+}
+
+class _TextFormState extends State<TextForm> {
   @override
   Widget build(BuildContext context) {
 
     final store = Modular.get<LoginStore>();
 
     final Size screen = MediaQuery.of(context).size;
-    if(type == 'email'){
+    if(widget.type == 'email'){
       return SizedBox(
         width: screen.width * 0.8,
         child: TextFormField(
           decoration: InputDecoration(
-            hintText: hintText,
+            hintText: widget.hintText,
             //labelText: labelText,
             border: const OutlineInputBorder(),
           ),
           onChanged: store.setEmail,
         ),
       );
-    } else if(type == 'password'){
+    } else if(widget.type == 'password'){
       return SizedBox(
         width: screen.width * 0.8,
         child: TextFormField(
           decoration: InputDecoration(
-            hintText: hintText,
-            //labelText: labelText,
+            hintText: widget.hintText,
             border: const OutlineInputBorder(),
           ),
           onChanged: store.setPassword,
@@ -44,5 +48,4 @@ class TextForm extends StatelessWidget {
     return const Center(child: Text('Erro'));
 
   }
-
 }
