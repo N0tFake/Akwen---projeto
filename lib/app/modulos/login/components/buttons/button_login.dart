@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ButtonLogin extends StatelessWidget {
@@ -13,6 +12,11 @@ class ButtonLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     final LoginStore store = Modular.get();
     Services service = Modular.get();
+
+    void navigateLogin(){
+      service.loginUser();
+      Modular.to.navigate('/home');
+    }
 
     final Size screen = MediaQuery.of(context).size;
     return TextButton(

@@ -15,6 +15,7 @@ class Services implements IServices{
   final RegistrationStore registerStore = Modular.get();
   final LoginStore loginStore = Modular.get();
 
+  /// funções do [FirebaseAuth]
   /// [CADASTRAR USUARIO] as funções [_addData] e [cadastrarUser], são usadas para cadastrar usuario 
   void _addData(){
     CollectionReference collectionReference = FirebaseFirestore.instance.collection('users');
@@ -33,6 +34,7 @@ class Services implements IServices{
         password: registerStore.password,
       );
       _addData();
+      Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
       if(e.code == 'weak-password'){
         print('Senha fraca');
@@ -54,7 +56,7 @@ class Services implements IServices{
         email: loginStore.email, 
         password: loginStore.password
       );
-      loginStore.setIsLogin(true);
+      Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
       if(e.code == 'user-not-found'){
         print('nenhum usuario encontrado');
@@ -63,5 +65,19 @@ class Services implements IServices{
       }
     }
   }
+  /// [DESLOGAR]
+  Future deslogar() async{
+    try{
+      await FirebaseAuth.instance.signOut();
+      Modular.to.navigate('/');
+      print('deslogado');
+    } catch(e){
+      print('error ao deslogar');
+    }
+  }
 
+ /// funções do [Firestore]
+ /* Future getDataUser() async{
+
+ } */
 }

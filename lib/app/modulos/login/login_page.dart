@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/modulos/login/components/buttons/button_login.dart';
 import 'package:flutter_akwen/app/modulos/login/components/campo_login.dart';
@@ -15,13 +16,25 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final store = Modular.get<LoginStore>();
+  String uid = '';
+
+  Future teste() async{
+    final user = FirebaseAuth.instance.currentUser;
+    setState(() {
+      if(user == null){
+        uid = 'vazio';
+      }else{
+        uid = user.uid;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('${store.email} - ${store.password}'),
+        title: Text(uid),
         centerTitle: true,
       ),
       body: Center(
@@ -34,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: screen.height * 0.04,),
             const ButtonLogin(name: 'Login', route: '/home'),
             const ButtonLogin(name: 'Registrar', route: '/registration'),
+            ElevatedButton(onPressed: () => teste(), child: Text('testar')),
           ],
         ),
       ),

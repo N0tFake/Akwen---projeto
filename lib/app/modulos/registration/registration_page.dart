@@ -45,7 +45,7 @@ class RegistrationPageState extends State<RegistrationPage> {
           Observer(builder: (_) {
             return ElevatedButton(
               onPressed: () => service.cadastrarUser(),
-              child: const Text('testar'),
+              child: const Text('Cadastrar'),
             );
           })
         ],
