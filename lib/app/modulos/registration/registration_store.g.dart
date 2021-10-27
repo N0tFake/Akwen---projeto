@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_store.dart';
+part of 'registration_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'login_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$LoginStore on _LoginStoreBase, Store {
-  final _$emailAtom = Atom(name: '_LoginStoreBase.email');
+mixin _$RegistrationStore on _RegistrationStoreBase, Store {
+  final _$emailAtom = Atom(name: '_RegistrationStoreBase.email');
 
   @override
   String get email {
@@ -24,7 +24,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: '_LoginStoreBase.password');
+  final _$passwordAtom = Atom(name: '_RegistrationStoreBase.password');
 
   @override
   String get password {
@@ -39,54 +39,54 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$isLoginAtom = Atom(name: '_LoginStoreBase.isLogin');
+  final _$usernameAtom = Atom(name: '_RegistrationStoreBase.username');
 
   @override
-  bool get isLogin {
-    _$isLoginAtom.reportRead();
-    return super.isLogin;
+  String get username {
+    _$usernameAtom.reportRead();
+    return super.username;
   }
 
   @override
-  set isLogin(bool value) {
-    _$isLoginAtom.reportWrite(value, super.isLogin, () {
-      super.isLogin = value;
+  set username(String value) {
+    _$usernameAtom.reportWrite(value, super.username, () {
+      super.username = value;
     });
   }
 
-  final _$_LoginStoreBaseActionController =
-      ActionController(name: '_LoginStoreBase');
+  final _$_RegistrationStoreBaseActionController =
+      ActionController(name: '_RegistrationStoreBase');
 
   @override
   void setEmail(String value) {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setEmail');
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.setEmail');
     try {
       return super.setEmail(value);
     } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setPassword');
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.setPassword');
     try {
       return super.setPassword(value);
     } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setIsLogin(bool value) {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setIsLogin');
+  void setUsername(String value) {
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.setUsername');
     try {
-      return super.setIsLogin(value);
+      return super.setUsername(value);
     } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -95,7 +95,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     return '''
 email: ${email},
 password: ${password},
-isLogin: ${isLogin}
+username: ${username}
     ''';
   }
 }
