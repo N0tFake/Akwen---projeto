@@ -77,7 +77,7 @@ class Services implements IServices{
   }
 
  /// funções do [Firestore]
- /* Future getDataUser() async{
+ Future getDataUser() async{
 
- } */
+ }
 }
