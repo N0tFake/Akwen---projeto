@@ -70,8 +70,17 @@ class _LoginPageState extends State<LoginPage> {
             Observer(builder: (_) {
               return ButtonLogin(name: 'Login', route: '/home');
             }),
+            SizedBox(
+              height: screen.height * 0.04,
+            ),
             const ButtonLogin(name: 'Registrar', route: '/registration'),
+            SizedBox(
+              height: screen.height * 0.04,
+            ),
             ElevatedButton(onPressed: () => teste(), child: Text('testar')),
+            SizedBox(
+              height: screen.height * 0.04,
+            ),
             ElevatedButton(
                 onPressed: () => deslogarLogin(), child: Text('deslogar')),
           ],

@@ -15,11 +15,6 @@ class ButtonLogin extends StatelessWidget {
     final LoginStore store = Modular.get();
     Services service = Modular.get();
 
-    void navigateLogin() {
-      service.loginUser();
-      Modular.to.navigate('/home');
-    }
-
     final Size screen = MediaQuery.of(context).size;
     return Observer(builder: (_) {
       return TextButton(
@@ -33,7 +28,7 @@ class ButtonLogin extends StatelessWidget {
           ),
           onPressed: () => name == 'Registrar'
               ? Modular.to.navigate(route)
-              : service.loginUser());
+              : service.loginUser(store.email, store.password));
     });
   }
 }

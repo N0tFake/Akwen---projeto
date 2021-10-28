@@ -6,10 +6,9 @@ class Desafio1Store = _Desafio1StoreBase with _$Desafio1Store;
 abstract class _Desafio1StoreBase with Store {
 
   @observable
-  int value = 0;
+  String opcEscolhida = '';
 
-  @action
-  void increment() {
-    value++;
-  } 
+  @action 
+  void setOpc(String value) => opcEscolhida = value;
+
 }

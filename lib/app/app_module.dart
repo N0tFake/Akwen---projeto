@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_module.dart';
+import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_module.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
@@ -21,7 +22,8 @@ class AppModule extends Module {
       firestore: FirebaseFirestore.instance
     )),
     Bind.singleton((i) => LoginStore()),
-    Bind.singleton((i) => RegistrationStore())
+    Bind.singleton((i) => RegistrationStore()),
+    Bind.singleton((i) => Desafio1Store()),
   ];
 
   @override

@@ -49,12 +49,12 @@ class Services implements IServices{
 
 /// [LOGIN]
   @override
-  Future<void> loginUser() async {
+  Future<void> loginUser(String email, String password) async {
     try{
-      print('email: ${loginStore.email}, senha: ${loginStore.password}');
+      print('email: ${email}, senha: ${password}');
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: loginStore.email, 
-        password: loginStore.password
+        email: email, 
+        password: password
       );
       Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
