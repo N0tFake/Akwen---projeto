@@ -16,7 +16,7 @@ class Desafio1PageState extends State<Desafio1Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Wakrowde'),
         leading: IconButton(
           onPressed: () => Modular.to.navigate('/home'),
           icon: Icon(Icons.arrow_back_ios),
@@ -24,6 +24,7 @@ class Desafio1PageState extends State<Desafio1Page> {
       ),
       body: Column(
         children: const [
+          Text('Qual o nome do cocar em akwẽ'),
           GetImg()
         ],
       ),
