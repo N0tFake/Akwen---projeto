@@ -6,4 +6,5 @@ abstract class IServices{
   Future deslogar();
   Future<DocumentSnapshot> getDataUser(String docUid);
   Future<String> getUidUser();
+  Future<DocumentSnapshot> getUrlImg(String doc);
 }
