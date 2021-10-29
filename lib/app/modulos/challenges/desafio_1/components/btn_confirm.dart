@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/enum_opc.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -15,8 +14,14 @@ class _BtnConfirmState extends State<BtnConfirm> {
   Widget build(BuildContext context) {
     Desafio1Store store = Modular.get();
     return ElevatedButton(
-      onPressed: () => store.opcEscolhida != '' ? print(store.opcEscolhida) : null, 
-      child: const Text('Confirmar')
+      onPressed: !store.isChosen ? null : tester(), 
+      child: Text('${store.opcEscolhida}')
     );
   }
+
+  tester(){
+    print('object');
+  }
+
+  //Widget
 }

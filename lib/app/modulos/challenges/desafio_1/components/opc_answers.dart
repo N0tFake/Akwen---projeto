@@ -87,6 +87,9 @@ class _OpcAnswersState extends State<OpcAnswers> {
   }
 
   void confirm(SingingCharacter? value){
+    if(store.isChosen == false){
+      store.setChosen(true);
+    }
     if(value == SingingCharacter.Sikno){
       store.setOpc('Sikno');
     }else if(value == SingingCharacter.Kuiro){

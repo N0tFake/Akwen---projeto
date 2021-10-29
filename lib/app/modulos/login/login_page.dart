@@ -38,9 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-          return Text(store.email);
-        }),
+        title: const Text('Login'),
         centerTitle: true,
       ),
       body: Center(
@@ -77,12 +75,12 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: screen.height * 0.04,
             ),
-            ElevatedButton(onPressed: () => teste(), child: Text('testar')),
+           /*  ElevatedButton(onPressed: () => teste(), child: Text('testar')),
             SizedBox(
               height: screen.height * 0.04,
             ),
             ElevatedButton(
-                onPressed: () => deslogarLogin(), child: Text('deslogar')),
+                onPressed: () => deslogarLogin(), child: Text('deslogar')), */
           ],
         ),
       ),

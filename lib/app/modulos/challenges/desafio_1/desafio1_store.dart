@@ -11,4 +11,10 @@ abstract class _Desafio1StoreBase with Store {
   @action 
   void setOpc(String value) => opcEscolhida = value;
 
+  @observable
+  bool isChosen = false;
+
+  @action 
+  void setChosen(bool value) => isChosen = value;
+
 }

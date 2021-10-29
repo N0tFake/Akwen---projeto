@@ -17,23 +17,23 @@ class Services implements IServices{
 
   /// funções do [FirebaseAuth]
   /// [CADASTRAR USUARIO] as funções [_addData] e [cadastrarUser], são usadas para cadastrar usuario 
-  void _addData(){
+  void _addData(String email, String username){
     CollectionReference collectionReference = FirebaseFirestore.instance.collection('users');
     final user = FirebaseAuth.instance.currentUser;
     collectionReference.doc(user?.uid).set({
-      'email': registerStore.email,
-      'username': registerStore.username
+      'email': email,
+      'username': username
     }).then((value) => print('Adicionado'));
   }
 
   @override
-  Future<void> cadastrarUser() async {
+  Future<void> cadastrarUser(String email, String username, String password) async {
     try{
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: registerStore.email, 
-        password: registerStore.password,
+        email: email, 
+        password: password,
       );
-      _addData();
+      _addData(email, username);
       Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
       if(e.code == 'weak-password'){

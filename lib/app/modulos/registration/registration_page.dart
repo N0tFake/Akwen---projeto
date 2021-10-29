@@ -27,51 +27,50 @@ class RegistrationPageState extends State<RegistrationPage> {
           onPressed: () => Modular.to.navigate('/'),
         ),
       ),
-      body: Column(
-        children: [
-          Observer(builder: (_) {
-            return TextFormField(
-              decoration: const InputDecoration(labelText: 'Email'),
-              onChanged: store.setEmail,
-            );
-          }),
-          Observer(builder: (_) {
-            return TextFormField(
-              decoration: const InputDecoration(labelText: 'username'),
-              onChanged: store.setUsername,
-            );
-          }),
-          Observer(builder: (_) {
-            return TextFormField(
-              decoration: const InputDecoration(labelText: 'password'),
-              onChanged: store.setPassword,
-            );
-          }),
-          Observer(builder: (_) {
-            return ElevatedButton(
-              onPressed: () => service.cadastrarUser(),
-              child: const Text('Cadastrar'),
-            );
-          })
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Column(
+          children: [
+            Observer(builder: (_) {
+              return TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: store.setEmail,
+              );
+            }),
+            const SizedBox(height: 40),
+            Observer(builder: (_) {
+              return TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: store.setUsername,
+              );
+            }),
+            const SizedBox(height: 40),
+            Observer(builder: (_) {
+              return TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: store.setPassword,
+              );
+            }),
+  
+            const SizedBox(height: 40,),
+            Observer(builder: (_) {
+              return ElevatedButton(
+                onPressed: () => service.cadastrarUser(store.email, store.username, store.password),
+                child: const Text('Cadastrar'),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
 }
-
-/* TextFormField(
-  decoration: const InputDecoration(labelText: 'Email'),
-  onChanged: store.setEmail,
-),
-TextFormField(
-  decoration: const InputDecoration(labelText: 'username'),
-  onChanged: store.setUsername,
-),
-TextFormField(
-  decoration: const InputDecoration(labelText: 'password'),
-  onChanged: store.setPassword,
-),
-ElevatedButton(
-  onPressed: () => service.cadastrarUser(),
-  child: const Text('testar'),
-) */

@@ -20,12 +20,19 @@ class ButtonChallenge extends StatelessWidget {
           if(name == 'Desafio 1'){
             Modular.to.navigate('/desafio1');
           }else if(name == 'Desafio 2'){
-            Modular.to.navigate('/desafio2');
+            alert(context);
+            //Modular.to.navigate('/desafio2');
           }else if(name == 'Desafio 3'){
-            Modular.to.navigate('/desafio3');
+            alert(context);
+            //Modular.to.navigate('/desafio3');
           }else{
             AlertDialog(
-              title: const Text('Error'),
+              title: Row(
+                children: const [
+                  Text('Error'),
+                  Icon(Icons.warning)
+                ],
+              ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(), 
@@ -44,4 +51,37 @@ class ButtonChallenge extends StatelessWidget {
       ),
     );
   }
+
+  Future alert(BuildContext context){
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: const [
+              Icon(Icons.warning),
+              SizedBox(width: 10),
+              Text('Error'),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Essa pagina está em desenvolvimento'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Sair'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

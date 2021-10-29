@@ -24,6 +24,21 @@ mixin _$Desafio1Store on _Desafio1StoreBase, Store {
     });
   }
 
+  final _$isChosenAtom = Atom(name: '_Desafio1StoreBase.isChosen');
+
+  @override
+  bool get isChosen {
+    _$isChosenAtom.reportRead();
+    return super.isChosen;
+  }
+
+  @override
+  set isChosen(bool value) {
+    _$isChosenAtom.reportWrite(value, super.isChosen, () {
+      super.isChosen = value;
+    });
+  }
+
   final _$_Desafio1StoreBaseActionController =
       ActionController(name: '_Desafio1StoreBase');
 
@@ -39,9 +54,21 @@ mixin _$Desafio1Store on _Desafio1StoreBase, Store {
   }
 
   @override
+  void setChosen(bool value) {
+    final _$actionInfo = _$_Desafio1StoreBaseActionController.startAction(
+        name: '_Desafio1StoreBase.setChosen');
+    try {
+      return super.setChosen(value);
+    } finally {
+      _$_Desafio1StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-opcEscolhida: ${opcEscolhida}
+opcEscolhida: ${opcEscolhida},
+isChosen: ${isChosen}
     ''';
   }
 }
