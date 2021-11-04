@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
@@ -43,7 +45,31 @@ class _OpcAnswersState extends State<OpcAnswers> {
             return const Text('Sem dados');
             }else if(snapshot.connectionState == ConnectionState.done){
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-              return RadioListTileAnswers(data: data);
+              int num=0;
+              bool repete = false;
+              int tamanho = data['akwe'].length;
+              List palavras = [];
+              for(var i=0; i<3; i++){
+                do{
+                  do{
+                    num = Random().nextInt(tamanho);
+                  }while(num == store.numPosition);
+                  print('dentro do while: $num');
+                }while(palavras.contains(num));
+
+                palavras.add(num);
+
+                if(Random().nextInt(2) == 1 && repete == false){
+                  print('posição: ${store.numPosition}');
+                  repete = true;
+                  palavras.add(store.numPosition);  
+                }else if(repete == false && i == 2){
+                  print('posição: ${store.numPosition}');
+                  repete = true;
+                  palavras.add(store.numPosition);
+                }
+              }
+              return RadioListTileAnswers(data: data, palavras: palavras,);
             } else {
               return const Center(child: CircularProgressIndicator(),);
             }
