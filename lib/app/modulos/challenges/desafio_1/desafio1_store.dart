@@ -6,6 +6,12 @@ class Desafio1Store = _Desafio1StoreBase with _$Desafio1Store;
 abstract class _Desafio1StoreBase with Store {
 
   @observable
+  int numPosition = 0;
+
+  @action
+  void setNumPosition(int value) => numPosition = value;
+
+  @observable
   String opcEscolhida = '';
 
   @action 

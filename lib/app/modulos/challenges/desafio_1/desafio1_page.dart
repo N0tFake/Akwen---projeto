@@ -27,14 +27,14 @@ class Desafio1PageState extends State<Desafio1Page> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () => Modular.to.navigate('/home'),
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: Column(
         children: [
           const GetImg(),
           Observer(builder: (_) {
-            return OpcAnswers();
+            return const OpcAnswers();
           }),
           SizedBox(height: screen.height * 0.04),
           Observer(builder: (_) {

@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/enum_opc.dart';
+import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/radio_list_answers.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class OpcAnswers extends StatefulWidget {
@@ -12,8 +14,8 @@ class OpcAnswers extends StatefulWidget {
 }
 
 class _OpcAnswersState extends State<OpcAnswers> {
+  final Services service = Modular.get();
   Desafio1Store store = Modular.get();
-  SingingCharacter? _character = null;
 
   @override
   Widget build(BuildContext context) {
@@ -27,66 +29,31 @@ class _OpcAnswersState extends State<OpcAnswers> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
           borderRadius: const BorderRadius.all(
             Radius.circular(5)
           )
         ),
-        child: Column(
-          children: [
-            RadioListTile(
-              title: const Text('Siknõ'),
-              value: SingingCharacter.Sikno, 
-              groupValue: _character, 
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-                confirm(value);
-              }
-            ),
-            RadioListTile(
-              title: const Text('Kuiro'),
-              value: SingingCharacter.Kuiro, 
-              groupValue: _character, 
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-                confirm(value);
-              }
-            ),
-            RadioListTile(
-              title: const Text('Wakrowde'),
-              value: SingingCharacter.Wakrowde, 
-              groupValue: _character, 
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-                confirm(value);
-              }
-            ),
-            RadioListTile(
-              title: const Text('Kni'),
-              value: SingingCharacter.Kni, 
-              groupValue: _character, 
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-                confirm(value);
-              }
-            ),
-          ],
+        child: FutureBuilder(
+          future: service.getChallengeDoc('palavras'),
+          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
+            if(snapshot.hasData && !snapshot.data!.exists){
+            return const Text('Sem dados');
+            }else if(snapshot.connectionState == ConnectionState.done){
+              Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+              return RadioListTileAnswers(data: data);
+            } else {
+              return const Center(child: CircularProgressIndicator(),);
+            }
+          },
         ),
       ),
     );
   }
 
-  void confirm(SingingCharacter? value){
+  /* void confirm(SingingCharacter? value){
     if(store.isChosen == false){
       store.setChosen(true);
     }
@@ -99,5 +66,7 @@ class _OpcAnswersState extends State<OpcAnswers> {
     }else if(value == SingingCharacter.Kni){
       store.setOpc('kni');
     }
-  }
+  } */
 }
+
+

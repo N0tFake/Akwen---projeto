@@ -104,7 +104,7 @@ class Services implements IServices{
   return snapshot;
  }
 
- Future<DocumentSnapshot> getUrlImg(String doc) async{
+ Future<DocumentSnapshot> getChallengeDoc(String doc) async{
   CollectionReference collectionReference 
     = FirebaseFirestore
       .instance

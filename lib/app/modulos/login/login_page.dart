@@ -87,32 +87,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-/* Observer(builder: (_) {
-return const CampLogin(
-  hintText: 'mail@mail.com',
-  labelText: 'Usuario',
-  type: 'email',
-);
-}),
-SizedBox(
-height: screen.height * 0.03,
-),
-Observer(builder: (_) {
-return const CampLogin(
-  hintText: '***********',
-  labelText: 'Senha',
-  type: 'password',
-);
-}),
-SizedBox(
-height: screen.height * 0.04,
-),
-Observer(builder: (_) {
-return const ButtonLogin(name: 'Login', route: '/home');
-}),
-Observer(builder: (_) {
-return const ButtonLogin(
-    name: 'Registrar', route: '/registrartion');
-}), */

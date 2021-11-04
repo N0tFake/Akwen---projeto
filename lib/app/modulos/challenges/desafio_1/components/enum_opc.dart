@@ -1,6 +1,8 @@
 enum SingingCharacter { 
-  Sikno, 
-  Kuiro, 
-  Wakrowde, 
-  Kni
+  AlternativaA,
+  AlternativaB,
+  AlternativaC,
+  AlternativaD
 } 
+
+
