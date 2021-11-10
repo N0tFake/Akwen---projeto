@@ -28,10 +28,7 @@ class _GetImgState extends State<GetImg> {
             return const Text('Sem imagem');
           }else if(snapshot.connectionState == ConnectionState.done){
             Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-            int tamanho = data['Imagens'].length;
-            int numPosition = Random().nextInt(tamanho);
-            store.setNumPosition(numPosition);
-            return Image.network(data['Imagens'][numPosition]);
+            return Image.network(data['Imagens'][store.numPosition]);
           } else {
             return const CircularProgressIndicator();
           }

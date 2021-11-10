@@ -11,6 +11,12 @@ abstract class _Desafio1StoreBase with Store {
   @action
   void setNumPosition(int value) => numPosition = value;
 
+  @observable 
+  String nameCorrent = '';
+
+  @action
+  void setNameCorrent(String value) => nameCorrent = value;
+
   @observable
   String opcEscolhida = '';
 

@@ -6,6 +6,8 @@ import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_module.d
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_module.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/group_module.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
@@ -27,6 +29,7 @@ class AppModule extends Module {
     Bind.singleton((i) => RegistrationStore()),
     Bind.singleton((i) => Desafio1Store()),
     Bind.singleton((i) => ResultadoStore()),
+    Bind.singleton((i) => GroupStore()),
   ];
 
   @override
@@ -37,6 +40,7 @@ class AppModule extends Module {
     ModuleRoute(Desafio1Module.routeName, module: Desafio1Module()),
     ModuleRoute(Desafio2Module.routeName, module: Desafio2Module()),
     ModuleRoute(Desafio3Module.routeName, module: Desafio3Module()),
-    ModuleRoute(ResultadoModule.routeName, module: ResultadoModule())
+    ModuleRoute(ResultadoModule.routeName, module: ResultadoModule()),
+    ModuleRoute(GroupModule.routeName, module: GroupModule())
   ];
 }

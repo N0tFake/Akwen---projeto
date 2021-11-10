@@ -18,50 +18,61 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
 
   @override
   Widget build(BuildContext context) {
+    String value0 = widget.data['akwe'][widget.palavras[0]];
+    List<String> value = [
+      widget.data['akwe'][widget.palavras[0]], 
+      widget.data['akwe'][widget.palavras[1]],
+      widget.data['akwe'][widget.palavras[2]],
+      widget.data['akwe'][widget.palavras[3]],
+    ];
     return Column(
       children: [
         RadioListTile(
           title: Text(widget.data['akwe'][widget.palavras[0]]),
-          value: 'valor tirado', 
+          value: value[0], 
           groupValue: groupValue, 
           onChanged: (value) {
             setState(() {
               groupValue = value as String?;
             });
-            print(value);
+            store.isChosen = true;
+            store.opcEscolhida = value.toString();
           }
         ),
         RadioListTile(
           title: Text(widget.data['akwe'][widget.palavras[1]]),
-          value: 'teste2', 
+          value: value[1], 
           groupValue: groupValue, 
           onChanged: (value) {
             setState(() {
               groupValue = value as String?;
             });
-            print(value);
+            store.isChosen = true;
+            store.opcEscolhida = value.toString();
           }
         ),
         RadioListTile(
           title: Text(widget.data['akwe'][widget.palavras[2]]),
-          value: 'teste2', 
+          value: value[2], 
           groupValue: groupValue, 
           onChanged: (value) {
             setState(() {
               groupValue = value as String?;
             });
-            print(value);
+            store.isChosen = true;
+            store.opcEscolhida = value.toString();
           }
         ),
         RadioListTile(
           title: Text(widget.data['akwe'][widget.palavras[3]]),
-          value: 'teste2', 
+          value: value[3], 
           groupValue: groupValue, 
           onChanged: (value) {
             setState(() {
               groupValue = value as String?;
             });
-            print(value);
+            store.isChosen = true;
+            store.opcEscolhida = value.toString();
           }
         )
       ]

@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,6 +46,7 @@ class _OpcAnswersState extends State<OpcAnswers> {
             return const Text('Sem dados');
             }else if(snapshot.connectionState == ConnectionState.done){
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+              
               int num=0;
               bool repete = false;
               int tamanho = data['akwe'].length;
@@ -54,17 +56,14 @@ class _OpcAnswersState extends State<OpcAnswers> {
                   do{
                     num = Random().nextInt(tamanho);
                   }while(num == store.numPosition);
-                  print('dentro do while: $num');
                 }while(palavras.contains(num));
 
                 palavras.add(num);
 
                 if(Random().nextInt(2) == 1 && repete == false){
-                  print('posição: ${store.numPosition}');
                   repete = true;
                   palavras.add(store.numPosition);  
                 }else if(repete == false && i == 2){
-                  print('posição: ${store.numPosition}');
                   repete = true;
                   palavras.add(store.numPosition);
                 }
@@ -78,21 +77,6 @@ class _OpcAnswersState extends State<OpcAnswers> {
       ),
     );
   }
-
-  /* void confirm(SingingCharacter? value){
-    if(store.isChosen == false){
-      store.setChosen(true);
-    }
-    if(value == SingingCharacter.Sikno){
-      store.setOpc('Sikno');
-    }else if(value == SingingCharacter.Kuiro){
-      store.setOpc('Kuiro');
-    }else if(value == SingingCharacter.Wakrowde){
-      store.setOpc('Wakrowde');
-    }else if(value == SingingCharacter.Kni){
-      store.setOpc('kni');
-    }
-  } */
 }
 
 
