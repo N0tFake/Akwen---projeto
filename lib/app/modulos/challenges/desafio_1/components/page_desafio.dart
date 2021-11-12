@@ -20,6 +20,20 @@ class _PageDesafioState extends State<PageDesafio> {
   final GroupStore storeGroup = Modular.get();
 
   void confirm(){
+    if(store.opcEscolhida == widget.data['akwe'][store.numPosition]){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Resposta correta'),
+        )
+      );
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Resposta errada'),
+        )
+      );
+    }
+
     if(storeGroup.visible1 == true){
       storeGroup.setVisible1(false);
       storeGroup.setVisible2(true);
@@ -66,8 +80,9 @@ class _PageDesafioState extends State<PageDesafio> {
           SizedBox(height: screen.height * 0.04),
           Observer(builder: (_) {
             return ElevatedButton(
-                onPressed: !store.isChosen ? null : confirm,
-                child: const Text('Confirmar'));
+              onPressed: !store.isChosen ? null :  confirm,
+              child: const Text('Confirmar')
+            );
           })
         ],
       ),
