@@ -1,4 +1,8 @@
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_page.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_01.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_02.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_03.dart';
+import 'package:flutter_akwen/app/modulos/resultado/resultado_page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
@@ -16,29 +20,18 @@ class GroupPageState extends State<GroupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Observer(builder: (_) {
-          return Visibility(
-            visible: store.visible1,
-            child: Desafio1Page()
-          );
-        }),
-
-        Observer(builder: (_) {
-          return Visibility(
-            visible: store.visible2,
-            child: Desafio1Page()
-          );
-        }),
-
-        Observer(builder: (_) {
-          return Visibility(
-            visible: store.visible3,
-            child: Desafio1Page()
-          );
-        }),
-      ],
+    return Observer(builder: (_) {
+      switch(store.numDesafio){
+        case 1:
+          return const Group01Task01();
+        case 2:
+          return const Group01Task02();
+        case 3:
+          return const Group01Task03();
+        default: 
+          return const ResultadoPage();
+      }
+    },
     );
   }
 }

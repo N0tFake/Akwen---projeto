@@ -9,48 +9,33 @@ part of 'group_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GroupStore on _GroupStoreBase, Store {
-  final _$visible1Atom = Atom(name: '_GroupStoreBase.visible1');
+  final _$numDesafioAtom = Atom(name: '_GroupStoreBase.numDesafio');
 
   @override
-  bool get visible1 {
-    _$visible1Atom.reportRead();
-    return super.visible1;
+  int get numDesafio {
+    _$numDesafioAtom.reportRead();
+    return super.numDesafio;
   }
 
   @override
-  set visible1(bool value) {
-    _$visible1Atom.reportWrite(value, super.visible1, () {
-      super.visible1 = value;
+  set numDesafio(int value) {
+    _$numDesafioAtom.reportWrite(value, super.numDesafio, () {
+      super.numDesafio = value;
     });
   }
 
-  final _$visible2Atom = Atom(name: '_GroupStoreBase.visible2');
+  final _$ptsAtom = Atom(name: '_GroupStoreBase.pts');
 
   @override
-  bool get visible2 {
-    _$visible2Atom.reportRead();
-    return super.visible2;
+  int get pts {
+    _$ptsAtom.reportRead();
+    return super.pts;
   }
 
   @override
-  set visible2(bool value) {
-    _$visible2Atom.reportWrite(value, super.visible2, () {
-      super.visible2 = value;
-    });
-  }
-
-  final _$visible3Atom = Atom(name: '_GroupStoreBase.visible3');
-
-  @override
-  bool get visible3 {
-    _$visible3Atom.reportRead();
-    return super.visible3;
-  }
-
-  @override
-  set visible3(bool value) {
-    _$visible3Atom.reportWrite(value, super.visible3, () {
-      super.visible3 = value;
+  set pts(int value) {
+    _$ptsAtom.reportWrite(value, super.pts, () {
+      super.pts = value;
     });
   }
 
@@ -58,33 +43,22 @@ mixin _$GroupStore on _GroupStoreBase, Store {
       ActionController(name: '_GroupStoreBase');
 
   @override
-  void setVisible1(bool value) {
+  void setNumDesfio(int value) {
     final _$actionInfo = _$_GroupStoreBaseActionController.startAction(
-        name: '_GroupStoreBase.setVisible1');
+        name: '_GroupStoreBase.setNumDesfio');
     try {
-      return super.setVisible1(value);
+      return super.setNumDesfio(value);
     } finally {
       _$_GroupStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setVisible2(bool value) {
+  void setPTS(int value) {
     final _$actionInfo = _$_GroupStoreBaseActionController.startAction(
-        name: '_GroupStoreBase.setVisible2');
+        name: '_GroupStoreBase.setPTS');
     try {
-      return super.setVisible2(value);
-    } finally {
-      _$_GroupStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setVisible3(bool value) {
-    final _$actionInfo = _$_GroupStoreBaseActionController.startAction(
-        name: '_GroupStoreBase.setVisible3');
-    try {
-      return super.setVisible3(value);
+      return super.setPTS(value);
     } finally {
       _$_GroupStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -93,9 +67,8 @@ mixin _$GroupStore on _GroupStoreBase, Store {
   @override
   String toString() {
     return '''
-visible1: ${visible1},
-visible2: ${visible2},
-visible3: ${visible3}
+numDesafio: ${numDesafio},
+pts: ${pts}
     ''';
   }
 }

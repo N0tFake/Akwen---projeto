@@ -2,9 +2,6 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
-import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/btn_confirm.dart';
-import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/future_get_url_img.dart';
-import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/opc_answers.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/page_desafio.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
