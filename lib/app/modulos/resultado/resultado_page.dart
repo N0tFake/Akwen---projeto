@@ -31,7 +31,7 @@ class ResultadoPageState extends State<ResultadoPage> {
             Column(
               children: [
                 const Text(
-                  'Você resebeu',
+                  'Você recebeu',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
