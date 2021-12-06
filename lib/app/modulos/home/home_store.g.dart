@@ -9,39 +9,41 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on _HomeStoreBase, Store {
-  final _$valueAtom = Atom(name: '_HomeStoreBase.value');
+  final _$uidAtom = Atom(name: '_HomeStoreBase.uid');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  String get uid {
+    _$uidAtom.reportRead();
+    return super.uid;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set uid(String value) {
+    _$uidAtom.reportWrite(value, super.uid, () {
+      super.uid = value;
     });
   }
 
-  final _$_HomeStoreBaseActionController =
-      ActionController(name: '_HomeStoreBase');
+  final _$usernameAtom = Atom(name: '_HomeStoreBase.username');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
-        name: '_HomeStoreBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
-    }
+  String get username {
+    _$usernameAtom.reportRead();
+    return super.username;
+  }
+
+  @override
+  set username(String value) {
+    _$usernameAtom.reportWrite(value, super.username, () {
+      super.username = value;
+    });
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+uid: ${uid},
+username: ${username}
     ''';
   }
 }

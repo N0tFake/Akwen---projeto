@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 abstract class IServices{
-  Future<void> cadastrarUser();
-  Future<void> loginUser();
+  Future<void> cadastrarUser(String email, String username, String password);
+  Future<void> loginUser(String email, String password);
   Future deslogar();
-  Future getDataUser();
+  Future<DocumentSnapshot> getDataUser(String docUid);
+  Future<String> getUidUser();
+  Future<DocumentSnapshot> getChallengeDoc(String doc);
 }

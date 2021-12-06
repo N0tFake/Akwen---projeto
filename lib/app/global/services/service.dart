@@ -17,23 +17,23 @@ class Services implements IServices{
 
   /// funções do [FirebaseAuth]
   /// [CADASTRAR USUARIO] as funções [_addData] e [cadastrarUser], são usadas para cadastrar usuario 
-  void _addData(){
+  void _addData(String email, String username){
     CollectionReference collectionReference = FirebaseFirestore.instance.collection('users');
     final user = FirebaseAuth.instance.currentUser;
     collectionReference.doc(user?.uid).set({
-      'email': registerStore.email,
-      'username': registerStore.username
+      'email': email,
+      'username': username
     }).then((value) => print('Adicionado'));
   }
 
   @override
-  Future<void> cadastrarUser() async {
+  Future<void> cadastrarUser(String email, String username, String password) async {
     try{
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: registerStore.email, 
-        password: registerStore.password,
+        email: email, 
+        password: password,
       );
-      _addData();
+      _addData(email, username);
       Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
       if(e.code == 'weak-password'){
@@ -49,12 +49,12 @@ class Services implements IServices{
 
 /// [LOGIN]
   @override
-  Future<void> loginUser() async {
+  Future<void> loginUser(String email, String password) async {
     try{
-      print(loginStore.email);
+      print('email: ${email}, senha: ${password}');
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: loginStore.email, 
-        password: loginStore.password
+        email: email, 
+        password: password
       );
       Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
@@ -62,7 +62,9 @@ class Services implements IServices{
         print('nenhum usuario encontrado');
       }else if(e.code == 'wrong-password'){
         print('Senha errada');
-      }
+      } 
+    } catch(e){
+      print(e);
     }
   }
   /// [DESLOGAR]
@@ -77,7 +79,42 @@ class Services implements IServices{
   }
 
  /// funções do [Firestore]
- Future getDataUser() async{
+ Future<String> getUidUser() async{
+    try{
+      final user = auth.currentUser;
+      String userUid = user!.uid;
+      return userUid;
+    } catch(e){
+      print(e);
+    }
+    return "Error";
+ }
 
+ Future<DocumentSnapshot> getDataUser(String docUid) async{
+  CollectionReference collectionReference 
+    = FirebaseFirestore
+      .instance
+      .collection('users');
+
+  DocumentSnapshot snapshot = 
+    await collectionReference
+    .doc(docUid)
+    .get();
+
+  return snapshot;
+ }
+
+ Future<DocumentSnapshot> getChallengeDoc(String doc) async{
+  CollectionReference collectionReference 
+    = FirebaseFirestore
+      .instance
+      .collection('challenge');
+
+  DocumentSnapshot snapshot = 
+    await collectionReference
+    .doc(doc)
+    .get();
+
+  return snapshot;
  }
 }
