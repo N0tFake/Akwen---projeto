@@ -3,12 +3,10 @@ import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginModule extends Module {
-
-  static LoginStore loginStore = LoginStore();
-
+  static String get routeName => '/login';
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => loginStore),
+    Bind.lazySingleton((i) => LoginStore()),
   ];
 
   @override

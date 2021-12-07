@@ -9,6 +9,7 @@ import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_module.d
 import 'package:flutter_akwen/app/modulos/challenges/group/group_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
+import 'package:flutter_akwen/app/modulos/loding_screen/loding_screen_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_module.dart';
@@ -34,7 +35,8 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ModuleRoute(Modular.initialRoute, module: LoginModule()),
+    ModuleRoute(Modular.initialRoute, module: LodingScreenModule()),
+    ModuleRoute(LoginModule.routeName, module: LoginModule()),
     ModuleRoute(RegistrationModule.routeName, module: RegistrationModule()),
     ModuleRoute(HomeModule.routeName, module: HomeModule()),
     ModuleRoute(Desafio1Module.routeName, module: Desafio1Module()),

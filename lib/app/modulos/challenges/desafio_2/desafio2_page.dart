@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 
@@ -10,22 +13,24 @@ class Desafio2Page extends StatefulWidget {
 }
 class Desafio2PageState extends State<Desafio2Page> {
   final Desafio2Store store = Modular.get();
+  final Services service = Modular.get();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        leading: IconButton(
-          onPressed: () => Modular.to.navigate('/home'),
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-      ),
-      body: Column(
-        children: <Widget>[
-          Text('desafio 2')
-        ],
-      ),
-    );
+    return Observer(builder: (_){
+      return FutureBuilder(
+        future: service.getChallengeDoc('desafio 1'),
+        builder: 
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
+            if(snapshot.hasData && !snapshot.data!.exists){
+              return const Text('Error');
+            }else if(snapshot.connectionState == ConnectionState.done){
+              return Text('data');
+            }else{
+              return const CircularProgressIndicator();
+            }
+          }
+      );
+    });
   }
 }
