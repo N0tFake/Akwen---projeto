@@ -42,7 +42,7 @@ class _OpcAnswersState extends State<OpcAnswers> {
           future: service.getChallengeDoc('palavras'),
           builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
             if(snapshot.hasData && !snapshot.data!.exists){
-            return const Text('Sem dados');
+              return const Text('Sem dados');
             }else if(snapshot.connectionState == ConnectionState.done){
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
               

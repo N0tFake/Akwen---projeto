@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/modulos/challenges/desafio_2/components/page_desafio.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,15 +20,17 @@ class Desafio2PageState extends State<Desafio2Page> {
   Widget build(BuildContext context) {
     return Observer(builder: (_){
       return FutureBuilder(
-        future: service.getChallengeDoc('desafio 1'),
+        future: service.getChallengeDoc('palavras'),
         builder: 
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
             if(snapshot.hasData && !snapshot.data!.exists){
               return const Text('Error');
             }else if(snapshot.connectionState == ConnectionState.done){
-              return Text('data');
+              Map<String, dynamic> data = 
+                snapshot.data!.data() as Map<String, dynamic>;
+              return PageDesafio02(data: data);
             }else{
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator(),);
             }
           }
       );
