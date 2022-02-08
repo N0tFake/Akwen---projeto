@@ -12,6 +12,7 @@ import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/loding_screen/loding_screen_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_module.dart';
+import 'package:flutter_akwen/app/modulos/login/login_repository.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_module.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_store.dart';
@@ -27,7 +28,8 @@ class AppModule extends Module {
       auth: FirebaseAuth.instance,
       firestore: FirebaseFirestore.instance
     )),
-    Bind.singleton((i) => LoginStore()),
+    Bind.singleton((i) => LoginStore(i.get())),
+    Bind.lazySingleton((i) => LoginRepository(FirebaseAuth.instance)),
     Bind.singleton((i) => RegistrationStore()),
     Bind.singleton((i) => Desafio1Store()),
     Bind.singleton((i) => Desafio2Store()),
@@ -45,6 +47,6 @@ class AppModule extends Module {
     ModuleRoute(Desafio2Module.routeName, module: Desafio2Module()),
     ModuleRoute(Desafio3Module.routeName, module: Desafio3Module()),
     ModuleRoute(ResultadoModule.routeName, module: ResultadoModule()),
-    ModuleRoute(GroupModule.routeName, module: GroupModule())
+    ModuleRoute(GroupModule.routeName, module: GroupModule()),
   ];
 }

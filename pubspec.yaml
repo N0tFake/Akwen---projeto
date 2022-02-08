@@ -41,6 +41,7 @@ dependencies:
   flutter_mobx: ^2.0.2
   build_runner: ^2.1.4
   flutter_modular: ^3.4.1
+  another_flushbar: ^1.10.28
 
 dev_dependencies:
   flutter_test:

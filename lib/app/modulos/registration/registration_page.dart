@@ -24,7 +24,7 @@ class RegistrationPageState extends State<RegistrationPage> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Modular.to.navigate('/'),
+          onPressed: () => Modular.to.navigate('/login'),
         ),
       ),
       body: Padding(

@@ -36,7 +36,7 @@ class LodingScreenPageState extends State<LodingScreenPage> {
                 fontWeight: FontWeight.bold
               ),
             ),
-            _sizedBoxImage('assets/images/UFT.png'),
+            _sizedBoxImage('assets/images/uft.png'),
             _sizedBoxImage('assets/images/profnit.png'),
             _sizedBoxImage('assets/images/funai.png'),
             const SizedBox(height: 20),

@@ -56,15 +56,13 @@ class Services implements IServices{
         email: email, 
         password: password
       );
-      Modular.to.navigate('/home');
+      //Modular.to.navigate('/home');
     } on FirebaseAuthException catch(e){
       if(e.code == 'user-not-found'){
-        print('nenhum usuario encontrado');
+        throw Exception("O e-mail não foi encontrado");
       }else if(e.code == 'wrong-password'){
-        print('Senha errada');
+        throw Exception("Senha");
       } 
-    } catch(e){
-      print(e);
     }
   }
   /// [DESLOGAR]
