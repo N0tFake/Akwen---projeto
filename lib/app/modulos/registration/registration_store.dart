@@ -20,4 +20,19 @@ abstract class _RegistrationStoreBase with Store {
   @action
   void setUsername(String value) => username = value;
 
+  @observable 
+  bool isStudent = false;
+  @action 
+  void setIsStudent(value) => isStudent = value;
+
+  @observable 
+  bool hintPassword = true;
+  @action 
+  void setHintPassword(value) => hintPassword = value;
+
+  @observable 
+  bool hintConfirmPassword = true;
+  @action 
+  void sethintConfirmPassword(value) => hintConfirmPassword = value;
+
 }

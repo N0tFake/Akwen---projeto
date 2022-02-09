@@ -40,45 +40,41 @@ class _LoginPageState extends State<LoginPage> {
 
   List<ReactionDisposer> disposers = [];
 
-  @override 
+  @override
   void initState() {
     disposers = [
+      reaction((_) => store.logged == true,
+          (_) => Modular.to.navigate(HomeModule.routeName)),
       reaction(
-        (_) => store.logged == true, 
-        (_) => Modular.to.navigate(HomeModule.routeName)
-      ),
+          (_) => store.incorretLogin == false,
+          (_) => Flushbar(
+                title: 'Error',
+                icon: const Icon(Icons.sentiment_dissatisfied),
+                message: 'Dados de login estão incorretos',
+                mainButton: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ).show(context)),
       reaction(
-        (_) => store.incorretLogin == false, 
-        (_) => Flushbar(
-          title: 'Error',
-          icon: const Icon(Icons.sentiment_dissatisfied),
-          message: 'Dados de login estão incorretos',
-          mainButton: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ).show(context)
-      ),
-      reaction(
-        (_) => store.errorMessage.isNotEmpty, 
-        (_) => Flushbar(
-          title: 'Erro!',
-          message: store.errorMessage,
-          mainButton: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ).show(context)
-      )
+          (_) => store.errorMessage.isNotEmpty,
+          (_) => Flushbar(
+                title: 'Erro!',
+                message: store.errorMessage,
+                mainButton: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ).show(context))
     ];
     WidgetsFlutterBinding.ensureInitialized();
     super.initState();
   }
 
-  @override 
+  @override
   void dispose() {
     store.dispose();
-    for(var element in disposers){
+    for (var element in disposers) {
       element.call();
     }
     super.dispose();
@@ -95,7 +91,10 @@ class _LoginPageState extends State<LoginPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text('Email/Username'),
+            _ColumnSpace(),
             SizedBox(
               width: screen.width * 0.8,
               child: TextFormField(
@@ -106,53 +105,58 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
+            _ColumnSpace(),
             SizedBox(
               width: screen.width * 0.8,
               child: TextFormField(
                 controller: store.passwordController,
                 decoration: InputDecoration(
-                  hintText: 'Senha',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _showPassword ? Icons.visibility : Icons.visibility_off
-                    ),
-                    hoverColor: Colors.transparent,
-                    onPressed: (){
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    }
-                  )
-                ),
+                    hintText: 'Senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                        icon: Icon(_showPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        hoverColor: Colors.transparent,
+                        onPressed: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        })),
                 obscureText: _showPassword,
               ),
             ),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
+            _ColumnSpace(),
             Observer(builder: (_) {
-              return const ButtonLogin(name: 'Login', route: '/home');
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(screen.width * 0.8, 50)
+                ),
+                onPressed: () => store.login(), 
+                child: const Text('Login')
+              );
             }),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-            const ButtonLogin(name: 'Registrar', route: '/registration'),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-           /*  ElevatedButton(onPressed: () => teste(), child: Text('testar')),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-            ElevatedButton(
-                onPressed: () => deslogarLogin(), child: Text('deslogar')), */
+
+            _ColumnSpace(),
+            Observer(builder: (_) {
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(screen.width * 0.8, 50)
+                ),
+                onPressed: () => Modular.to.navigate('/registration'), 
+                child: const Text('Cadastrar')
+              );
+            })
           ],
         ),
       ),
+    );
+  }
+
+  Widget _ColumnSpace() {
+    final Size screen = MediaQuery.of(context).size;
+    return SizedBox(
+      height: screen.height * 0.04,
     );
   }
 }

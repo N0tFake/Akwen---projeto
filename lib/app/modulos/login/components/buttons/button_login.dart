@@ -13,7 +13,6 @@ class ButtonLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginStore store = Modular.get();
-    Services service = Modular.get();
 
     final Size screen = MediaQuery.of(context).size;
     return Observer(builder: (_) {
@@ -22,7 +21,7 @@ class ButtonLogin extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               color: Colors.green, borderRadius: BorderRadius.circular(10)),
-          width: screen.width * 0.4,
+          width: screen.width * 0.8,
           height: screen.height * 0.06,
           child: Center(child: Text(name)),
         ),

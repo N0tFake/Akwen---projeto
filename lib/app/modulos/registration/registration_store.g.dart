@@ -54,6 +54,52 @@ mixin _$RegistrationStore on _RegistrationStoreBase, Store {
     });
   }
 
+  final _$isStudentAtom = Atom(name: '_RegistrationStoreBase.isStudent');
+
+  @override
+  bool get isStudent {
+    _$isStudentAtom.reportRead();
+    return super.isStudent;
+  }
+
+  @override
+  set isStudent(bool value) {
+    _$isStudentAtom.reportWrite(value, super.isStudent, () {
+      super.isStudent = value;
+    });
+  }
+
+  final _$hintPasswordAtom = Atom(name: '_RegistrationStoreBase.hintPassword');
+
+  @override
+  bool get hintPassword {
+    _$hintPasswordAtom.reportRead();
+    return super.hintPassword;
+  }
+
+  @override
+  set hintPassword(bool value) {
+    _$hintPasswordAtom.reportWrite(value, super.hintPassword, () {
+      super.hintPassword = value;
+    });
+  }
+
+  final _$hintConfirmPasswordAtom =
+      Atom(name: '_RegistrationStoreBase.hintConfirmPassword');
+
+  @override
+  bool get hintConfirmPassword {
+    _$hintConfirmPasswordAtom.reportRead();
+    return super.hintConfirmPassword;
+  }
+
+  @override
+  set hintConfirmPassword(bool value) {
+    _$hintConfirmPasswordAtom.reportWrite(value, super.hintConfirmPassword, () {
+      super.hintConfirmPassword = value;
+    });
+  }
+
   final _$_RegistrationStoreBaseActionController =
       ActionController(name: '_RegistrationStoreBase');
 
@@ -91,11 +137,47 @@ mixin _$RegistrationStore on _RegistrationStoreBase, Store {
   }
 
   @override
+  void setIsStudent(dynamic value) {
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.setIsStudent');
+    try {
+      return super.setIsStudent(value);
+    } finally {
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setHintPassword(dynamic value) {
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.setHintPassword');
+    try {
+      return super.setHintPassword(value);
+    } finally {
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void sethintConfirmPassword(dynamic value) {
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.sethintConfirmPassword');
+    try {
+      return super.sethintConfirmPassword(value);
+    } finally {
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
 password: ${password},
-username: ${username}
+username: ${username},
+isStudent: ${isStudent},
+hintPassword: ${hintPassword},
+hintConfirmPassword: ${hintConfirmPassword}
     ''';
   }
 }
