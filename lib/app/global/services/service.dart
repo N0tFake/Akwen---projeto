@@ -69,7 +69,7 @@ class Services implements IServices{
   Future deslogar() async{
     try{
       await FirebaseAuth.instance.signOut();
-      Modular.to.navigate('/');
+      Modular.to.navigate('/login');
       print('deslogado');
     } catch(e){
       print('error ao deslogar');

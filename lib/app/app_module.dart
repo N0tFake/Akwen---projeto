@@ -15,6 +15,7 @@ import 'package:flutter_akwen/app/modulos/login/login_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_repository.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_module.dart';
+import 'package:flutter_akwen/app/modulos/registration/registration_repository.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_store.dart';
 import 'package:flutter_akwen/app/modulos/resultado/resultado_module.dart';
 import 'package:flutter_akwen/app/modulos/resultado/resultado_store.dart';
@@ -30,7 +31,11 @@ class AppModule extends Module {
     )),
     Bind.singleton((i) => LoginStore(i.get())),
     Bind.lazySingleton((i) => LoginRepository(FirebaseAuth.instance)),
-    Bind.singleton((i) => RegistrationStore()),
+    Bind.singleton((i) => RegistrationStore(i.get())),
+    Bind.lazySingleton((i) => RegistrationRepository(
+      auth: FirebaseAuth.instance,
+      firestore: FirebaseFirestore.instance
+    )),
     Bind.singleton((i) => Desafio1Store()),
     Bind.singleton((i) => Desafio2Store()),
     Bind.singleton((i) => ResultadoStore()),

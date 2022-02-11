@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
-import 'package:flutter_akwen/app/modulos/login/components/buttons/button_login.dart';
-import 'package:flutter_akwen/app/modulos/login/components/campo_login.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:another_flushbar/flushbar.dart';
@@ -21,22 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   final LoginStore store = Modular.get();
   String uid = '';
 
-  Future teste() async {
-    final user = FirebaseAuth.instance.currentUser;
-    setState(() {
-      if (user == null) {
-        uid = 'vazio';
-      } else {
-        uid = user.uid;
-      }
-    });
-  }
-
-  Future deslogarLogin() async {
-    await FirebaseAuth.instance.signOut();
-  }
-
   bool _showPassword = true;
+  bool _isLogging = false;
 
   List<ReactionDisposer> disposers = [];
 
@@ -65,7 +48,13 @@ class _LoginPageState extends State<LoginPage> {
                   icon: const Icon(Icons.close),
                   onPressed: () => Navigator.pop(context),
                 ),
-              ).show(context))
+              ).show(context)),
+      reaction(
+        (_) => store.errorMessage.isNotEmpty || store.incorretLogin == false, 
+        (_) => setState(() {
+          _isLogging = false;
+        })
+      )
     ];
     WidgetsFlutterBinding.ensureInitialized();
     super.initState();
@@ -93,19 +82,20 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Email/Username'),
             _ColumnSpace(),
+            const Text('Email/Username', style: TextStyle(fontWeight: FontWeight.bold),),
             SizedBox(
               width: screen.width * 0.8,
               child: TextFormField(
                 controller: store.emailController,
                 decoration: const InputDecoration(
-                  hintText: 'Email',
+                  hintText: 'Email ou Username',
                   border: OutlineInputBorder(),
                 ),
               ),
             ),
             _ColumnSpace(),
+            const Text('Senha', style: TextStyle(fontWeight: FontWeight.bold),),
             SizedBox(
               width: screen.width * 0.8,
               child: TextFormField(
@@ -132,8 +122,17 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(screen.width * 0.8, 50)
                 ),
-                onPressed: () => store.login(), 
-                child: const Text('Login')
+                onPressed: () {
+                  store.login();
+                  if(!store.logged){
+                    setState(() {
+                      _isLogging = true;
+                    });
+                  }
+                }, 
+                child: _isLogging 
+                  ? const CircularProgressIndicator( color: Colors.white, ) 
+                  : const Text('Login') 
               );
             }),
 
