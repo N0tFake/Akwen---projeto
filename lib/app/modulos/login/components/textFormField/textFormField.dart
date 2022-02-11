@@ -20,7 +20,7 @@ class _TextFormState extends State<TextForm> {
     final store = Modular.get<LoginStore>();
 
     final Size screen = MediaQuery.of(context).size;
-    if(widget.type == 'email'){
+    /* if(widget.type == 'email'){
       return SizedBox(
         width: screen.width * 0.8,
         child: TextFormField(
@@ -44,7 +44,7 @@ class _TextFormState extends State<TextForm> {
         ),
       );
     }
-
+ */
     return const Center(child: Text('Erro'));
 
   }

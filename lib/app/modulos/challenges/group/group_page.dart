@@ -1,7 +1,7 @@
-import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_page.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_01.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_02.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_03.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/pages/task_04.dart';
 import 'package:flutter_akwen/app/modulos/resultado/resultado_page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,6 +28,8 @@ class GroupPageState extends State<GroupPage> {
           return const Group01Task02();
         case 3:
           return const Group01Task03();
+        case 4:
+          return const Group01Task04();
         default: 
           return const ResultadoPage();
       }

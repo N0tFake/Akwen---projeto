@@ -9,36 +9,6 @@ part of 'login_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginStore on _LoginStoreBase, Store {
-  final _$emailAtom = Atom(name: '_LoginStoreBase.email');
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  final _$passwordAtom = Atom(name: '_LoginStoreBase.password');
-
-  @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
-  }
-
-  @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
-    });
-  }
-
   final _$isLoginAtom = Atom(name: '_LoginStoreBase.isLogin');
 
   @override
@@ -54,30 +24,60 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
+  final _$loggedAtom = Atom(name: '_LoginStoreBase.logged');
+
+  @override
+  bool get logged {
+    _$loggedAtom.reportRead();
+    return super.logged;
+  }
+
+  @override
+  set logged(bool value) {
+    _$loggedAtom.reportWrite(value, super.logged, () {
+      super.logged = value;
+    });
+  }
+
+  final _$incorretLoginAtom = Atom(name: '_LoginStoreBase.incorretLogin');
+
+  @override
+  bool get incorretLogin {
+    _$incorretLoginAtom.reportRead();
+    return super.incorretLogin;
+  }
+
+  @override
+  set incorretLogin(bool value) {
+    _$incorretLoginAtom.reportWrite(value, super.incorretLogin, () {
+      super.incorretLogin = value;
+    });
+  }
+
+  final _$errorMessageAtom = Atom(name: '_LoginStoreBase.errorMessage');
+
+  @override
+  String get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
+  final _$loginAsyncAction = AsyncAction('_LoginStoreBase.login');
+
+  @override
+  Future<void> login() {
+    return _$loginAsyncAction.run(() => super.login());
+  }
+
   final _$_LoginStoreBaseActionController =
       ActionController(name: '_LoginStoreBase');
-
-  @override
-  void setEmail(String value) {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setEmail');
-    try {
-      return super.setEmail(value);
-    } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setPassword(String value) {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setPassword');
-    try {
-      return super.setPassword(value);
-    } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void setIsLogin(bool value) {
@@ -91,11 +91,23 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
+  void dispose() {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.dispose');
+    try {
+      return super.dispose();
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-email: ${email},
-password: ${password},
-isLogin: ${isLogin}
+isLogin: ${isLogin},
+logged: ${logged},
+incorretLogin: ${incorretLogin},
+errorMessage: ${errorMessage}
     ''';
   }
 }

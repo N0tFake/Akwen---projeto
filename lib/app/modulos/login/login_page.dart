@@ -1,11 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_akwen/app/modulos/login/components/buttons/button_login.dart';
-import 'package:flutter_akwen/app/modulos/login/components/campo_login.dart';
+import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,22 +15,58 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final store = Modular.get<LoginStore>();
+  final LoginStore store = Modular.get();
   String uid = '';
 
-  Future teste() async {
-    final user = FirebaseAuth.instance.currentUser;
-    setState(() {
-      if (user == null) {
-        uid = 'vazio';
-      } else {
-        uid = user.uid;
-      }
-    });
+  bool _showPassword = true;
+  bool _isLogging = false;
+
+  List<ReactionDisposer> disposers = [];
+
+  @override
+  void initState() {
+    disposers = [
+      reaction((_) => store.logged == true,
+          (_) => Modular.to.navigate(HomeModule.routeName)),
+      reaction(
+          (_) => store.incorretLogin == false,
+          (_) => Flushbar(
+                title: 'Error',
+                icon: const Icon(Icons.sentiment_dissatisfied),
+                message: 'Dados de login estão incorretos',
+                mainButton: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ).show(context)),
+      reaction(
+          (_) => store.errorMessage.isNotEmpty,
+          (_) => Flushbar(
+                title: 'Erro!',
+                message: store.errorMessage,
+                mainButton: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ).show(context)),
+      reaction(
+        (_) => store.errorMessage.isNotEmpty || store.incorretLogin == false, 
+        (_) => setState(() {
+          _isLogging = false;
+        })
+      )
+    ];
+    WidgetsFlutterBinding.ensureInitialized();
+    super.initState();
   }
 
-  Future deslogarLogin() async {
-    await FirebaseAuth.instance.signOut();
+  @override
+  void dispose() {
+    store.dispose();
+    for (var element in disposers) {
+      element.call();
+    }
+    super.dispose();
   }
 
   @override
@@ -44,46 +80,82 @@ class _LoginPageState extends State<LoginPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _ColumnSpace(),
+            const Text('Email/Username', style: TextStyle(fontWeight: FontWeight.bold),),
+            SizedBox(
+              width: screen.width * 0.8,
+              child: TextFormField(
+                controller: store.emailController,
+                decoration: const InputDecoration(
+                  hintText: 'Email ou Username',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            _ColumnSpace(),
+            const Text('Senha', style: TextStyle(fontWeight: FontWeight.bold),),
+            SizedBox(
+              width: screen.width * 0.8,
+              child: TextFormField(
+                controller: store.passwordController,
+                decoration: InputDecoration(
+                    hintText: 'Senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                        icon: Icon(_showPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        hoverColor: Colors.transparent,
+                        onPressed: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        })),
+                obscureText: _showPassword,
+              ),
+            ),
+            _ColumnSpace(),
             Observer(builder: (_) {
-              return const CampLogin(
-                hintText: 'mail@mail.com',
-                labelText: 'Usuario',
-                type: 'email',
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(screen.width * 0.8, 50)
+                ),
+                onPressed: () {
+                  store.login();
+                  if(!store.logged){
+                    setState(() {
+                      _isLogging = true;
+                    });
+                  }
+                }, 
+                child: _isLogging 
+                  ? const CircularProgressIndicator( color: Colors.white, ) 
+                  : const Text('Login') 
               );
             }),
-            SizedBox(
-              height: screen.height * 0.03,
-            ),
+
+            _ColumnSpace(),
             Observer(builder: (_) {
-              return const CampLogin(
-                hintText: '***********',
-                labelText: 'Senha',
-                type: 'password',
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(screen.width * 0.8, 50)
+                ),
+                onPressed: () => Modular.to.navigate('/registration'), 
+                child: const Text('Cadastrar')
               );
-            }),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-            Observer(builder: (_) {
-              return ButtonLogin(name: 'Login', route: '/home');
-            }),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-            const ButtonLogin(name: 'Registrar', route: '/registration'),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-           /*  ElevatedButton(onPressed: () => teste(), child: Text('testar')),
-            SizedBox(
-              height: screen.height * 0.04,
-            ),
-            ElevatedButton(
-                onPressed: () => deslogarLogin(), child: Text('deslogar')), */
+            })
           ],
         ),
       ),
+    );
+  }
+
+  Widget _ColumnSpace() {
+    final Size screen = MediaQuery.of(context).size;
+    return SizedBox(
+      height: screen.height * 0.04,
     );
   }
 }

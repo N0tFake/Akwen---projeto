@@ -9,82 +9,147 @@ part of 'registration_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RegistrationStore on _RegistrationStoreBase, Store {
-  final _$emailAtom = Atom(name: '_RegistrationStoreBase.email');
+  final _$isStudentAtom = Atom(name: '_RegistrationStoreBase.isStudent');
 
   @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
+  bool get isStudent {
+    _$isStudentAtom.reportRead();
+    return super.isStudent;
   }
 
   @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
+  set isStudent(bool value) {
+    _$isStudentAtom.reportWrite(value, super.isStudent, () {
+      super.isStudent = value;
     });
   }
 
-  final _$passwordAtom = Atom(name: '_RegistrationStoreBase.password');
+  final _$hintPasswordAtom = Atom(name: '_RegistrationStoreBase.hintPassword');
 
   @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
+  bool get hintPassword {
+    _$hintPasswordAtom.reportRead();
+    return super.hintPassword;
   }
 
   @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
+  set hintPassword(bool value) {
+    _$hintPasswordAtom.reportWrite(value, super.hintPassword, () {
+      super.hintPassword = value;
     });
   }
 
-  final _$usernameAtom = Atom(name: '_RegistrationStoreBase.username');
+  final _$hintConfirmPasswordAtom =
+      Atom(name: '_RegistrationStoreBase.hintConfirmPassword');
 
   @override
-  String get username {
-    _$usernameAtom.reportRead();
-    return super.username;
+  bool get hintConfirmPassword {
+    _$hintConfirmPasswordAtom.reportRead();
+    return super.hintConfirmPassword;
   }
 
   @override
-  set username(String value) {
-    _$usernameAtom.reportWrite(value, super.username, () {
-      super.username = value;
+  set hintConfirmPassword(bool value) {
+    _$hintConfirmPasswordAtom.reportWrite(value, super.hintConfirmPassword, () {
+      super.hintConfirmPassword = value;
     });
+  }
+
+  final _$usernameExistAtom =
+      Atom(name: '_RegistrationStoreBase.usernameExist');
+
+  @override
+  bool get usernameExist {
+    _$usernameExistAtom.reportRead();
+    return super.usernameExist;
+  }
+
+  @override
+  set usernameExist(bool value) {
+    _$usernameExistAtom.reportWrite(value, super.usernameExist, () {
+      super.usernameExist = value;
+    });
+  }
+
+  final _$registeredAtom = Atom(name: '_RegistrationStoreBase.registered');
+
+  @override
+  bool get registered {
+    _$registeredAtom.reportRead();
+    return super.registered;
+  }
+
+  @override
+  set registered(bool value) {
+    _$registeredAtom.reportWrite(value, super.registered, () {
+      super.registered = value;
+    });
+  }
+
+  final _$errorMessageAtom = Atom(name: '_RegistrationStoreBase.errorMessage');
+
+  @override
+  String get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
+  final _$registerAsyncAction = AsyncAction('_RegistrationStoreBase.register');
+
+  @override
+  Future<void> register() {
+    return _$registerAsyncAction.run(() => super.register());
   }
 
   final _$_RegistrationStoreBaseActionController =
       ActionController(name: '_RegistrationStoreBase');
 
   @override
-  void setEmail(String value) {
+  void setIsStudent(dynamic value) {
     final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
-        name: '_RegistrationStoreBase.setEmail');
+        name: '_RegistrationStoreBase.setIsStudent');
     try {
-      return super.setEmail(value);
+      return super.setIsStudent(value);
     } finally {
       _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setPassword(String value) {
+  void setHintPassword(dynamic value) {
     final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
-        name: '_RegistrationStoreBase.setPassword');
+        name: '_RegistrationStoreBase.setHintPassword');
     try {
-      return super.setPassword(value);
+      return super.setHintPassword(value);
     } finally {
       _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setUsername(String value) {
+  void sethintConfirmPassword(dynamic value) {
     final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
-        name: '_RegistrationStoreBase.setUsername');
+        name: '_RegistrationStoreBase.sethintConfirmPassword');
     try {
-      return super.setUsername(value);
+      return super.sethintConfirmPassword(value);
+    } finally {
+      _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void dispose() {
+    final _$actionInfo = _$_RegistrationStoreBaseActionController.startAction(
+        name: '_RegistrationStoreBase.dispose');
+    try {
+      return super.dispose();
     } finally {
       _$_RegistrationStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -93,9 +158,12 @@ mixin _$RegistrationStore on _RegistrationStoreBase, Store {
   @override
   String toString() {
     return '''
-email: ${email},
-password: ${password},
-username: ${username}
+isStudent: ${isStudent},
+hintPassword: ${hintPassword},
+hintConfirmPassword: ${hintConfirmPassword},
+usernameExist: ${usernameExist},
+registered: ${registered},
+errorMessage: ${errorMessage}
     ''';
   }
 }
