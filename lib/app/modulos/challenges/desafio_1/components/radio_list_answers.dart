@@ -3,7 +3,8 @@ import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.da
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RadioListTileAnswers extends StatefulWidget {
-  const RadioListTileAnswers({ Key? key, required this.data, required this.palavras }) : super(key: key);
+  const RadioListTileAnswers({ Key? key, required this.data, required this.palavras, required this.challenge }) : super(key: key);
+  final String challenge;
   final Map<String, dynamic> data;
   final List palavras;
 
@@ -19,16 +20,27 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
   @override
   Widget build(BuildContext context) {
     String value0 = widget.data['akwe'][widget.palavras[0]];
-    List<String> value = [
-      widget.data['akwe'][widget.palavras[0]], 
-      widget.data['akwe'][widget.palavras[1]],
-      widget.data['akwe'][widget.palavras[2]],
-      widget.data['akwe'][widget.palavras[3]],
-    ];
+
+    List<String> value = [];
+   
+    if(widget.challenge == 'desafio1'){
+      value.add(widget.data['akwe'][widget.palavras[0]]);
+      value.add(widget.data['akwe'][widget.palavras[1]]);
+      value.add(widget.data['akwe'][widget.palavras[2]]);
+      value.add(widget.data['akwe'][widget.palavras[3]]);
+    }else if(widget.challenge == 'desafio2'){
+      value.add(widget.data['ptbr'][widget.palavras[0]]);
+      value.add(widget.data['ptbr'][widget.palavras[1]]);
+      value.add(widget.data['ptbr'][widget.palavras[2]]);
+      value.add(widget.data['ptbr'][widget.palavras[3]]);
+    }
+
+    value.add('error');
+
     return Column(
       children: [
         RadioListTile(
-          title: Text(widget.data['akwe'][widget.palavras[0]]),
+          title: Text(value[0]),
           value: value[0], 
           groupValue: groupValue, 
           onChanged: (value) {
@@ -40,7 +52,7 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
           }
         ),
         RadioListTile(
-          title: Text(widget.data['akwe'][widget.palavras[1]]),
+          title: Text(value[1]),
           value: value[1], 
           groupValue: groupValue, 
           onChanged: (value) {
@@ -52,7 +64,7 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
           }
         ),
         RadioListTile(
-          title: Text(widget.data['akwe'][widget.palavras[2]]),
+          title: Text(value[2]),
           value: value[2], 
           groupValue: groupValue, 
           onChanged: (value) {
@@ -64,7 +76,7 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
           }
         ),
         RadioListTile(
-          title: Text(widget.data['akwe'][widget.palavras[3]]),
+          title: Text(value[3]),
           value: value[3], 
           groupValue: groupValue, 
           onChanged: (value) {

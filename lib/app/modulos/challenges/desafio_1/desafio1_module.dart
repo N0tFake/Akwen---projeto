@@ -11,6 +11,6 @@ class Desafio1Module extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => const Desafio1Page()),
+    ChildRoute('/', child: (_, args) => const Desafio1Page(challenge: 'defaut',)),
   ];
 }

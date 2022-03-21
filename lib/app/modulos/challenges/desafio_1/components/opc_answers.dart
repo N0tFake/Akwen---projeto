@@ -3,13 +3,13 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
-import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/enum_opc.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/radio_list_answers.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class OpcAnswers extends StatefulWidget {
-  const OpcAnswers({ Key? key }) : super(key: key);
+  final String challenge;
+  const OpcAnswers({ Key? key, required this.challenge }) : super(key: key);
 
   @override
   _OpcAnswersState createState() => _OpcAnswersState();
@@ -67,7 +67,7 @@ class _OpcAnswersState extends State<OpcAnswers> {
                   palavras.add(store.numPosition);
                 }
               }
-              return RadioListTileAnswers(data: data, palavras: palavras,);
+              return RadioListTileAnswers(challenge: widget.challenge, data: data, palavras: palavras,);
             } else {
               return const Center(child: CircularProgressIndicator(),);
             }

@@ -11,6 +11,6 @@ class Group01Task03 extends StatefulWidget {
 class _Group01Task03State extends State<Group01Task03> {
   @override
   Widget build(BuildContext context) {
-    return const Desafio1Page();
+    return const Desafio1Page(challenge: 'desafio1',);
   }
 }

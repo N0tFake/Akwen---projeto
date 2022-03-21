@@ -1,4 +1,5 @@
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_akwen/app/modulos/resultado/resultado_store.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/material.dart';
 
 class ResultadoPage extends StatefulWidget {
   final String title;
-  const ResultadoPage({Key? key, this.title = 'ResultadoPage'})
+  final String challenge;
+  const ResultadoPage({Key? key, this.title = 'ResultadoPage', required this.challenge})
       : super(key: key);
   @override
   ResultadoPageState createState() => ResultadoPageState();
@@ -15,6 +17,7 @@ class ResultadoPage extends StatefulWidget {
 class ResultadoPageState extends State<ResultadoPage> {
   final ResultadoStore store = Modular.get();
   final GroupStore storeGroup = Modular.get();
+  final Group2Store storeGroup2 = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +44,28 @@ class ResultadoPageState extends State<ResultadoPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Observer(builder: (_) {
-                      return Text(
-                        '${storeGroup.pts}',
-                        style: TextStyle(
+                      if(widget.challenge == 'desafio1'){
+                        return Text(
+                          '${storeGroup.pts}',
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: storeGroup.pts == 0
-                                ? Colors.red
-                                : Colors.green),
+                              ? Colors.red
+                              : Colors.green),
                       );
+                      }else if(widget.challenge == 'desafio2'){
+                        return Text(
+                          '${storeGroup2.pts}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: storeGroup2.pts == 0
+                              ? Colors.red
+                              : Colors.green),
+                        );
+                      }
+                      return const Text('Error');
                     }),
                     const Text(
                       ' Pontos',
@@ -64,7 +80,11 @@ class ResultadoPageState extends State<ResultadoPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                storeGroup.reset();
+                if(widget.challenge == 'desafio1'){
+                  storeGroup.reset();
+                }else  if(widget.challenge == 'desafio2'){
+                  storeGroup2.reset();
+                }
                 Modular.to.navigate('/home');
               },
               child: const Text('Voltar para a Home'))

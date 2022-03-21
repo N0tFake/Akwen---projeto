@@ -9,7 +9,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class GridImages extends StatefulWidget {
-  const GridImages({ Key? key,}) : super(key: key);
+  const GridImages({ Key? key, required this.corrent }) : super(key: key);
+  final int corrent;
 
   @override
   _GridImagesState createState() => _GridImagesState();
@@ -37,18 +38,22 @@ class _GridImagesState extends State<GridImages> {
                 List<int> tirados = [];
                 for(var i=0; i<3; i++){
                   if(Random().nextInt(2) == 1 && repete == false){
-                    listImagens.add(data['Imagens'][store.numPosition]);
-                    tirados.add(store.numPosition);
+                    /* listImagens.add(data['Imagens'][store.numPosition]); */
+                    print('imagem:  ${widget.corrent}');
+                    listImagens.add(data['Imagens'][widget.corrent]);
+                    tirados.add(widget.corrent);
                     repete = true;
                     store.setPosCorrent(i);
                   }else{
                     if(listImagens.isEmpty){
-                      num = Random().nextInt(tamanho);
+                      do{
+                        num = Random().nextInt(tamanho);
+                      }while(num == widget.corrent);
                       listImagens.add(data['Imagens'][num]);
                     }else{
                       do{
                         num = Random().nextInt(tamanho);
-                      }while(tirados.contains(num) == true || num == store.numPosition);
+                      }while(tirados.contains(num) == true || num == widget.corrent);
                       tirados.add(num);
                       listImagens.add(data['Imagens'][num]);
                     }
@@ -58,7 +63,6 @@ class _GridImagesState extends State<GridImages> {
                   listImagens[2] = data['Imagens'][store.numPosition];
                   store.setPosCorrent(2);
                 }
-                print(listImagens.length);
                 return RadioButtons(listImages: listImagens);
               } else {
                 return const Center(child: CircularProgressIndicator(),);
