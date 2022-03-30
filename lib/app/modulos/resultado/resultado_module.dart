@@ -11,6 +11,6 @@ class ResultadoModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => ResultadoPage()),
+    ChildRoute('/', child: (_, args) => const ResultadoPage(challenge: 'defaut')),
   ];
 }

@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 
 class Desafio1Page extends StatefulWidget {
   final String title;
-  const Desafio1Page({Key? key, this.title = 'Desafio1Page'}) : super(key: key);
+  final String challenge;
+  const Desafio1Page({Key? key, this.title = 'Desafio1Page', required this.challenge}) : super(key: key);
   @override
   Desafio1PageState createState() => Desafio1PageState();
 }
@@ -27,27 +28,52 @@ class Desafio1PageState extends State<Desafio1Page> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      return FutureBuilder(
-        future: service.getChallengeDoc('palavras'),
-        builder:
-            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (snapshot.hasData && !snapshot.data!.exists) {
-            return const Text('Sem dados');
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            Map<String, dynamic> data =
-                snapshot.data!.data() as Map<String, dynamic>;
+      if(widget.challenge == 'desafio1'){
+        return FutureBuilder(
+          future: service.getChallengeDoc('palavras'),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasData && !snapshot.data!.exists) {
+              return const Text('Sem dados');
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              Map<String, dynamic> data =
+                  snapshot.data!.data() as Map<String, dynamic>;
 
-            int tamanho = data['ptbr'].length;
-            int numPosition = Random().nextInt(tamanho);
-            store.numPosition = numPosition;
-            return PageDesafio(data: data,);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      );
+              int tamanho = data['ptbr'].length;
+              int numPosition = Random().nextInt(tamanho);
+              store.numPosition = numPosition;
+              return PageDesafio(data: data, challenge: widget.challenge,);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        );
+      }else if(widget.challenge == 'desafio2'){
+        return FutureBuilder(
+          future: service.getChallengeDoc('palavras'),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasData && !snapshot.data!.exists) {
+              return const Text('Sem dados');
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              Map<String, dynamic> data =
+                  snapshot.data!.data() as Map<String, dynamic>;
+
+              int tamanho = data['ptbr'].length;
+              int numPosition = Random().nextInt(tamanho);
+              store.numPosition = numPosition;
+              return PageDesafio(data: data, challenge: widget.challenge,);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        );
+      }
+      return const Text('error');
     });
   }
 }
