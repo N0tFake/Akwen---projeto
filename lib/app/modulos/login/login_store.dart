@@ -51,6 +51,13 @@ abstract class _LoginStoreBase with Store {
   }
 
   @action 
+  void errorLogin(){
+    logged = false;
+    incorretLogin = true;
+    errorMessage = '';
+  }
+
+  @action 
   void dispose(){
     logged = false;
     incorretLogin = true;

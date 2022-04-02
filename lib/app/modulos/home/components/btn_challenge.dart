@@ -22,8 +22,8 @@ class ButtonChallenge extends StatelessWidget {
           }else if(name == 'Desafio 2'){
             Modular.to.navigate('/group2');
           }else if(name == 'Desafio 3'){
-            alert(context);
-            //Modular.to.navigate('/desafio3');
+            //alert(context);
+            Modular.to.navigate('/desafio3');
           }else{
             AlertDialog(
               title: Row(

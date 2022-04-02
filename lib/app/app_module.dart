@@ -7,6 +7,7 @@ import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.da
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_module.dart';
+import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group2/group2_module.dart';
@@ -40,6 +41,7 @@ class AppModule extends Module {
     )),
     Bind.singleton((i) => Desafio1Store()),
     Bind.singleton((i) => Desafio2Store()),
+    Bind.singleton((i) => Desafio3Store(i.get())),
     Bind.singleton((i) => ResultadoStore()),
     Bind.singleton((i) => GroupStore()),
     Bind.singleton((i) => Group2Store()),

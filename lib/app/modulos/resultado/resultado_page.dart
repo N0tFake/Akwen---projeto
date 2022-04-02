@@ -1,3 +1,4 @@
+import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -18,10 +19,19 @@ class ResultadoPageState extends State<ResultadoPage> {
   final ResultadoStore store = Modular.get();
   final GroupStore storeGroup = Modular.get();
   final Group2Store storeGroup2 = Modular.get();
+  final Desafio3Store storeGroup3 = Modular.get();
 
   @override
   Widget build(BuildContext context) {
     final ResultadoStore store = Modular.get();
+    int pts = 0;
+    if(widget.challenge == 'desafio1'){
+      pts = storeGroup.pts;
+    }else if(widget.challenge == 'desafio2'){
+      pts = storeGroup2.pts;
+    }else if(widget.challenge == 'desafio3'){
+      pts = storeGroup3.pts;
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resultado'),
@@ -44,7 +54,47 @@ class ResultadoPageState extends State<ResultadoPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Observer(builder: (_) {
-                      if(widget.challenge == 'desafio1'){
+                      return Text(
+                          '$pts',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: pts == 0
+                              ? Colors.red
+                              : Colors.green),
+                      );
+                    }),
+                    const Text(
+                      ' Pontos',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      )
+                    )
+                  ],
+                )
+              ],
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if(widget.challenge == 'desafio1'){
+                  storeGroup.reset();
+                }else  if(widget.challenge == 'desafio2'){
+                  storeGroup2.reset();
+                }else if(widget.challenge == 'desafio3'){
+                  storeGroup3.reset();
+                }
+                Modular.to.navigate('/home');
+              },
+              child: const Text('Voltar para a Home'))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*  if(widget.challenge == 'desafio1'){
                         return Text(
                           '${storeGroup.pts}',
                           style: TextStyle(
@@ -64,33 +114,15 @@ class ResultadoPageState extends State<ResultadoPage> {
                               ? Colors.red
                               : Colors.green),
                         );
+                      }else if(widget.challenge == 'desafio3'){
+                        return Text(
+                          '${storeGroup3.pts}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: storeGroup2.pts == 0
+                              ? Colors.red
+                              : Colors.green),
+                        );
                       }
-                      return const Text('Error');
-                    }),
-                    const Text(
-                      ' Pontos',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      )
-                    )
-                  ],
-                )
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if(widget.challenge == 'desafio1'){
-                  storeGroup.reset();
-                }else  if(widget.challenge == 'desafio2'){
-                  storeGroup2.reset();
-                }
-                Modular.to.navigate('/home');
-              },
-              child: const Text('Voltar para a Home'))
-          ],
-        ),
-      ),
-    );
-  }
-}
+                      return const Text('Error'); */

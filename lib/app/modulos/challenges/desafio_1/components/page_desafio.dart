@@ -66,6 +66,9 @@ class _PageDesafioState extends State<PageDesafio> {
           SizedBox(height: screen.height * 0.04),
           Observer(builder: (_) {
             return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(screen.width * 0.8, 50)
+              ),
                 onPressed: !store.isChosen ? null : confirm,
                 child: const Text('Confirmar'));
           })

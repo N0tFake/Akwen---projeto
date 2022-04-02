@@ -6,7 +6,7 @@ class Desafio3Module extends Module {
   static String get routeName => '/desafio3';
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => Desafio3Store()),
+    Bind.lazySingleton((i) => Desafio3Store(i.get())),
   ];
 
   @override
