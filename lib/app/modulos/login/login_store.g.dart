@@ -91,6 +91,17 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
+  void errorLogin() {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.errorLogin');
+    try {
+      return super.errorLogin();
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void dispose() {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
         name: '_LoginStoreBase.dispose');

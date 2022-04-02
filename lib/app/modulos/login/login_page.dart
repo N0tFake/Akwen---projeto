@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     disposers = [
       reaction((_) => store.logged == true,
-          (_) => Modular.to.navigate(HomeModule.routeName)),
+               (_) => Modular.to.navigate(HomeModule.routeName)),
       reaction(
           (_) => store.incorretLogin == false,
           (_) => Flushbar(
@@ -39,6 +39,10 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () => Navigator.pop(context),
                 ),
               ).show(context)),
+      reaction(
+        (_) => store.incorretLogin == false,
+        (_) => store.errorLogin()
+      ),
       reaction(
           (_) => store.errorMessage.isNotEmpty,
           (_) => Flushbar(

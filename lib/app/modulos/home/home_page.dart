@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/modulos/home/components/btn_challenge.dart';
 import 'package:flutter_akwen/app/modulos/home/components/data_user_future.dart';
+import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_akwen/app/modulos/home/home_store.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +13,7 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 class HomePageState extends State<HomePage> {
-  final HomeStore store = Modular.get();
+  final LoginStore store = Modular.get();
   final Services service = Modular.get();
 
   final uid = FirebaseAuth.instance.currentUser;
@@ -26,7 +25,10 @@ class HomePageState extends State<HomePage> {
         title: const FutureDataUsername(),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () => service.deslogar(),
+          onPressed: () => {
+            store.dispose(),
+            service.deslogar()
+          },
           icon: const Icon(Icons.arrow_back_ios),
         ),
         backgroundColor: Colors.black,

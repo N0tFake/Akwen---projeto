@@ -29,8 +29,8 @@ class LodingScreenPageState extends State<LodingScreenPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Text('Dasihâze dakrãiwaihkuzê',
+          children: [ 
+            const Text('Dasihâze dakrãiwaihkuzê O jogo',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold
