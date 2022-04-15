@@ -164,6 +164,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                           || username == ''){
                           return 'Esse campo é obrigatorio';
                         }
+                        return null;
                       },
                       decoration: const InputDecoration(
                         hintText: 'Username',
@@ -194,6 +195,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                         }else if (pass.length < 6){
                           return 'A senha deve ter no minimo 6 caracter';
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                           hintText: '********',
@@ -231,6 +233,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                         }else if (pass != store.passController.text){
                           return 'As senha não são iguais';
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                           hintText: '********',
@@ -269,8 +272,8 @@ class RegistrationPageState extends State<RegistrationPage> {
                     if(store.isStudent){
                       String studentEmail = store.usernameController.text + '@student.com';
                       store.emailController.text = studentEmail;
-                      store.register();
                     }
+                    store.register();
                   }
                 },
                 child: _isLogging 

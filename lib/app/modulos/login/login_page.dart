@@ -77,41 +77,73 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        centerTitle: true,
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _ColumnSpace(),
-            const Text('Email/Username', style: TextStyle(fontWeight: FontWeight.bold),),
+            const CircleAvatar(child: Image(image: AssetImage('assets/images/uft.png'),),),
+            _ColumnSpace(0.04),
+            const Text('Email ou Username', 
+              style: TextStyle(
+                fontWeight: FontWeight.bold, 
+                fontSize: 20, 
+                fontFamily: 'Nunito')),
+            _ColumnSpace(0.02),
             SizedBox(
               width: screen.width * 0.8,
               child: TextFormField(
                 controller: store.emailController,
+                cursorColor: Colors.green,
                 decoration: const InputDecoration(
                   hintText: 'Email ou Username',
-                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green, width: 2.0),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(25.0), 
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(25.0), 
+                    ),
+                  ),
                 ),
               ),
             ),
-            _ColumnSpace(),
-            const Text('Senha', style: TextStyle(fontWeight: FontWeight.bold),),
+            _ColumnSpace(0.04),
+            const Text('Senha', style: TextStyle(
+              fontWeight: FontWeight.bold, 
+              fontSize: 20, 
+              fontFamily: 'Nunito'),
+            ),
+            _ColumnSpace(0.02),
             SizedBox(
               width: screen.width * 0.8,
               child: TextFormField(
                 controller: store.passwordController,
+                cursorColor: Colors.green,
                 decoration: InputDecoration(
                     hintText: 'Senha',
-                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green, width: 2.0),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(25.0), 
+                    ),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(25.0), 
+                    ),
+                  ),
                     suffixIcon: IconButton(
                         icon: Icon(_showPassword
                             ? Icons.visibility
                             : Icons.visibility_off),
                         hoverColor: Colors.transparent,
+                        color: _showPassword ? Colors.grey : Colors.green,
                         onPressed: () {
                           setState(() {
                             _showPassword = !_showPassword;
@@ -120,11 +152,15 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: _showPassword,
               ),
             ),
-            _ColumnSpace(),
+            _ColumnSpace(0.04),
             Observer(builder: (_) {
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screen.width * 0.8, 50)
+                  fixedSize: Size(screen.width * 0.8, 50),
+                  primary: const Color(0xffFF2400),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)
+                  )
                 ),
                 onPressed: () {
                   store.login();
@@ -136,18 +172,24 @@ class _LoginPageState extends State<LoginPage> {
                 }, 
                 child: _isLogging 
                   ? const CircularProgressIndicator( color: Colors.white, ) 
-                  : const Text('Login') 
+                  : const Text('Login', style: TextStyle(
+                    fontSize: 20
+                  ),) 
               );
             }),
 
-            _ColumnSpace(),
+            _ColumnSpace(0.04),
             Observer(builder: (_) {
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screen.width * 0.8, 50)
+                  fixedSize: Size(screen.width * 0.8, 50),
+                  primary: const Color(0xff007FFF),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)
+                  )
                 ),
                 onPressed: () => Modular.to.navigate('/registration'), 
-                child: const Text('Cadastrar')
+                child: const Text('Cadastrar', style: TextStyle(fontSize: 20),)
               );
             })
           ],
@@ -156,10 +198,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _ColumnSpace() {
+  Widget _ColumnSpace(double floating) {
     final Size screen = MediaQuery.of(context).size;
     return SizedBox(
-      height: screen.height * 0.04,
+      height: screen.height * floating,
     );
   }
 }
