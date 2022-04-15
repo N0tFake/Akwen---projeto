@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -290,6 +291,57 @@ class RegistrationPageState extends State<RegistrationPage> {
   Widget _columnSpace() {
     return const SizedBox(
       height: 20,
+    );
+  }
+
+  InputDecoration _InputDecoration(String hintText){
+    return InputDecoration(
+      hintText: hintText,
+      filled: true,
+      fillColor: Colors.white70,
+      focusedBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: greeColor, width: 2.0),
+        borderRadius: BorderRadius.all(
+            Radius.circular(25.0), 
+        ),
+      ),
+      enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black),
+        borderRadius: BorderRadius.all(
+            Radius.circular(25.0), 
+        ),
+      ),
+    );
+  }
+
+   InputDecoration _inputDecorationPassword(bool _showPassword){
+    return InputDecoration(
+      hintText: '********',
+      filled: true,
+      fillColor: Colors.white70,
+      focusedBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: greeColor, width: 2.0),
+        borderRadius: BorderRadius.all(
+          Radius.circular(25.0), 
+        ),
+      ),
+      enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black),
+        borderRadius: BorderRadius.all(
+          Radius.circular(25.0), 
+        ),
+      ),
+      suffixIcon: IconButton(
+        icon: Icon(_showPassword
+            ? Icons.visibility
+            : Icons.visibility_off),
+        hoverColor: Colors.transparent,
+        color: _showPassword ? Colors.grey : greeColor,
+        onPressed: () {
+          setState(() {
+            _showPassword = !_showPassword;
+          });
+        })
     );
   }
 }

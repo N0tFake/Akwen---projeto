@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -77,122 +78,132 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const CircleAvatar(child: Image(image: AssetImage('assets/images/uft.png'),),),
-            _ColumnSpace(0.04),
-            const Text('Email ou Username', 
-              style: TextStyle(
-                fontWeight: FontWeight.bold, 
-                fontSize: 20, 
-                fontFamily: 'Nunito')),
-            _ColumnSpace(0.02),
-            SizedBox(
-              width: screen.width * 0.8,
-              child: TextFormField(
-                controller: store.emailController,
-                cursorColor: Colors.green,
-                decoration: const InputDecoration(
-                  hintText: 'Email ou Username',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green, width: 2.0),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(25.0), 
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/fundos/fundoWhite.png'),
+            fit: BoxFit.cover,
+          )
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CircleAvatar(
+                maxRadius: 70,
+                backgroundColor: redColor,
+                child: Image(
+                  image: AssetImage('assets/images/logo/LOGO-APP.png'),
+                ),
+              ),
+              _ColumnSpace(0.04),
+              _Title('Email ou Username'),
+              _ColumnSpace(0.02),
+              SizedBox(
+                width: screen.width * 0.8,
+                child: TextFormField(
+                  controller: store.emailController,
+                  cursorColor: Colors.green,
+                  decoration: const InputDecoration(
+                    hintText: 'Email ou Username',
+                    filled: true,
+                    fillColor: Colors.white70,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: greeColor, width: 2.0),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(25.0), 
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(25.0), 
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(25.0), 
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            _ColumnSpace(0.04),
-            const Text('Senha', style: TextStyle(
-              fontWeight: FontWeight.bold, 
-              fontSize: 20, 
-              fontFamily: 'Nunito'),
-            ),
-            _ColumnSpace(0.02),
-            SizedBox(
-              width: screen.width * 0.8,
-              child: TextFormField(
-                controller: store.passwordController,
-                cursorColor: Colors.green,
-                decoration: InputDecoration(
+              _ColumnSpace(0.04),
+              _Title('Senha'),
+              _ColumnSpace(0.02),
+              SizedBox(
+                width: screen.width * 0.8,
+                child: TextFormField(
+                  controller: store.passwordController,
+                  cursorColor: Colors.green,
+                  decoration: InputDecoration(
                     hintText: 'Senha',
+                    filled: true,
+                    fillColor: Colors.white70,
                     focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green, width: 2.0),
-                    borderRadius: BorderRadius.all(
+                      borderSide: BorderSide(color: greeColor, width: 2.0),
+                      borderRadius: BorderRadius.all(
                         Radius.circular(25.0), 
+                      ),
                     ),
-                  ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
                         Radius.circular(25.0), 
+                      ),
                     ),
-                  ),
                     suffixIcon: IconButton(
-                        icon: Icon(_showPassword
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        hoverColor: Colors.transparent,
-                        color: _showPassword ? Colors.grey : Colors.green,
-                        onPressed: () {
-                          setState(() {
-                            _showPassword = !_showPassword;
-                          });
-                        })),
-                obscureText: _showPassword,
+                      icon: Icon(_showPassword
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      hoverColor: Colors.transparent,
+                      color: _showPassword ? Colors.grey : greeColor,
+                      onPressed: () {
+                        setState(() {
+                          _showPassword = !_showPassword;
+                        });
+                      })),
+                  obscureText: _showPassword,
+                ),
               ),
-            ),
-            _ColumnSpace(0.04),
-            Observer(builder: (_) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screen.width * 0.8, 50),
-                  primary: const Color(0xffFF2400),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)
-                  )
-                ),
-                onPressed: () {
-                  store.login();
-                  if(!store.logged){
-                    setState(() {
-                      _isLogging = true;
-                    });
-                  }
-                }, 
-                child: _isLogging 
-                  ? const CircularProgressIndicator( color: Colors.white, ) 
-                  : const Text('Login', style: TextStyle(
-                    fontSize: 20
-                  ),) 
-              );
-            }),
-
-            _ColumnSpace(0.04),
-            Observer(builder: (_) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screen.width * 0.8, 50),
-                  primary: const Color(0xff007FFF),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)
-                  )
-                ),
-                onPressed: () => Modular.to.navigate('/registration'), 
-                child: const Text('Cadastrar', style: TextStyle(fontSize: 20),)
-              );
-            })
-          ],
+              _ColumnSpace(0.04),
+              Observer(builder: (_) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(screen.width * 0.8, 50),
+                    primary: redColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    )
+                  ),
+                  onPressed: () {
+                    store.login();
+                    if(!store.logged){
+                      setState(() {
+                        _isLogging = true;
+                      });
+                    }
+                  }, 
+                  child: _isLogging 
+                    ? const CircularProgressIndicator( color: Colors.white, ) 
+                    : const Text('Login', style: TextStyle(
+                      fontSize: 20
+                    ),) 
+                );
+              }),
+        
+              _ColumnSpace(0.04),
+              Observer(builder: (_) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(screen.width * 0.8, 50),
+                    primary: blueColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    )
+                  ),
+                  onPressed: () => Modular.to.navigate('/registration'), 
+                  child: const Text('Cadastrar', style: TextStyle(fontSize: 20),)
+                );
+              })
+            ],
+          ),
         ),
       ),
     );
@@ -203,5 +214,21 @@ class _LoginPageState extends State<LoginPage> {
     return SizedBox(
       height: screen.height * floating,
     );
+  }
+
+  Widget _Title(String text){
+    return Text(text, 
+      style: TextStyle(
+        fontWeight: FontWeight.bold, 
+        fontSize: 20, 
+        fontFamily: 'Nunito',
+        shadows: [
+          Shadow(
+            color: Colors.black.withOpacity(0.4),
+            offset: const Offset(5, 5),
+            blurRadius: 10,
+          )
+        ]
+      ));
   }
 }
