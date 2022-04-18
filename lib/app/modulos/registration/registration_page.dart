@@ -1,3 +1,4 @@
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
@@ -64,9 +65,13 @@ class RegistrationPageState extends State<RegistrationPage> {
     WidgetsFlutterBinding.ensureInitialized();
     super.initState();
   }
+  
+  final FocusScopeNode _node = FocusScopeNode();
+  final _formKey = GlobalKey<FormState>();
 
   @override 
   void dispose(){
+    _node.dispose();
     store.dispose();
     for(var element in disposers){
       element.call();
@@ -74,223 +79,335 @@ class RegistrationPageState extends State<RegistrationPage> {
     super.dispose();
   }
 
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro'),
+        title: const Text('Cadastro', 
+          style: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.bold,
+            fontSize: 30
+          ),
+        ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios, size: 30,),
           onPressed: () => Modular.to.navigate('/login'),
         ),
+        elevation: 0,
+        backgroundColor: blueColor,
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _columnSpace(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Observer(builder: (_) {
-                  return Checkbox(
-                      value: store.isStudent,
-                      onChanged: (bool? value) {
-                        store.setIsStudent(value);
-                      });
-                }),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text(
-                    'Conta para estudante. \nObs: Contas para estudante não precisam de email.'),
-              ],
-            ),
-            _columnSpace(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Observer(builder: (_) {
-                  return Text(
-                    'Email',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: store.isStudent ? Colors.grey : null),
-                  );
-                }),
-                Observer(builder: (_) {
-                  return SizedBox(
+
+      resizeToAvoidBottomInset: false,
+
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 50),
+          //height: 0.955 * (screen.height - AppBar().preferredSize.height), 
+          //height: double.infinity,
+          width: screen.width,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/fundos/fundo-grey-light.png'),
+              fit: BoxFit.cover
+            )
+          ),
+          child: Form(
+            key: _formKey,
+            child:  FocusScope(
+              node: _node,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+
+                  _columnSpace('inputSpace'),
+                  Container(
                     width: screen.width * 0.8,
-                    child: TextFormField(
-                      enabled: !store.isStudent,
-                      validator: (email) {
-                        if(store.isStudent){
-                          return null;
-                        } else if(email != null && !EmailValidator.validate(email)){
-                          return 'Email invalido';
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                        hintText: 'Email',
-                        border: OutlineInputBorder(),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black38,
+                          blurRadius: 25,
+                          offset: Offset(0, 10)
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Observer(builder: (_) {
+                          return Transform.scale(
+                            scale: 2,
+                            child: Checkbox(
+                                value: store.isStudent,
+                                activeColor: redColor,
+                                shape: const CircleBorder(),
+                                onChanged: (bool? value) {
+                                  store.setIsStudent(value);
+                                }),
+                          );
+                        }),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        const Text(
+                          'Conta para estudante. \nObs: Contas para estudante \nnão precisam de email.',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  _columnSpace('inputSpace'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Observer(builder: (_) {
+                        return Text(
+                          'Email',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            shadows: [
+                              Shadow(
+                                color: Colors.white.withOpacity(0.4),
+                                offset: const Offset(5, 5),
+                                blurRadius: 10
+                              )
+                            ],
+                            color: store.isStudent ? Colors.grey : null),
+                        );
+                      }),
+                      _columnSpace('titleSpace'),
+                      Observer(builder: (_) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                blurRadius: 25,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          width: screen.width * 0.8,
+                          child: TextFormField(
+                            enabled: !store.isStudent,
+                            validator: (email) {
+                              if(store.isStudent){
+                                return null;
+                              } else if(email != null && !EmailValidator.validate(email)){
+                                return 'Email invalido';
+                              }
+                              return null;
+                            },
+                            decoration: _InputDecoration('email@mail.com'),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: store.emailController,
+                            onEditingComplete: _node.nextFocus,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+
+                  _columnSpace('inputSpace'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _Title('Username'),
+                      _columnSpace('titleSpace'),
+                      Observer(builder: (_) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                blurRadius: 25,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          width: screen.width * 0.8,
+                          child: TextFormField(
+                            validator: (username) {
+                              if(username == null 
+                                || username.isEmpty 
+                                || username == ''){
+                                return 'Esse campo é obrigatorio';
+                              }
+                              return null;
+                            },
+                            decoration: _InputDecoration('username'),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: store.usernameController,
+                            onEditingComplete: _node.nextFocus,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+
+                  _columnSpace('inputSpace'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _Title('Senha'),
+                      _columnSpace('titleSpace'),
+                      Observer(builder: (_) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                blurRadius: 25,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          width: screen.width * 0.8,
+                          child: TextFormField(
+                            validator: (pass) {
+                              if(pass == null || pass.isEmpty){
+                                return 'Esse campo é obrigatorio';
+                              }else if (pass.length < 6){
+                                return 'A senha deve ter no minimo 6 caracter';
+                              }
+                              return null;
+                            },
+                            decoration: _inputDecorationPassword(store, 'password'),
+                            obscureText: store.hintPassword,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: store.passController,
+                            onEditingComplete: _node.nextFocus,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+
+                  _columnSpace('inputSpace'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _Title('Confirmar Senha'),
+                      _columnSpace('titleSpace'),
+                      Observer(builder: (_) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                blurRadius: 25,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          width: screen.width * 0.8,
+                          child: TextFormField(
+                            validator: (pass) {
+                              if(pass == null || pass.isEmpty){
+                                return 'Esse campo é obrigatorio';
+                              }else if (pass != store.passController.text){
+                                return 'As senha não são iguais';
+                              }
+                              return null;
+                            },
+                            decoration:  _inputDecorationPassword(store, 'confirm'), 
+                            obscureText: store.hintConfirmPassword,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            controller: store.confirPasslController,
+                            onEditingComplete: _node.nextFocus,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+
+                  _columnSpace('inputSpace'),
+                  Observer(builder: (_) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(screen.width * 0.8, 50),
+                        primary: blueColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)
+                        ),
+                        shadowColor: Colors.black
                       ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: store.emailController,
-                    ),
-                  );
-                }),
-              ],
-            ),
-            _columnSpace(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Username',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Observer(builder: (_) {
-                  return SizedBox(
-                    width: screen.width * 0.8,
-                    child: TextFormField(
-                      validator: (username) {
-                        if(username == null 
-                          || username.isEmpty 
-                          || username == ''){
-                          return 'Esse campo é obrigatorio';
+                      onPressed: () {
+                        setState(() {
+                          _isLogging = true;
+                        });
+                        if(!_formKey.currentState!.validate()){
+                          Flushbar(
+                            title: 'Error',
+                            message: 'Insira os dados corretamentes',
+                            duration: const Duration(seconds: 2),
+                          ).show(context);
+                          setState(() {
+                            _isLogging = false;
+                          });
+                        } else {
+                          if(store.isStudent){
+                            String studentEmail = store.usernameController.text + '@student.com';
+                            store.emailController.text = studentEmail;
+                          }
+                          store.register();
                         }
-                        return null;
                       },
-                      decoration: const InputDecoration(
-                        hintText: 'Username',
-                        border: OutlineInputBorder(),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: store.usernameController,
-                    ),
-                  );
-                }),
-              ],
+                      child: _isLogging 
+                        ? const CircularProgressIndicator( color: Colors.white, ) 
+                        : const Text('Cadastrar', style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold, 
+                          fontSize: 30
+                        ),),
+                    );
+                  }),
+                  Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom))
+                ],
+              ),
             ),
-            _columnSpace(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Senha',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Observer(builder: (_) {
-                  return SizedBox(
-                    width: screen.width * 0.8,
-                    child: TextFormField(
-                      validator: (pass) {
-                        if(pass == null || pass.isEmpty){
-                          return 'Esse campo é obrigatorio';
-                        }else if (pass.length < 6){
-                          return 'A senha deve ter no minimo 6 caracter';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          hintText: '********',
-                          border: const OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                            onPressed: () =>
-                                store.setHintPassword(!store.hintPassword),
-                            icon: Icon(store.hintPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                          )),
-                      obscureText: store.hintPassword,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: store.passController,
-                    ),
-                  );
-                }),
-              ],
-            ),
-            _columnSpace(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Confirme a senha',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Observer(builder: (_) {
-                  return SizedBox(
-                    width: screen.width * 0.8,
-                    child: TextFormField(
-                      validator: (pass) {
-                        if(pass == null || pass.isEmpty){
-                          return 'Esse campo é obrigatorio';
-                        }else if (pass != store.passController.text){
-                          return 'As senha não são iguais';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          hintText: '********',
-                          border: const OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                              onPressed: () => store.sethintConfirmPassword(
-                                  !store.hintConfirmPassword),
-                              icon: Icon(store.hintConfirmPassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off))),
-                      obscureText: store.hintConfirmPassword,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: store.confirPasslController
-                    ),
-                  );
-                }),
-              ],
-            ),
-            _columnSpace(),
-            Observer(builder: (_) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screen.width * 0.8, 50)
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isLogging = true;
-                  });
-                  if(!_formKey.currentState!.validate()){
-                    Flushbar(
-                      title: 'Error',
-                      message: 'Insira os dados corretamentes',
-                      duration: const Duration(seconds: 2),
-                    ).show(context);
-                  } else {
-                    if(store.isStudent){
-                      String studentEmail = store.usernameController.text + '@student.com';
-                      store.emailController.text = studentEmail;
-                    }
-                    store.register();
-                  }
-                },
-                child: _isLogging 
-                  ? const CircularProgressIndicator( color: Colors.white, ) 
-                  : const Text('Cadastrar'),
-              );
-            }),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _columnSpace() {
-    return const SizedBox(
-      height: 20,
+  Widget _Title(String text){
+    return Text(text, 
+      style: TextStyle(
+        fontWeight: FontWeight.bold, 
+        fontSize: 25, 
+        fontFamily: 'Nunito',
+        shadows: [
+          Shadow(
+            color: Colors.white.withOpacity(0.4),
+            offset: const Offset(5, 5),
+            blurRadius: 10,
+          )
+        ]
+      ));
+  }
+
+  Widget _columnSpace(String typeSpace) {
+    final Size screen = MediaQuery.of(context).size;
+    return SizedBox(
+      height: typeSpace == 'inputSpace' ? 40 : 5,
     );
   }
 
@@ -298,50 +415,62 @@ class RegistrationPageState extends State<RegistrationPage> {
     return InputDecoration(
       hintText: hintText,
       filled: true,
-      fillColor: Colors.white70,
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: greeColor, width: 2.0),
-        borderRadius: BorderRadius.all(
-            Radius.circular(25.0), 
-        ),
-      ),
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black),
-        borderRadius: BorderRadius.all(
-            Radius.circular(25.0), 
-        ),
-      ),
+      fillColor: Colors.white,
+
+      disabledBorder: _OutlineInputBorder(false, false),
+
+      focusedBorder: _OutlineInputBorder(false, true),
+      enabledBorder: _OutlineInputBorder(false, false),
+
+      errorBorder: _OutlineInputBorder(true, false),
+      focusedErrorBorder: _OutlineInputBorder(true, false),
     );
   }
 
-   InputDecoration _inputDecorationPassword(bool _showPassword){
+  InputDecoration _inputDecorationPassword(RegistrationStore store, String type){
     return InputDecoration(
       hintText: '********',
       filled: true,
-      fillColor: Colors.white70,
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: greeColor, width: 2.0),
-        borderRadius: BorderRadius.all(
-          Radius.circular(25.0), 
-        ),
-      ),
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black),
-        borderRadius: BorderRadius.all(
-          Radius.circular(25.0), 
-        ),
-      ),
-      suffixIcon: IconButton(
-        icon: Icon(_showPassword
+      fillColor: Colors.white,
+
+      focusedBorder: _OutlineInputBorder(false, true),
+      enabledBorder:_OutlineInputBorder(false, false),
+
+      errorBorder: _OutlineInputBorder(true, false),
+      focusedErrorBorder: _OutlineInputBorder(true, false),
+
+      suffixIcon: type == 'password' 
+        ? IconButton(
+          onPressed: () =>
+            store.setHintPassword(!store.hintPassword),
+          color: store.hintPassword ? Colors.grey : greeColor,
+          icon: Icon(store.hintPassword
             ? Icons.visibility
             : Icons.visibility_off),
-        hoverColor: Colors.transparent,
-        color: _showPassword ? Colors.grey : greeColor,
-        onPressed: () {
-          setState(() {
-            _showPassword = !_showPassword;
-          });
-        })
+        ) 
+        : IconButton(
+          onPressed: () => store.sethintConfirmPassword(
+            !store.hintConfirmPassword),
+          color: store.hintConfirmPassword ? Colors.grey : greeColor,
+          icon: Icon(store.hintConfirmPassword
+            ? Icons.visibility
+            : Icons.visibility_off)
+        ),
+      
+    );
+  }
+
+  OutlineInputBorder _OutlineInputBorder(bool error, bool focus){
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: error 
+          ? Colors.red 
+          : focus 
+            ? greeColor 
+            : Colors.transparent, width: 2),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(25.0), 
+      ),
     );
   }
 }
