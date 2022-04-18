@@ -3,6 +3,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
+import 'package:flutter_akwen/app/modulos/registration/components/inputs_decorations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_akwen/app/modulos/registration/registration_store.dart';
@@ -194,15 +195,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                       _columnSpace('titleSpace'),
                       Observer(builder: (_) {
                         return Container(
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 25,
-                                offset: Offset(0, 10),
-                              ),
-                            ],
-                          ),
+                          decoration: _boxDecoration(),
                           width: screen.width * 0.8,
                           child: TextFormField(
                             enabled: !store.isStudent,
@@ -214,7 +207,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               }
                               return null;
                             },
-                            decoration: _InputDecoration('email@mail.com'),
+                            decoration:  InputDecorationCustom('email@mail.com'),
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: store.emailController,
                             onEditingComplete: _node.nextFocus,
@@ -232,15 +225,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                       _columnSpace('titleSpace'),
                       Observer(builder: (_) {
                         return Container(
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 25,
-                                offset: Offset(0, 10),
-                              ),
-                            ],
-                          ),
+                          decoration: _boxDecoration(),
                           width: screen.width * 0.8,
                           child: TextFormField(
                             validator: (username) {
@@ -251,7 +236,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               }
                               return null;
                             },
-                            decoration: _InputDecoration('username'),
+                            decoration: InputDecorationCustom('username'),
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: store.usernameController,
                             onEditingComplete: _node.nextFocus,
@@ -269,15 +254,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                       _columnSpace('titleSpace'),
                       Observer(builder: (_) {
                         return Container(
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 25,
-                                offset: Offset(0, 10),
-                              ),
-                            ],
-                          ),
+                          decoration: _boxDecoration(),
                           width: screen.width * 0.8,
                           child: TextFormField(
                             validator: (pass) {
@@ -288,7 +265,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               }
                               return null;
                             },
-                            decoration: _inputDecorationPassword(store, 'password'),
+                            decoration: InputDecorationPasswordCustom(store, 'password'),
                             obscureText: store.hintPassword,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: store.passController,
@@ -307,15 +284,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                       _columnSpace('titleSpace'),
                       Observer(builder: (_) {
                         return Container(
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 25,
-                                offset: Offset(0, 10),
-                              ),
-                            ],
-                          ),
+                          decoration: _boxDecoration(),
                           width: screen.width * 0.8,
                           child: TextFormField(
                             validator: (pass) {
@@ -326,7 +295,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               }
                               return null;
                             },
-                            decoration:  _inputDecorationPassword(store, 'confirm'), 
+                            decoration:  InputDecorationPasswordCustom(store, 'confirm'), 
                             obscureText: store.hintConfirmPassword,
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             controller: store.confirPasslController,
@@ -411,66 +380,16 @@ class RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  InputDecoration _InputDecoration(String hintText){
-    return InputDecoration(
-      hintText: hintText,
-      filled: true,
-      fillColor: Colors.white,
-
-      disabledBorder: _OutlineInputBorder(false, false),
-
-      focusedBorder: _OutlineInputBorder(false, true),
-      enabledBorder: _OutlineInputBorder(false, false),
-
-      errorBorder: _OutlineInputBorder(true, false),
-      focusedErrorBorder: _OutlineInputBorder(true, false),
-    );
-  }
-
-  InputDecoration _inputDecorationPassword(RegistrationStore store, String type){
-    return InputDecoration(
-      hintText: '********',
-      filled: true,
-      fillColor: Colors.white,
-
-      focusedBorder: _OutlineInputBorder(false, true),
-      enabledBorder:_OutlineInputBorder(false, false),
-
-      errorBorder: _OutlineInputBorder(true, false),
-      focusedErrorBorder: _OutlineInputBorder(true, false),
-
-      suffixIcon: type == 'password' 
-        ? IconButton(
-          onPressed: () =>
-            store.setHintPassword(!store.hintPassword),
-          color: store.hintPassword ? Colors.grey : greeColor,
-          icon: Icon(store.hintPassword
-            ? Icons.visibility
-            : Icons.visibility_off),
-        ) 
-        : IconButton(
-          onPressed: () => store.sethintConfirmPassword(
-            !store.hintConfirmPassword),
-          color: store.hintConfirmPassword ? Colors.grey : greeColor,
-          icon: Icon(store.hintConfirmPassword
-            ? Icons.visibility
-            : Icons.visibility_off)
+  BoxDecoration _boxDecoration(){
+    return const BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38,
+          blurRadius: 25,
+          offset: Offset(0, 10),
         ),
-      
+      ],
     );
   }
 
-  OutlineInputBorder _OutlineInputBorder(bool error, bool focus){
-    return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: error 
-          ? Colors.red 
-          : focus 
-            ? greeColor 
-            : Colors.transparent, width: 2),
-      borderRadius: const BorderRadius.all(
-        Radius.circular(25.0), 
-      ),
-    );
-  }
 }

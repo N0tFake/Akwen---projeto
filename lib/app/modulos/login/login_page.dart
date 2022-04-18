@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: greeColor, width: 2.0),
+                        borderSide: BorderSide(color: greenColor, width: 2.0),
                         borderRadius: BorderRadius.all(
                             Radius.circular(25.0), 
                         ),
@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                       filled: true,
                       fillColor: Colors.white,
                       focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: greeColor, width: 2.0),
+                        borderSide: BorderSide(color: greenColor, width: 2.0),
                         borderRadius: BorderRadius.all(
                           Radius.circular(25.0), 
                         ),
@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                             ? Icons.visibility
                             : Icons.visibility_off),
                         hoverColor: Colors.transparent,
-                        color: _showPassword ? Colors.grey : greeColor,
+                        color: _showPassword ? Colors.grey : greenColor,
                         onPressed: () {
                           setState(() {
                             _showPassword = !_showPassword;
