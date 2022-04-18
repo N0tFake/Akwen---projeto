@@ -117,6 +117,7 @@ class RegistrationPageState extends State<RegistrationPage> {
               fit: BoxFit.cover
             )
           ),
+
           child: Form(
             key: _formKey,
             child:  FocusScope(
@@ -129,7 +130,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                   _columnSpace('inputSpace'),
                   Container(
                     width: screen.width * 0.8,
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: const [
@@ -159,12 +160,15 @@ class RegistrationPageState extends State<RegistrationPage> {
                         const SizedBox(
                           width: 20,
                         ),
-                        const Text(
-                          'Conta para estudante. \nObs: Contas para estudante \nnão precisam de email.',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25
+                        const Expanded(
+                          child: Text(
+                            'Conta para estudante.\nObs: Contas para estudante não precisam de email.',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25
+                            ),
                           ),
                         ),
                       ],

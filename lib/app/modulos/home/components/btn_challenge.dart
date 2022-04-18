@@ -1,28 +1,49 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ButtonChallenge extends StatelessWidget {
-  final String name;
+  final int number;
+  final String imgUrl;
   final Color color;
-  const ButtonChallenge({ Key? key, required this.name, required this.color }) : super(key: key);
+  const ButtonChallenge({ 
+    Key? key, 
+    required this.number, 
+    required this.imgUrl, 
+    required this.color
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    final Map colorName = {
+      1: redColor,
+      2: blueColor,
+      3: const Color(0xff277a32)
+    };
+
     final Size screen = MediaQuery.of(context).size;
     return Container(
       width: screen.width,
-      color: color,  
+      decoration: BoxDecoration(
+        color: color,
+        image: DecorationImage(
+          image: AssetImage(imgUrl),
+          fit: BoxFit.fill
+        )
+      ),  
+
       child: TextButton(
         style: TextButton.styleFrom(
           primary: Colors.white
         ),
         onPressed: () {
-          if(name == 'Desafio 1'){
+          if(number == 1){
             Modular.to.navigate('/group');
-          }else if(name == 'Desafio 2'){
+          }else if(number == 2){
             Modular.to.navigate('/group2');
-          }else if(name == 'Desafio 3'){
-            //alert(context);
+          }else if(number == 3){
             Modular.to.navigate('/desafio3');
           }else{
             AlertDialog(
@@ -41,11 +62,25 @@ class ButtonChallenge extends StatelessWidget {
             );
           }
         }, 
-        child: Text(
-          name,
-          style: const TextStyle(
-            fontSize: 50,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              decoration: BoxDecoration(
+                color: number == 1 ? redColor : color,
+                borderRadius: BorderRadius.circular(50)
+              ),
+              child: Text(
+                'Desafio $number',
+                style: const TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 70,
+                  fontWeight: FontWeight.w800
+                ),
+              ),
+            ),
+          ],
         )
       ),
     );
