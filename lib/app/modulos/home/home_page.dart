@@ -35,9 +35,14 @@ class HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: const [
-          Expanded(child: ButtonChallenge(name: 'Desafio 1', color: Colors.red)),
-          Expanded(child: ButtonChallenge(name: 'Desafio 2', color: Colors.blue)),
-          Expanded(child: ButtonChallenge(name: 'Desafio 3', color: Colors.green)),
+          Expanded(child: ButtonChallenge(
+            number: 1, imgUrl: 'assets/images/fundos/fundo-red.png', color: Colors.red)),
+          
+          Expanded(child: ButtonChallenge(
+            number: 2, imgUrl: 'assets/images/fundos/fundo-blue.png', color: Colors.blue)),
+          
+          Expanded(child: ButtonChallenge(
+            number: 3, imgUrl: 'assets/images/fundos/fundo-green.png', color: Colors.green)),
         ],
       ),
     );
