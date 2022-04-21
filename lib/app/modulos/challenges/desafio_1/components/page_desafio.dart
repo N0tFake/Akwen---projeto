@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/components/img_background.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/future_get_url_img.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/opc_answers.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
+import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 class PageDesafio extends StatefulWidget {
   final String challenge;
@@ -49,30 +53,79 @@ class _PageDesafioState extends State<PageDesafio> {
       titleQuestion = 'Nanēp ${widget.data['akwe'][store.numPosition]} īsisize ktâwankõnã';
     }
     return Scaffold(
-      appBar: AppBar(
+      /* appBar: AppBar(
         title: Text(titleQuestion),
         centerTitle: true,
         leading: IconButton(
           onPressed: () => Modular.to.navigate('/home'),
           icon: const Icon(Icons.arrow_back_ios),
         ),
-      ),
-      body: Column(
-        children: [
-          const GetImg(),
-          Observer(builder: (_) {
-            return OpcAnswers(challenge: widget.challenge);
-          }),
-          SizedBox(height: screen.height * 0.04),
-          Observer(builder: (_) {
-            return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(screen.width * 0.8, 50)
+      ), */
+      body: ImgBackground(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Modular.to.navigate(HomeModule.routeName), 
+                    icon: const Icon(Icons.arrow_back_ios, color: redColor, size: 40)
+                  ),
+                  Expanded(
+                    child: Text(titleQuestion,
+                      style: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700
+                      ),
+                    ),
+                  )
+                ],
               ),
-                onPressed: !store.isChosen ? null : confirm,
-                child: const Text('Confirmar'));
-          })
-        ],
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(TablerIcons.fish, color: redColor, size: 40,),
+                    const SizedBox(width: 10,),
+                    Text( widget.challenge == 'desafio1' ? '${storeGroup.pts}' : '${storeGroup2.pts}', 
+                      style: const TextStyle(
+                        fontFamily: 'Nunito', 
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700
+                      ),)
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 20),
+                child: Column(
+                  children: [
+                    const GetImg(),
+                    Observer(builder: (_) {
+                      return OpcAnswers(challenge: widget.challenge);
+                    }),
+                  ],
+                ),
+              ),
+              /* Observer(builder: (_) {
+                return OpcAnswers(challenge: widget.challenge);
+              }), */
+              SizedBox(height: screen.height * 0.04),
+              Observer(builder: (_) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(screen.width * 0.8, 50)
+                  ),
+                    onPressed: !store.isChosen ? null : confirm,
+                    child: const Text('Confirmar'));
+              })
+            ],
+          ),
+        ),
       ),
     );
   }
