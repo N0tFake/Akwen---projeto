@@ -218,11 +218,12 @@ class _LoginPageState extends State<LoginPage> {
                       shadowColor: Colors.black
                     ),
                     onPressed: () => Modular.to.navigate('/registration'), 
-                    child: const Text('Cadastrar', style: TextStyle(
-                      fontFamily: 'Nunito', 
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30
-                    ),)
+                    child: const Text('Cadastrar', 
+                      style: TextStyle(
+                        fontFamily: 'Nunito', 
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30
+                      ),)
                   );
                 })
               ],

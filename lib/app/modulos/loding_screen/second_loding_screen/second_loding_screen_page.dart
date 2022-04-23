@@ -52,7 +52,7 @@ class _SecondLodingScreenPageState extends State<SecondLodingScreenPage> {
               Container(
                 padding: const EdgeInsets.all(10),
                 width: screen.width, 
-                height: 100,
+                height: 120,
                 decoration: const BoxDecoration(
                   color: Colors.white60,
                   boxShadow: [

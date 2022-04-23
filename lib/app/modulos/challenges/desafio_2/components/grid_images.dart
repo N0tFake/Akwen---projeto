@@ -9,8 +9,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class GridImages extends StatefulWidget {
-  const GridImages({ Key? key, required this.corrent }) : super(key: key);
+  const GridImages({ Key? key, required this.corrent, required this.challenge}) : super(key: key);
   final int corrent;
+  final String challenge;
 
   @override
   _GridImagesState createState() => _GridImagesState();
@@ -38,7 +39,6 @@ class _GridImagesState extends State<GridImages> {
                 List<int> tirados = [];
                 for(var i=0; i<3; i++){
                   if(Random().nextInt(2) == 1 && repete == false){
-                    /* listImagens.add(data['Imagens'][store.numPosition]); */
                     print('imagem:  ${widget.corrent}');
                     listImagens.add(data['Imagens'][widget.corrent]);
                     tirados.add(widget.corrent);
@@ -63,7 +63,7 @@ class _GridImagesState extends State<GridImages> {
                   listImagens[2] = data['Imagens'][store.numPosition];
                   store.setPosCorrent(2);
                 }
-                return RadioButtons(listImages: listImagens);
+                return RadioButtons(listImages: listImagens, challenge: widget.challenge,);
               } else {
                 return const Center(child: CircularProgressIndicator(),);
               }

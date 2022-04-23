@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/radio_list_answers.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -67,7 +68,16 @@ class _OpcAnswersState extends State<OpcAnswers> {
             }
             return RadioListTileAnswers(challenge: widget.challenge, data: data, palavras: palavras,);
           } else {
-            return const Center(child: CircularProgressIndicator(),);
+            return Center(child: Row(
+              children: const [
+                Text('Carrengando', style: TextStyle(
+                  fontFamily: 'Nunito', 
+                  fontSize: 20, 
+                  fontWeight: FontWeight.w600
+                )),
+                CircularProgressIndicator(color: redColor)
+              ],
+            ));
           }
         },
       ),

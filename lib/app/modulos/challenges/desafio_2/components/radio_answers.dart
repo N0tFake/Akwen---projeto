@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RadioButtons extends StatefulWidget {
-  const RadioButtons({ Key? key, required this.listImages}) : super(key: key);
+  const RadioButtons({ Key? key, required this.listImages, required this.challenge}) : super(key: key);
   final List<String> listImages;
+  final String challenge;
   @override
   _RadioButtonsState createState() => _RadioButtonsState();
 }
@@ -39,6 +41,7 @@ class _RadioButtonsState extends State<RadioButtons> {
             primary: false,
             children: [
               RadioListTile(
+                activeColor: _color(),
                 title: SizedBox(
                   width: 100, height: 100,
                   child: Image.network(widget.listImages[0]),
@@ -48,13 +51,13 @@ class _RadioButtonsState extends State<RadioButtons> {
                 onChanged: (value){
                   store.setChosen(true);
                   value == 'Certo' ? store.setIsCorrent(true): store.setIsCorrent(false); 
-                  print(value);
                   setState(() {
                     groupValue = value as String?;
                   });
                 }
               ),
               RadioListTile(
+                activeColor: _color(),
                 title: SizedBox(
                   width: 100, height: 100,
                   child: Image.network(widget.listImages[1]),
@@ -64,13 +67,13 @@ class _RadioButtonsState extends State<RadioButtons> {
                 onChanged: (value){
                   store.setChosen(true);
                   value == 'Certo' ? store.setIsCorrent(true): store.setIsCorrent(false); 
-                  print(value);
                   setState(() {
                     groupValue = value as String?;
                   });
                 }
               ),
               RadioListTile(
+                activeColor: _color(),
                 title: SizedBox(
                   width: 100, height: 100,
                   child: Image.network(widget.listImages[2]),
@@ -80,7 +83,6 @@ class _RadioButtonsState extends State<RadioButtons> {
                 onChanged: (value){
                   store.setChosen(true);
                   value == 'Certo' ? store.setIsCorrent(true): store.setIsCorrent(false); 
-                  print(value);
                   setState(() {
                     groupValue = value as String?;
                   });
@@ -91,5 +93,14 @@ class _RadioButtonsState extends State<RadioButtons> {
         ),
       );
     });
+  }
+
+  Color _color(){
+    if(widget.challenge == 'desafio1'){
+      return redColor;
+    }else if(widget.challenge == 'desafio2'){
+      return blueColor;
+    }
+    return Colors.amber;
   }
 }
