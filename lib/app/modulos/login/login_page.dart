@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/components/img_background.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
@@ -78,13 +79,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/fundos/fundo-grey-light.png'),
-            fit: BoxFit.cover,
-          )
-        ),
+      body: ImgBackground(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -223,11 +218,12 @@ class _LoginPageState extends State<LoginPage> {
                       shadowColor: Colors.black
                     ),
                     onPressed: () => Modular.to.navigate('/registration'), 
-                    child: const Text('Cadastrar', style: TextStyle(
-                      fontFamily: 'Nunito', 
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30
-                    ),)
+                    child: const Text('Cadastrar', 
+                      style: TextStyle(
+                        fontFamily: 'Nunito', 
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30
+                      ),)
                   );
                 })
               ],

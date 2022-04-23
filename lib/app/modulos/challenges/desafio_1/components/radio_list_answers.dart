@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -35,12 +36,26 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
       value.add(widget.data['ptbr'][widget.palavras[3]]);
     }
 
+    Color _color(){
+      if(widget.challenge == 'desafio1'){
+        return redColor;
+      }else if(widget.challenge == 'desafio2'){
+        return blueColor;
+      }
+      return Colors.amber;
+    }
+
+    TextStyle _textStyle(){
+      return const TextStyle(fontFamily: 'Nunito', fontSize: 20, fontWeight: FontWeight.bold);
+    }
+
     value.add('error');
 
     return Column(
       children: [
         RadioListTile(
-          title: Text(value[0]),
+          activeColor: _color(),
+          title: Text(value[0], style: _textStyle()),
           value: value[0], 
           groupValue: groupValue, 
           onChanged: (value) {
@@ -52,7 +67,8 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
           }
         ),
         RadioListTile(
-          title: Text(value[1]),
+          activeColor: _color(),
+          title: Text(value[1], style: _textStyle()),
           value: value[1], 
           groupValue: groupValue, 
           onChanged: (value) {
@@ -64,7 +80,8 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
           }
         ),
         RadioListTile(
-          title: Text(value[2]),
+          activeColor: _color(),
+          title: Text(value[2], style: _textStyle()),
           value: value[2], 
           groupValue: groupValue, 
           onChanged: (value) {
@@ -76,7 +93,8 @@ class _RadioListTileAnswersState extends State<RadioListTileAnswers> {
           }
         ),
         RadioListTile(
-          title: Text(value[3]),
+          activeColor: _color(),
+          title: Text(value[3], style: _textStyle()),
           value: value[3], 
           groupValue: groupValue, 
           onChanged: (value) {

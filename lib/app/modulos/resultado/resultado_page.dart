@@ -1,3 +1,5 @@
+import 'package:flutter_akwen/app/global/components/img_background.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_akwen/app/modulos/resultado/resultado_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 class ResultadoPage extends StatefulWidget {
   final String title;
@@ -23,6 +26,8 @@ class ResultadoPageState extends State<ResultadoPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screen = MediaQuery.of(context).size;
+
     final ResultadoStore store = Modular.get();
     int pts = 0;
     if(widget.challenge == 'desafio1'){
@@ -33,22 +38,18 @@ class ResultadoPageState extends State<ResultadoPage> {
       pts = storeGroup3.pts;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Resultado'),
-        centerTitle: true,
-      ),
-      body: Center(
+      body: ImgBackground(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Text('Resultado do desafio:', 
+              style: _textStyle(true, 40),
+            ),
             Column(
               children: [
-                const Text(
+                Text(
                   'Você recebeu',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  )
+                  style: _textStyle(false, 40),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -57,25 +58,29 @@ class ResultadoPageState extends State<ResultadoPage> {
                       return Text(
                           '$pts',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontFamily: 'Nunito', 
+                            fontSize: 60, 
+                            fontWeight: FontWeight.w800,
                             color: pts == 0
                               ? Colors.red
                               : Colors.green),
                       );
                     }),
-                    const Text(
-                      ' Pontos',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      )
-                    )
+                    const SizedBox(width: 20,),
+                    Icon(TablerIcons.fish, size: 60, color: _color(),)
                   ],
                 )
               ],
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                      fixedSize: Size(screen.width * 0.8, 50),
+                      primary: _color(),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)
+                      ),
+                      shadowColor: Colors.black
+                    ),
               onPressed: () {
                 if(widget.challenge == 'desafio1'){
                   storeGroup.reset();
@@ -86,43 +91,33 @@ class ResultadoPageState extends State<ResultadoPage> {
                 }
                 Modular.to.navigate('/home');
               },
-              child: const Text('Voltar para a Home'))
+              child: Text('Voltar para a Home',
+                style: _textStyle(false, 20),
+              ))
           ],
         ),
       ),
     );
   }
-}
 
-/*  if(widget.challenge == 'desafio1'){
-                        return Text(
-                          '${storeGroup.pts}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: storeGroup.pts == 0
-                              ? Colors.red
-                              : Colors.green),
-                      );
-                      }else if(widget.challenge == 'desafio2'){
-                        return Text(
-                          '${storeGroup2.pts}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: storeGroup2.pts == 0
-                              ? Colors.red
-                              : Colors.green),
-                        );
-                      }else if(widget.challenge == 'desafio3'){
-                        return Text(
-                          '${storeGroup3.pts}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: storeGroup2.pts == 0
-                              ? Colors.red
-                              : Colors.green),
-                        );
-                      }
-                      return const Text('Error'); */
+  TextStyle _textStyle(bool isColor, double fontSize){
+    return TextStyle(
+      fontFamily: 'Nunito', 
+      fontSize: fontSize, 
+      fontWeight: FontWeight.bold,
+      color: isColor ? _color() : null
+    );
+  }
+
+  Color _color(){
+    if(widget.challenge == 'desafio1'){
+      return redColor;
+    }else if(widget.challenge == 'desafio2'){
+      return blueColor;
+    }else if(widget.challenge == 'desafio3'){
+      return greenColor;
+    }
+    return Colors.amber;
+  }
+
+}

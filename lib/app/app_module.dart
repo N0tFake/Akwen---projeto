@@ -14,6 +14,7 @@ import 'package:flutter_akwen/app/modulos/challenges/group2/group2_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/loding_screen/loding_screen_module.dart';
+import 'package:flutter_akwen/app/modulos/loding_screen/second_loding_screen/second_loding_screen_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_module.dart';
 import 'package:flutter_akwen/app/modulos/login/login_repository.dart';
 import 'package:flutter_akwen/app/modulos/login/login_store.dart';
@@ -50,14 +51,15 @@ class AppModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ModuleRoute(Modular.initialRoute, module: LodingScreenModule()),
-    ModuleRoute(LoginModule.routeName, module: LoginModule()),
-    ModuleRoute(RegistrationModule.routeName, module: RegistrationModule()),
+    ModuleRoute(SecondLodingScreenModule.routeName, module: SecondLodingScreenModule(), transition: TransitionType.rightToLeftWithFade),
+    ModuleRoute(LoginModule.routeName, module: LoginModule(), transition: TransitionType.rightToLeftWithFade),
+    ModuleRoute(RegistrationModule.routeName, module: RegistrationModule(), transition: TransitionType.rightToLeftWithFade),
     ModuleRoute(HomeModule.routeName, module: HomeModule()),
-    ModuleRoute(Desafio1Module.routeName, module: Desafio1Module()),
+    ModuleRoute(Desafio1Module.routeName, module: Desafio1Module(), transition: TransitionType.rightToLeftWithFade),
     ModuleRoute(Desafio2Module.routeName, module: Desafio2Module()),
     ModuleRoute(Desafio3Module.routeName, module: Desafio3Module()),
     ModuleRoute(ResultadoModule.routeName, module: ResultadoModule()),
-    ModuleRoute(GroupModule.routeName, module: GroupModule()),
+    ModuleRoute(GroupModule.routeName, module: GroupModule(), transition: TransitionType.rightToLeftWithFade),
     ModuleRoute(Group2Module.routeName, module: Group2Module()),
   ];
 }
