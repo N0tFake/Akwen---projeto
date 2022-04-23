@@ -136,8 +136,10 @@ Future ShowDialogRightDesafio02(
                     ),
                     onPressed: () {
                       if(challenge == 'desafio1'){
+                        Navigator.of(context).pop();
                         storeGroup.setNumDesfio(1);
                       }else if(challenge == 'desafio2') {
+                        Navigator.of(context).pop();
                         storeGroup2.setNumDesfio(1);
                       }
                     } , child: Text('Proximo', style: _textStyle(false)))
