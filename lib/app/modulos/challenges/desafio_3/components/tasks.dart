@@ -100,7 +100,7 @@ class _TasksState extends State<Tasks> {
                         color: Colors.white60,
                         borderRadius: BorderRadius.circular(20)
                       ),
-                    child: Text('widget.phraseQuestiondsdasdasdasdasdasdasddasdasdasdasdasdasdasdasdasdsdsadasdasdasdsa', 
+                    child: Text(widget.phraseQuestion, 
                       style: _textStyle(), 
                       textAlign: TextAlign.center,
                     )
