@@ -39,7 +39,7 @@ class HomePageState extends State<HomePage> {
             number: 1, imgUrl: 'assets/images/fundos/fundo-red.png', color: Colors.red)),
           
           Expanded(child: ButtonChallenge(
-            number: 2, imgUrl: 'assets/images/fundos/fundo-blue.png', color: Colors.blue)),
+            number: 2, imgUrl: 'assets/images/fundos/fundo-blue-dark.png', color: Colors.blue)),
           
           Expanded(child: ButtonChallenge(
             number: 3, imgUrl: 'assets/images/fundos/fundo-green.png', color: Colors.green)),
