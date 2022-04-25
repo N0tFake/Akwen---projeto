@@ -100,11 +100,9 @@ class _TasksState extends State<Tasks> {
                         color: Colors.white60,
                         borderRadius: BorderRadius.circular(20)
                       ),
-                    child: Expanded(
-                      child: Text(widget.phraseQuestion, 
-                        style: _textStyle(), 
-                        textAlign: TextAlign.center,
-                      ),
+                    child: Text('widget.phraseQuestiondsdasdasdasdasdasdasddasdasdasdasdasdasdasdasdasdsdsadasdasdasdsa', 
+                      style: _textStyle(), 
+                      textAlign: TextAlign.center,
                     )
                   ),
                   Container(
