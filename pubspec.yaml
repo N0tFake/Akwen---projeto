@@ -45,6 +45,7 @@ dependencies:
   email_validator: ^2.0.1
   diacritic: ^0.1.3
   flutter_tabler_icons: ^1.1.1
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,8 @@ flutter:
   - assets/images/
   - assets/images/fundos/
   - assets/images/logo/
+  - assets/sonds/correct.mp3
+  - assets/sonds/incorrect.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

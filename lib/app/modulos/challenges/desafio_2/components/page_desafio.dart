@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/components/img_background.dart';
+import 'package:flutter_akwen/app/global/utils/audio.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/components/grid_images.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/components/show_dialog.dart';
@@ -29,9 +30,11 @@ class _PageDesafio02State extends State<PageDesafio02> {
 
   void confirm(BuildContext context) {
     if (store.isCorrent) {
-        ShowDialogRightDesafio02(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
+      playaudioChallenge(true);
+      ShowDialogRightDesafio02(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
     } else {
-        ShowDialogErrorDesafio02(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
+      playaudioChallenge(false);
+      ShowDialogErrorDesafio02(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
     }
   }
 

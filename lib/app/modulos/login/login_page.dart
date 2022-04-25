@@ -133,8 +133,10 @@ class _LoginPageState extends State<LoginPage> {
                 _Title('Senha'),
                 _ColumnSpace(0.02),
                 Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25),
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black38,
                         blurRadius: 25,
@@ -148,8 +150,6 @@ class _LoginPageState extends State<LoginPage> {
                     cursorColor: Colors.green,
                     decoration: InputDecoration(
                       hintText: 'Senha',
-                      filled: true,
-                      fillColor: Colors.white,
                       focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: greenColor, width: 2.0),
                         borderRadius: BorderRadius.all(

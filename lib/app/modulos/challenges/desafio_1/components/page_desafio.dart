@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/components/img_background.dart';
+import 'package:flutter_akwen/app/global/utils/audio.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/future_get_url_img.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/opc_answers.dart';
@@ -26,18 +27,21 @@ class _PageDesafioState extends State<PageDesafio> {
   final GroupStore storeGroup = Modular.get();
   final Group2Store storeGroup2 = Modular.get();
 
-
   void confirm(BuildContext context) {
     if(widget.challenge == 'desafio1'){
       if (store.opcEscolhida == widget.data['akwe'][store.numPosition]) {
+        playaudioChallenge(true);
         ShowDialogRight(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       } else {
+        playaudioChallenge(false);
         ShowDialogError(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       }
     }else if(widget.challenge == 'desafio2'){
       if (store.opcEscolhida == widget.data['ptbr'][store.numPosition]) {
+        playaudioChallenge(true);
         ShowDialogRight(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       } else {
+        playaudioChallenge(false);
         ShowDialogError(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       }
     } 

@@ -4,6 +4,7 @@ import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
+
 Future ShowDialogRight(
   BuildContext context, 
   Function() _color, 

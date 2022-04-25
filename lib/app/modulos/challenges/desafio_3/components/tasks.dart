@@ -1,6 +1,7 @@
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/components/img_background.dart';
+import 'package:flutter_akwen/app/global/utils/audio.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/components/show_dialog_desafio03.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
@@ -44,7 +45,7 @@ class _TasksState extends State<Tasks> {
     } else {
       isRight = false;
     }
-
+    playaudioChallenge(isRight);
     ShowDialogRightDesafio03(context, _textStyle, store, isRight);
   }
 
@@ -100,11 +101,9 @@ class _TasksState extends State<Tasks> {
                         color: Colors.white60,
                         borderRadius: BorderRadius.circular(20)
                       ),
-                    child: Expanded(
-                      child: Text(widget.phraseQuestion, 
-                        style: _textStyle(), 
-                        textAlign: TextAlign.center,
-                      ),
+                    child: Text(widget.phraseQuestion, 
+                      style: _textStyle(), 
+                      textAlign: TextAlign.center,
                     )
                   ),
                   Container(
