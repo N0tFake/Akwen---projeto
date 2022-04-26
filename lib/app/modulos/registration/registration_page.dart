@@ -379,8 +379,10 @@ class RegistrationPageState extends State<RegistrationPage> {
   }
 
   BoxDecoration _boxDecoration(){
-    return const BoxDecoration(
-      boxShadow: [
+    return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(25),
+      boxShadow: const [
         BoxShadow(
           color: Colors.black38,
           blurRadius: 25,
