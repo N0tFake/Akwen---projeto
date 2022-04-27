@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
@@ -44,6 +45,22 @@ abstract class _Desafio3StoreBase with Store {
   int pts = 0;
   @action 
   void setPTS(int value) => pts += value;
+
+  @observable
+  AudioCache cache = AudioCache();
+  
+  @observable
+  AudioPlayer player = AudioPlayer();
+
+  @computed 
+  Future<void> stopAudioBackground() async {
+    player.pause();
+  }
+
+  Future<void> playAudioBackground() async {
+    player = await cache.loop('sonds/background/01.mp3');
+  }
+
 
   void reset(){
     answerController.clear();

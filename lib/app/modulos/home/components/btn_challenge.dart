@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
+import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group/group_store.dart';
+import 'package:flutter_akwen/app/modulos/challenges/group2/group2_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ButtonChallenge extends StatelessWidget {
@@ -40,10 +43,16 @@ class ButtonChallenge extends StatelessWidget {
         ),
         onPressed: () {
           if(number == 1){
+            GroupStore store = Modular.get();
+            store.playAudioBackground();
             Modular.to.navigate('/group');
           }else if(number == 2){
+            Group2Store store = Modular.get();
+            store.playAudioBackground();
             Modular.to.navigate('/group2');
           }else if(number == 3){
+            Desafio3Store store = Modular.get();
+            store.playAudioBackground();
             Modular.to.navigate('/desafio3');
           }else{
             AlertDialog(

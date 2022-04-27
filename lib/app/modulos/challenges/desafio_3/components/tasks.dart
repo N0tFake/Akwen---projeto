@@ -51,7 +51,7 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    final String questionOrder = widget.isAkwe == true ? "Akwe para português" : "Português para Akwe";
+    final String questionOrder = widget.isAkwe == true ? "Akwẽ para português" : "Português para Akwẽ";
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
@@ -64,6 +64,7 @@ class _TasksState extends State<Tasks> {
                 children: [
                   IconButton(
                     onPressed: () => {
+                      store.stopAudioBackground(),
                       store.reset(),
                       Modular.to.navigate(HomeModule.routeName)
                     }, 

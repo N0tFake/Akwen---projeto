@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/global/utils/schemas.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/loding.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/components/page_desafio.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
@@ -45,7 +46,7 @@ class Desafio1PageState extends State<Desafio1Page> {
               store.numPosition = numPosition;
               return PageDesafio(data: data, challenge: widget.challenge,);
             } else {
-              return const LoadingChallenge();
+              return const LoadingChallenge(color: redColor,);
             }
           },
         );
@@ -65,7 +66,7 @@ class Desafio1PageState extends State<Desafio1Page> {
               store.numPosition = numPosition;
               return PageDesafio(data: data, challenge: widget.challenge,);
             } else {
-              return const LoadingChallenge();
+              return const LoadingChallenge(color: blueColor,);
             }
           },
         );

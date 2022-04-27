@@ -83,10 +83,13 @@ class ResultadoPageState extends State<ResultadoPage> {
                     ),
               onPressed: () {
                 if(widget.challenge == 'desafio1'){
+                  storeGroup.stopAudioBackground();
                   storeGroup.reset();
                 }else  if(widget.challenge == 'desafio2'){
+                  storeGroup2.stopAudioBackground();
                   storeGroup2.reset();
                 }else if(widget.challenge == 'desafio3'){
+                  storeGroup3.stopAudioBackground();
                   storeGroup3.reset();
                 }
                 Modular.to.navigate('/home');

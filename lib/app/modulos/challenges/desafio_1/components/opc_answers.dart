@@ -10,7 +10,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class OpcAnswers extends StatefulWidget {
   final String challenge;
-  const OpcAnswers({ Key? key, required this.challenge }) : super(key: key);
+  const OpcAnswers({ Key? key, required this.challenge, required this.progressColor }) : super(key: key);
+  final Color progressColor;
 
   @override
   _OpcAnswersState createState() => _OpcAnswersState();
@@ -69,13 +70,13 @@ class _OpcAnswersState extends State<OpcAnswers> {
             return RadioListTileAnswers(challenge: widget.challenge, data: data, palavras: palavras,);
           } else {
             return Center(child: Row(
-              children: const [
-                Text('Carrengando', style: TextStyle(
+              children: [
+                const Text('Carrengando', style: TextStyle(
                   fontFamily: 'Nunito', 
                   fontSize: 20, 
                   fontWeight: FontWeight.w600
                 )),
-                CircularProgressIndicator(color: redColor)
+                CircularProgressIndicator(color: widget.progressColor)
               ],
             ));
           }
