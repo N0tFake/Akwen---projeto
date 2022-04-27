@@ -54,7 +54,7 @@ class _PageDesafioState extends State<PageDesafio> {
     final Size screen = MediaQuery.of(context).size;
     String titleQuestion = 'Error';
     if(widget.challenge == 'desafio1'){
-      titleQuestion = 'Qual o nome em Akwe do(a) ${widget.data['ptbr'][store.numPosition]}';
+      titleQuestion = 'Qual o nome em Akwẽ do(a) ${widget.data['ptbr'][store.numPosition]}';
     }else if(widget.challenge == 'desafio2'){
       titleQuestion = 'Nanēp ${widget.data['akwe'][store.numPosition]} īsisize ktâwankõnã';
     }
@@ -70,6 +70,8 @@ class _PageDesafioState extends State<PageDesafio> {
                 children: [
                   IconButton(
                     onPressed: () => {
+                      storeGroup.stopAudioBackground(),
+                      storeGroup2.stopAudioBackground(),
                       storeGroup.reset(),
                       storeGroup2.reset(),
                       Modular.to.navigate(HomeModule.routeName)
@@ -107,9 +109,9 @@ class _PageDesafioState extends State<PageDesafio> {
                 padding: const EdgeInsets.only(left: 20.0, right: 20),
                 child: Column(
                   children: [
-                    const GetImg(),
+                    GetImg(progressColor: _color(),),
                     Observer(builder: (_) {
-                      return OpcAnswers(challenge: widget.challenge);
+                      return OpcAnswers(challenge: widget.challenge, progressColor: _color(),);
                     }),
                   ],
                 ),
