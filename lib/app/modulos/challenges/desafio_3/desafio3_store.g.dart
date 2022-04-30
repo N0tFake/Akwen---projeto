@@ -9,14 +9,6 @@ part of 'desafio3_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Desafio3Store on _Desafio3StoreBase, Store {
-  Computed<bool>? _$isChangedComputed;
-
-  @override
-  bool get isChanged =>
-      (_$isChangedComputed ??= Computed<bool>(() => super.isChanged,
-              name: '_Desafio3StoreBase.isChanged'))
-          .value;
-
   final _$numberTaskAtom = Atom(name: '_Desafio3StoreBase.numberTask');
 
   @override
@@ -122,6 +114,39 @@ mixin _$Desafio3Store on _Desafio3StoreBase, Store {
     });
   }
 
+  final _$listBtnsAnswerChoisenAtom =
+      Atom(name: '_Desafio3StoreBase.listBtnsAnswerChoisen');
+
+  @override
+  ObservableList<ModelAnswer> get listBtnsAnswerChoisen {
+    _$listBtnsAnswerChoisenAtom.reportRead();
+    return super.listBtnsAnswerChoisen;
+  }
+
+  @override
+  set listBtnsAnswerChoisen(ObservableList<ModelAnswer> value) {
+    _$listBtnsAnswerChoisenAtom.reportWrite(value, super.listBtnsAnswerChoisen,
+        () {
+      super.listBtnsAnswerChoisen = value;
+    });
+  }
+
+  final _$listBtnsAnswerOpcsAtom =
+      Atom(name: '_Desafio3StoreBase.listBtnsAnswerOpcs');
+
+  @override
+  ObservableList<ModelAnswer> get listBtnsAnswerOpcs {
+    _$listBtnsAnswerOpcsAtom.reportRead();
+    return super.listBtnsAnswerOpcs;
+  }
+
+  @override
+  set listBtnsAnswerOpcs(ObservableList<ModelAnswer> value) {
+    _$listBtnsAnswerOpcsAtom.reportWrite(value, super.listBtnsAnswerOpcs, () {
+      super.listBtnsAnswerOpcs = value;
+    });
+  }
+
   final _$firstAtom = Atom(name: '_Desafio3StoreBase.first');
 
   @override
@@ -167,6 +192,36 @@ mixin _$Desafio3Store on _Desafio3StoreBase, Store {
     });
   }
 
+  final _$cacheAtom = Atom(name: '_Desafio3StoreBase.cache');
+
+  @override
+  AudioCache get cache {
+    _$cacheAtom.reportRead();
+    return super.cache;
+  }
+
+  @override
+  set cache(AudioCache value) {
+    _$cacheAtom.reportWrite(value, super.cache, () {
+      super.cache = value;
+    });
+  }
+
+  final _$playerAtom = Atom(name: '_Desafio3StoreBase.player');
+
+  @override
+  AudioPlayer get player {
+    _$playerAtom.reportRead();
+    return super.player;
+  }
+
+  @override
+  set player(AudioPlayer value) {
+    _$playerAtom.reportWrite(value, super.player, () {
+      super.player = value;
+    });
+  }
+
   final _$getDocAsyncAction = AsyncAction('_Desafio3StoreBase.getDoc');
 
   @override
@@ -183,6 +238,50 @@ mixin _$Desafio3Store on _Desafio3StoreBase, Store {
         name: '_Desafio3StoreBase.setNumberTask');
     try {
       return super.setNumberTask(value);
+    } finally {
+      _$_Desafio3StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addAnswerChoisen(ModelAnswer model) {
+    final _$actionInfo = _$_Desafio3StoreBaseActionController.startAction(
+        name: '_Desafio3StoreBase.addAnswerChoisen');
+    try {
+      return super.addAnswerChoisen(model);
+    } finally {
+      _$_Desafio3StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic rmvAnswerChoisen(ModelAnswer model) {
+    final _$actionInfo = _$_Desafio3StoreBaseActionController.startAction(
+        name: '_Desafio3StoreBase.rmvAnswerChoisen');
+    try {
+      return super.rmvAnswerChoisen(model);
+    } finally {
+      _$_Desafio3StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic addAnswerOpcs(ModelAnswer model) {
+    final _$actionInfo = _$_Desafio3StoreBaseActionController.startAction(
+        name: '_Desafio3StoreBase.addAnswerOpcs');
+    try {
+      return super.addAnswerOpcs(model);
+    } finally {
+      _$_Desafio3StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic rmvAnswerOpcs(ModelAnswer model) {
+    final _$actionInfo = _$_Desafio3StoreBaseActionController.startAction(
+        name: '_Desafio3StoreBase.rmvAnswerOpcs');
+    try {
+      return super.rmvAnswerOpcs(model);
     } finally {
       _$_Desafio3StoreBaseActionController.endAction(_$actionInfo);
     }
@@ -220,10 +319,13 @@ phraseAkwe3: ${phraseAkwe3},
 phrasePTBR1: ${phrasePTBR1},
 phrasePTBR2: ${phrasePTBR2},
 phrasePTBR3: ${phrasePTBR3},
+listBtnsAnswerChoisen: ${listBtnsAnswerChoisen},
+listBtnsAnswerOpcs: ${listBtnsAnswerOpcs},
 first: ${first},
 answer: ${answer},
 pts: ${pts},
-isChanged: ${isChanged}
+cache: ${cache},
+player: ${player}
     ''';
   }
 }

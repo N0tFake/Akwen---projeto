@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/modulos/challenges/desafio_3/components/challenge/model_answer.dart';
 import 'package:mobx/mobx.dart';
 
 part 'desafio3_store.g.dart';
@@ -33,6 +34,54 @@ abstract class _Desafio3StoreBase with Store {
   @observable
   String phrasePTBR3 = '';
 
+
+  @observable
+  ObservableList<ModelAnswer> listBtnsAnswerChoisen = ObservableList<ModelAnswer>().asObservable();
+  @observable
+  ObservableList<ModelAnswer> listBtnsAnswerOpcs = ObservableList<ModelAnswer>().asObservable();
+  @action 
+  addAnswerChoisen(ModelAnswer model){
+    listBtnsAnswerChoisen.add(model);
+  }
+  @action 
+  rmvAnswerChoisen(ModelAnswer model){
+    int index = 0;
+    for(int i = 0; i < listBtnsAnswerChoisen.length; i++){
+      if(listBtnsAnswerChoisen[i].title == model.title){
+        index = i;
+        break;
+      }
+    }
+    listBtnsAnswerChoisen.removeAt(index);
+  }
+  @action 
+  addAnswerOpcs(ModelAnswer model){
+    listBtnsAnswerOpcs.add(model);
+  }
+  @action 
+  rmvAnswerOpcs(ModelAnswer model){
+    int index = 0;
+    for(int i = 0; i < listBtnsAnswerOpcs.length; i++){
+      if(listBtnsAnswerOpcs[i].title == model.title){
+        index = i;
+        break;
+      }
+    }
+    listBtnsAnswerOpcs.removeAt(index);
+  }
+
+  Future<void> getWords(String str)async {
+    final List listTemp = str.split(' ');
+    for (var element in listTemp) { 
+      if(element != ''){
+        ModelAnswer model = ModelAnswer(element);
+        addAnswerOpcs(model);
+      }
+    }
+  }
+
+
+
   @observable 
   bool first = true;
 
@@ -52,7 +101,6 @@ abstract class _Desafio3StoreBase with Store {
   @observable
   AudioPlayer player = AudioPlayer();
 
-  @computed 
   Future<void> stopAudioBackground() async {
     player.pause();
   }
@@ -63,6 +111,8 @@ abstract class _Desafio3StoreBase with Store {
 
 
   void reset(){
+    listBtnsAnswerChoisen.clear();
+    listBtnsAnswerOpcs.clear();
     answerController.clear();
     answer = '';
     numberTask = 1;
@@ -74,7 +124,6 @@ abstract class _Desafio3StoreBase with Store {
     answer = '';
   }
 
-  @computed 
   bool get isChanged => answer.isNotEmpty;
 
   @action 
@@ -84,15 +133,22 @@ abstract class _Desafio3StoreBase with Store {
       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
       var phrase = data['frases'];
+      
+      var _keys = phrase.keys.toList()..shuffle();
+      var _values = [];
 
-      phraseAkwe1 = phrase.keys.toList()[0];
-      phrasePTBR1 = phrase.values.toList()[0];
+      for(var i in _keys){
+        _values.add(phrase[i.toString()]);
+      }
 
-      phraseAkwe2 = phrase.keys.toList()[1];
-      phrasePTBR2 = phrase.values.toList()[1];
+      phraseAkwe1 = _keys[0];
+      phrasePTBR1 = _values[0];
 
-      phraseAkwe3 = phrase.keys.toList()[2];
-      phrasePTBR3 = phrase.values.toList()[2];
+      phraseAkwe2 = _keys[1];
+      phrasePTBR2 = _values[1];
+
+      phraseAkwe3 = _keys[2];
+      phrasePTBR3 = _values[2];
 
     }catch(e){
       print(e.toString());
