@@ -64,10 +64,10 @@ Future ShowDialogRightDesafio03(
                       if(isRight == true){
                         store.setPTS(10);
                       }
-                        store.setNumberTask(1);
-                        store.answerReset();
-                        Navigator.of(context).pop();
-                      }, 
+                      store.setNumberTask(1);
+                      store.answerReset();
+                      Navigator.of(context).pop();
+                    }, 
                     child: Text('Proximo', style: textStyle())
                   )
 
