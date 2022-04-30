@@ -39,6 +39,36 @@ mixin _$GroupStore on _GroupStoreBase, Store {
     });
   }
 
+  final _$cacheAtom = Atom(name: '_GroupStoreBase.cache');
+
+  @override
+  AudioCache get cache {
+    _$cacheAtom.reportRead();
+    return super.cache;
+  }
+
+  @override
+  set cache(AudioCache value) {
+    _$cacheAtom.reportWrite(value, super.cache, () {
+      super.cache = value;
+    });
+  }
+
+  final _$playerAtom = Atom(name: '_GroupStoreBase.player');
+
+  @override
+  AudioPlayer get player {
+    _$playerAtom.reportRead();
+    return super.player;
+  }
+
+  @override
+  set player(AudioPlayer value) {
+    _$playerAtom.reportWrite(value, super.player, () {
+      super.player = value;
+    });
+  }
+
   final _$_GroupStoreBaseActionController =
       ActionController(name: '_GroupStoreBase');
 
@@ -68,7 +98,9 @@ mixin _$GroupStore on _GroupStoreBase, Store {
   String toString() {
     return '''
 numDesafio: ${numDesafio},
-pts: ${pts}
+pts: ${pts},
+cache: ${cache},
+player: ${player}
     ''';
   }
 }

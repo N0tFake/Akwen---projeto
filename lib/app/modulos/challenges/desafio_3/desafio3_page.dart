@@ -1,3 +1,4 @@
+import 'package:flutter_akwen/app/modulos/challenges/desafio_3/components/challenge/selection_task.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/components/tasks.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
 import 'package:flutter_akwen/app/modulos/resultado/resultado_page.dart';
@@ -54,16 +55,9 @@ class Desafio3PageState extends State<Desafio3Page> {
             isAkwe: true
           );
         case 5:
-          return Tasks(
-            phraseQuestion: store.phrasePTBR3, 
-            phraseCorrect: store.phraseAkwe3, 
-            isAkwe: false
-          );
-        case 6:
-          return Tasks(
+          return SelectionTasks(
             phraseQuestion: store.phraseAkwe3, 
-            phraseCorrect: store.phrasePTBR3, 
-            isAkwe: true
+            phraseCorrect:store.phrasePTBR3, 
           );
         default:
           return const ResultadoPage(challenge: 'desafio3');

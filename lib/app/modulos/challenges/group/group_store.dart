@@ -22,7 +22,6 @@ abstract class _GroupStoreBase with Store {
   @observable
   AudioPlayer player = AudioPlayer();
 
-  @computed 
   Future<void> stopAudioBackground() async {
     player.pause();
   }
