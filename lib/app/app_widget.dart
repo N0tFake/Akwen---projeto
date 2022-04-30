@@ -8,7 +8,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Akwe',
+      title: 'Dasihâze dakrãiwaihkuzê - O jogo',
       theme: ThemeData(primarySwatch: Colors.blue),
     ).modular();
   }
