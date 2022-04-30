@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +28,8 @@ abstract class _Desafio3StoreBase with Store {
   String phraseAkwe2 = '';
   @observable
   String phraseAkwe3 = '';
+  @observable
+  String phraseAkwe4 = '';
 
   @observable
   String phrasePTBR1 = '';
@@ -33,6 +37,8 @@ abstract class _Desafio3StoreBase with Store {
   String phrasePTBR2 = '';
   @observable
   String phrasePTBR3 = '';
+  @observable
+  String phrasePTBR4 = '';
 
 
   @observable
@@ -70,7 +76,13 @@ abstract class _Desafio3StoreBase with Store {
     listBtnsAnswerOpcs.removeAt(index);
   }
 
-  Future<void> getWords(String str)async {
+  void getWords(String str) {
+    if(
+      listBtnsAnswerChoisen.isEmpty == false 
+      || listBtnsAnswerOpcs.isEmpty == false
+    ){
+      resetLists();
+    }
     final List listTemp = str.split(' ');
     for (var element in listTemp) { 
       if(element != ''){
@@ -78,9 +90,66 @@ abstract class _Desafio3StoreBase with Store {
         addAnswerOpcs(model);
       }
     }
+    fakeWords();
+    generateRandomPosition();
   }
 
+  void fakeWords(){
+    List<String> words = [];
 
+    if(listBtnsAnswerOpcs.length <= 2){
+
+      List wordsChallenge01 = phrasePTBR1.split(' '); 
+      for(var element in wordsChallenge01){
+        if(element != ''){
+          if(listBtnsAnswerOpcs.contains(element) == false){
+              words.add(element);
+          }
+        }
+      }
+      List wordsChallenge02 = phrasePTBR2.split(' '); 
+      for(var element in wordsChallenge02){
+        if(element != ''){
+          if(listBtnsAnswerOpcs.contains(element) == false){
+              words.add(element);
+          }
+        }
+      }
+      words.shuffle();
+      ModelAnswer model01 = ModelAnswer(words[0]);
+      addAnswerOpcs(model01);
+      int tamanho = words.length -1;
+      ModelAnswer model02 = ModelAnswer(words[tamanho]);
+      addAnswerOpcs(model02);
+
+    } else if(listBtnsAnswerOpcs.length == 3){
+
+      var random = Random();
+      int number = random.nextInt(1);
+
+      List wordsChallenge01 = number == 0 
+      ? phrasePTBR1.split(' ') : phrasePTBR2.split(' '); 
+      for(var element in wordsChallenge01){
+        if(element != ''){
+          if(listBtnsAnswerOpcs.contains(element) == false){
+            words.add(element);
+          }
+        }
+      }
+      words.shuffle();
+      ModelAnswer model = ModelAnswer(words[0]);
+      addAnswerOpcs(model);
+    }
+  }
+
+  void generateRandomPosition(){
+    listBtnsAnswerOpcs = listBtnsAnswerOpcs..shuffle();
+  }
+
+  void resetLists(){
+    listBtnsAnswerChoisen.clear();
+    listBtnsAnswerOpcs.clear();
+  }
 
   @observable 
   bool first = true;
@@ -149,6 +218,11 @@ abstract class _Desafio3StoreBase with Store {
 
       phraseAkwe3 = _keys[2];
       phrasePTBR3 = _values[2];
+
+      phraseAkwe4 = _keys[3];
+      phrasePTBR4 = _values[3];
+    
+      print('$phraseAkwe4 -- $phrasePTBR4');
 
     }catch(e){
       print(e.toString());

@@ -24,6 +24,20 @@ mixin _$ModelAnswer on _ModelAnswerBase, Store {
     });
   }
 
+  final _$_ModelAnswerBaseActionController =
+      ActionController(name: '_ModelAnswerBase');
+
+  @override
+  void setTitle(String value) {
+    final _$actionInfo = _$_ModelAnswerBaseActionController.startAction(
+        name: '_ModelAnswerBase.setTitle');
+    try {
+      return super.setTitle(value);
+    } finally {
+      _$_ModelAnswerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

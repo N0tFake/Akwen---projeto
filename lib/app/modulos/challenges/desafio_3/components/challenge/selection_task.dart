@@ -1,5 +1,4 @@
 
-import 'dart:math';
 
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:mobx/mobx.dart';
 
 class SelectionTasks extends StatefulWidget {
   const SelectionTasks({ Key? key, required this.phraseQuestion, required this.phraseCorrect }) : super(key: key);
@@ -52,60 +52,7 @@ class _SelectionTasksState extends State<SelectionTasks> {
 
     playaudioChallenge(isRight);
     ShowDialogRightDesafio03(context, _textStyle, store, isRight);
-
-  }
-
-  void fakeWords(){
-    List<String> words = [];
-
-    if(store.listBtnsAnswerOpcs.length <= 2){
-
-      List wordsChallenge01 = store.phrasePTBR1.split(' '); 
-      for(var element in wordsChallenge01){
-        if(element != ''){
-          if(store.listBtnsAnswerOpcs.contains(element) == false){
-              words.add(element);
-          }
-        }
-      }
-      List wordsChallenge02 = store.phrasePTBR2.split(' '); 
-      for(var element in wordsChallenge02){
-        if(element != ''){
-          if(store.listBtnsAnswerOpcs.contains(element) == false){
-              words.add(element);
-          }
-        }
-      }
-      words.shuffle();
-      ModelAnswer model01 = ModelAnswer(words[0]);
-      store.addAnswerOpcs(model01);
-      int tamanho = words.length -1;
-      ModelAnswer model02 = ModelAnswer(words[tamanho]);
-      store.addAnswerOpcs(model02);
-      print(store.listBtnsAnswerOpcs);
-
-    } else if(store.listBtnsAnswerOpcs.length == 3){
-
-      var random = Random();
-      int number = random.nextInt(1);
-
-      List wordsChallenge01 = number == 0 
-      ? store.phrasePTBR1.split(' ') : store.phrasePTBR2.split(' '); 
-      for(var element in wordsChallenge01){
-        if(element != ''){
-          if(store.listBtnsAnswerOpcs.contains(element) == false){
-              words.add(element);
-          }
-        }
-      }
-      words.shuffle();
-      ModelAnswer model = ModelAnswer(words[0]);
-      store.addAnswerOpcs(model);
-    }
-  }
-
-  void generateRandomPosition(){
-    store.listBtnsAnswerOpcs = store.listBtnsAnswerOpcs..shuffle();
+    store.resetLists();
   }
 
   void constructAnswer(ModelAnswer model){
@@ -118,12 +65,12 @@ class _SelectionTasksState extends State<SelectionTasks> {
     store.addAnswerOpcs(model);  
   }
 
+  List<ReactionDisposer> disposers = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     store.getWords(widget.phraseCorrect.toString());
-    fakeWords();
-    generateRandomPosition();
+    WidgetsFlutterBinding.ensureInitialized();
     super.initState();
   }
 

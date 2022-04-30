@@ -69,6 +69,21 @@ mixin _$Desafio3Store on _Desafio3StoreBase, Store {
     });
   }
 
+  final _$phraseAkwe4Atom = Atom(name: '_Desafio3StoreBase.phraseAkwe4');
+
+  @override
+  String get phraseAkwe4 {
+    _$phraseAkwe4Atom.reportRead();
+    return super.phraseAkwe4;
+  }
+
+  @override
+  set phraseAkwe4(String value) {
+    _$phraseAkwe4Atom.reportWrite(value, super.phraseAkwe4, () {
+      super.phraseAkwe4 = value;
+    });
+  }
+
   final _$phrasePTBR1Atom = Atom(name: '_Desafio3StoreBase.phrasePTBR1');
 
   @override
@@ -111,6 +126,21 @@ mixin _$Desafio3Store on _Desafio3StoreBase, Store {
   set phrasePTBR3(String value) {
     _$phrasePTBR3Atom.reportWrite(value, super.phrasePTBR3, () {
       super.phrasePTBR3 = value;
+    });
+  }
+
+  final _$phrasePTBR4Atom = Atom(name: '_Desafio3StoreBase.phrasePTBR4');
+
+  @override
+  String get phrasePTBR4 {
+    _$phrasePTBR4Atom.reportRead();
+    return super.phrasePTBR4;
+  }
+
+  @override
+  set phrasePTBR4(String value) {
+    _$phrasePTBR4Atom.reportWrite(value, super.phrasePTBR4, () {
+      super.phrasePTBR4 = value;
     });
   }
 
@@ -316,9 +346,11 @@ numberTask: ${numberTask},
 phraseAkwe1: ${phraseAkwe1},
 phraseAkwe2: ${phraseAkwe2},
 phraseAkwe3: ${phraseAkwe3},
+phraseAkwe4: ${phraseAkwe4},
 phrasePTBR1: ${phrasePTBR1},
 phrasePTBR2: ${phrasePTBR2},
 phrasePTBR3: ${phrasePTBR3},
+phrasePTBR4: ${phrasePTBR4},
 listBtnsAnswerChoisen: ${listBtnsAnswerChoisen},
 listBtnsAnswerOpcs: ${listBtnsAnswerOpcs},
 first: ${first},
