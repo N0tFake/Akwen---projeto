@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/components/img_background.dart';
 import 'package:flutter_akwen/app/global/utils/audio.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
+import 'package:flutter_akwen/app/global/utils/translation/translation_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/components/show_dialog_desafio03.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
@@ -49,9 +50,34 @@ class _TasksState extends State<Tasks> {
     ShowDialogRightDesafio03(context, _textStyle, store, isRight);
   }
 
+  final TranslationStore translationStore = Modular.get();
+  String wordTranslated(String word) {
+    if(word == 'confirm'){
+      if (translationStore.translation == 'PT-BR') {
+        return translationStore.confirmPTBR;
+      } else {
+        return translationStore.confirmAkwe;
+      }
+    } else {
+      if(widget.isAkwe){
+        if (translationStore.translation == 'PT-BR') {
+          return translationStore.translateAkewePtbrPTBR;
+        } else {
+          return translationStore.translateAkewePtbrAkwe;
+        }
+      } else {
+        if (translationStore.translation == 'PT-BR') {
+          return translationStore.translatePtbrAkwePTBR;
+        } else {
+          return translationStore.translatePtbrAkweAkwe;
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final String questionOrder = widget.isAkwe == true ? "Akwẽ para português" : "Português para Akwẽ";
+    //final String questionOrder = widget.isAkwe == true ? "Akwẽ para português" : "Português para Akwẽ";
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
@@ -71,7 +97,7 @@ class _TasksState extends State<Tasks> {
                     icon: const Icon(Icons.arrow_back_ios, color: greenColor, size: 40)
                   ),
                   Expanded(
-                    child: Text('Traduza o enunciado abaixo, de $questionOrder:', 
+                    child: Text(wordTranslated('phrase'), 
                       style: _textStyle() 
                     )
                   ),
@@ -159,7 +185,7 @@ class _TasksState extends State<Tasks> {
                         shadowColor: Colors.black
                       ),
                       onPressed: store.isChanged ? () => confirm(context) : null,
-                      child: Text("Confirmar", 
+                      child: Text(wordTranslated('confirm'), 
                         style: _textStyle()),
                       );
                 },
@@ -178,28 +204,4 @@ class _TasksState extends State<Tasks> {
       fontWeight: FontWeight.bold,
     );
   }
-
-  Future _showDialog(bool _isRight){
-    return showDialog(
-      barrierDismissible: false,
-      context: context, 
-      builder: (BuildContext context) => AlertDialog(
-        content:  _isRight ? const Text('Resposta certa +10pts') : const Text('Resposta errada'),
-        actions: [
-          TextButton(
-            onPressed: (){
-              if(_isRight == true){
-                store.setPTS(10);
-              }
-                store.setNumberTask(1);
-                store.answerReset();
-                Navigator.of(context).pop();
-              }, 
-            child: const Text('Proximo')
-          )
-        ],
-      )
-    );
-  }
-
 }

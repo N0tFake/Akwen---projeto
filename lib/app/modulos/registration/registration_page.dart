@@ -3,6 +3,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter_akwen/app/global/components/img_background.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
+import 'package:flutter_akwen/app/global/utils/translation/translation_store.dart';
 import 'package:flutter_akwen/app/modulos/home/home_module.dart';
 import 'package:flutter_akwen/app/modulos/registration/components/inputs_decorations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -23,6 +24,7 @@ class RegistrationPage extends StatefulWidget {
 class RegistrationPageState extends State<RegistrationPage> {
   final RegistrationStore store = Modular.get();
   Services service = Modular.get();
+  final TranslationStore translationStore = Modular.get();
   
 
   bool _isLogging = false;
@@ -82,6 +84,32 @@ class RegistrationPageState extends State<RegistrationPage> {
     super.dispose();
   }
 
+  String wordTranslated(String word){
+    if(translationStore.translation == 'PT-BR'){
+      switch(word){
+        case 'name':
+          return translationStore.namePTBR;
+        case 'password':
+          return translationStore.passwordPTBR;
+        case 'confirmPassword':
+          return translationStore.confirmPasswordPTBR;
+        case 'register':
+          return translationStore.resgisterPTBR;
+      }
+    } else {
+      switch(word){
+        case 'name':
+          return translationStore.nameAkwe;
+        case 'password':
+          return translationStore.passwordAkwe;
+        case 'confirmPassword':
+          return translationStore.confirmPasswordAkwe;
+        case 'register':
+          return translationStore.resgisterAkwe;
+      }
+    }
+    return word;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +246,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _Title('Username'),
+                        _Title(wordTranslated('name')),
                         _columnSpace('titleSpace'),
                         Observer(builder: (_) {
                           return Container(
@@ -230,6 +258,9 @@ class RegistrationPageState extends State<RegistrationPage> {
                                   || username.isEmpty 
                                   || username == ''){
                                   return 'Esse campo é obrigatorio';
+                                }
+                                if(username.contains(' ')){
+                                  return 'O nome não pode conter espaço';
                                 }
                                 return null;
                               },
@@ -247,7 +278,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _Title('Senha'),
+                        _Title(wordTranslated('password')),
                         _columnSpace('titleSpace'),
                         Observer(builder: (_) {
                           return Container(
@@ -277,7 +308,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _Title('Confirmar Senha'),
+                        _Title(wordTranslated('confirmPassword')),
                         _columnSpace('titleSpace'),
                         Observer(builder: (_) {
                           return Container(
@@ -337,7 +368,8 @@ class RegistrationPageState extends State<RegistrationPage> {
                         },
                         child: _isLogging 
                           ? const CircularProgressIndicator( color: Colors.white, ) 
-                          : const Text('Cadastrar', style: TextStyle(
+                          : Text(wordTranslated('register'), 
+                          style: const TextStyle(
                             fontFamily: 'Nunito',
                             fontWeight: FontWeight.bold, 
                             fontSize: 30

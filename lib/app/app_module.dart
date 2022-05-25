@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_akwen/app/global/services/service.dart';
+import 'package:flutter_akwen/app/global/utils/translation/translation_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_module.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_1/desafio1_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_module.dart';
@@ -46,6 +47,7 @@ class AppModule extends Module {
     Bind.singleton((i) => ResultadoStore()),
     Bind.singleton((i) => GroupStore()),
     Bind.singleton((i) => Group2Store()),
+    Bind.singleton((i) => TranslationStore())
   ];
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/components/img_background.dart';
 import 'package:flutter_akwen/app/global/utils/audio.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
+import 'package:flutter_akwen/app/global/utils/translation/translation_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/components/grid_images.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/components/show_dialog.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_2/desafio2_store.dart';
@@ -35,6 +36,16 @@ class _PageDesafio02State extends State<PageDesafio02> {
     } else {
       playaudioChallenge(false);
       ShowDialogErrorDesafio02(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
+    }
+  }
+
+  final TranslationStore translationStore = Modular.get();
+  
+  String wordTranslated() {
+    if (translationStore.translation == 'PT-BR') {
+      return translationStore.confirmPTBR;
+    } else {
+      return translationStore.confirmAkwe;
     }
   }
 
@@ -117,8 +128,8 @@ class _PageDesafio02State extends State<PageDesafio02> {
                     shadowColor: Colors.black
                   ),
                   onPressed: !store.isChosen ? null : () => confirm(context),
-                  child: const Text('Confirmar',
-                    style: TextStyle(
+                  child: Text(wordTranslated(),
+                    style: const TextStyle(
                       fontFamily: 'Nunito', 
                       fontWeight: FontWeight.bold,
                       fontSize: 30
