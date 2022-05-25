@@ -69,7 +69,7 @@ abstract class _TranslationStoreBase with Store {
   @observable
   String translateAkewePtbrPTBR = 'Traduza a frase abaixo de akwẽ para português';
   @observable
-  String translateAkewePtbrAkwe = 'Ikuikre kmãspikranã akwẽ hawi ktâwankõ tmē';
+  String translateAkewePtbrAkwe = 'Ikuikre kmãspikranã akwẽ hawi ktâwankõ tmẽ';
   
   @observable
   String translatePtbrAkwePTBR = 'Traduza a frase abaixo de português para akwẽ';
