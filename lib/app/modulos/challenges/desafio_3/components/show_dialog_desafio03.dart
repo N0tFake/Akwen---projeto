@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_akwen/app/global/utils/schemas.dart';
+import 'package:flutter_akwen/app/global/utils/translation/translation_store.dart';
 import 'package:flutter_akwen/app/modulos/challenges/desafio_3/desafio3_store.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 Future ShowDialogRightDesafio03(
@@ -10,6 +12,23 @@ Future ShowDialogRightDesafio03(
   bool isRight,
   ){
     final Size screen = MediaQuery.of(context).size;
+
+    final TranslationStore translationStore = Modular.get();
+    String wordTranslated(bool _isRight) {
+      if(_isRight){
+        if (translationStore.translation == 'PT-BR') {
+          return translationStore.rightAnswerPTBR;
+        } else {
+          return translationStore.rightAnswerAkwe;
+        }
+      }else {
+        if (translationStore.translation == 'PT-BR') {
+          return translationStore.wrongAnswerPTBR;
+        } else {
+          return translationStore.wrongAnswerAkwe;
+        }
+      }
+    }
     return showGeneralDialog(
       barrierLabel: "Label",
       barrierDismissible: false,
@@ -33,7 +52,7 @@ Future ShowDialogRightDesafio03(
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(isRight ?'Resposta certa' : 'Resposta errada', 
+                      Text(wordTranslated(isRight), 
                         style: textStyle(),
                       ),
                       const SizedBox(width: 20,),
