@@ -16,6 +16,7 @@ class _LoadingChallengeState extends State<LoadingChallenge> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Center(
           child:  Text('Carregando ...', style: TextStyle(
             fontFamily: 'Nunito',

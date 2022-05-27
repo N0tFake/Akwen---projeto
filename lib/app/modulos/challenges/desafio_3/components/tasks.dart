@@ -77,10 +77,10 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    //final String questionOrder = widget.isAkwe == true ? "Akwẽ para português" : "Português para Akwẽ";
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Column(

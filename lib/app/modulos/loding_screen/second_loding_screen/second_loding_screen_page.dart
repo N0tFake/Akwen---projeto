@@ -31,6 +31,7 @@ class _SecondLodingScreenPageState extends State<SecondLodingScreenPage> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Container(
           padding: const EdgeInsets.only(top: 45),
           color: Colors.white24,

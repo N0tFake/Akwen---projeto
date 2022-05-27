@@ -70,6 +70,7 @@ class _PageDesafioState extends State<PageDesafio> {
     }
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Padding(
           padding: const EdgeInsets.only(top: 20),
           child: Column(
