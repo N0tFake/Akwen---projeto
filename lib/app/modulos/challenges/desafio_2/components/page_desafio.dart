@@ -65,6 +65,7 @@ class _PageDesafio02State extends State<PageDesafio02> {
       store.setNumPosition(corrent);
       return Scaffold(
         body: ImgBackground(
+          height: false,
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Column(

@@ -112,213 +112,216 @@ class _LoginPageState extends State<LoginPage> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 0.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(20))),
-                    child: Row(
-                      children: [
-                        const Text('TRADUÇÃO ', 
-                          style: TextStyle(
-                            fontFamily: 'Nunito', 
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15
-                          )),
-                        const Icon(Icons.translate),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Observer(builder: (_) {
-                          return DropdownButton<String>(
-                            value: translationStore.translation == 'PT-BR' ? 'PT-BR' : 'AKWẼ',
-                            icon: const Icon(Icons.arrow_downward),
-                            elevation: 16,
-                            style: const TextStyle(color: redColor),
-                            underline: Container(
-                              height: 2,
-                              color: redColor,
-                            ),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownValue = newValue!;
-                                /* dropValue(); */
-                              });
-                              translationStore.setTranslation(newValue!);
-                            },
-                            items: <String>['PT-BR', 'AKWẼ']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          );
-                        }),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        height: true,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 50.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const CircleAvatar(
-                      maxRadius: 70,
-                      backgroundColor: redColor,
-                      child: Image(
-                        image: AssetImage('assets/images/logo/LOGO-APP.png'),
-                      ),
-                    ),
-                    _ColumnSpace(0.04),
-                    _Title('Email ou Username'),
-                    _ColumnSpace(0.02),
                     Container(
+                      padding: const EdgeInsets.fromLTRB(8.0, 25.0, 8.0, 8.0),
                       decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black38,
-                            blurRadius: 25,
-                            offset: Offset(0, 10),
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.only(bottomLeft: Radius.circular(20))),
+                      child: Row(
+                        children: [
+                          const Text('TRADUÇÃO ', 
+                            style: TextStyle(
+                              fontFamily: 'Nunito', 
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15
+                            )),
+                          const Icon(Icons.translate),
+                          const SizedBox(
+                            width: 10,
                           ),
+                          Observer(builder: (_) {
+                            return DropdownButton<String>(
+                              value: translationStore.translation == 'PT-BR' ? 'PT-BR' : 'AKWẼ',
+                              icon: const Icon(Icons.arrow_downward),
+                              elevation: 16,
+                              style: const TextStyle(color: redColor),
+                              underline: Container(
+                                height: 2,
+                                color: redColor,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  dropdownValue = newValue!;
+                                  /* dropValue(); */
+                                });
+                                translationStore.setTranslation(newValue!);
+                              },
+                              items: <String>['PT-BR', 'AKWẼ']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            );
+                          }),
                         ],
                       ),
-                      width: screen.width * 0.8,
-                      child: TextFormField(
-                        controller: store.emailController,
-                        cursorColor: Colors.green,
-                        decoration: const InputDecoration(
-                          hintText: 'Email ou Username',
-                          filled: true,
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: greenColor, width: 2.0),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(25.0),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(25.0),
-                            ),
-                          ),
+                    ),
+                  ],
+                ),
+              ),
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircleAvatar(
+                        maxRadius: 70,
+                        backgroundColor: redColor,
+                        child: Image(
+                          image: AssetImage('assets/images/logo/LOGO-APP.png'),
                         ),
                       ),
-                    ),
-                    _ColumnSpace(0.04),
-                    _Title(wordTranslated('password')),
-                    _ColumnSpace(0.02),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black38,
-                            blurRadius: 25,
-                            offset: Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      width: screen.width * 0.8,
-                      child: TextFormField(
-                        controller: store.passwordController,
-                        cursorColor: Colors.green,
-                        decoration: InputDecoration(
-                            hintText: 'Senha',
-                            focusedBorder: const OutlineInputBorder(
+                      _ColumnSpace(0.04),
+                      _Title('Email ou Username'),
+                      _ColumnSpace(0.02),
+                      Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black38,
+                              blurRadius: 25,
+                              offset: Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        width: screen.width * 0.8,
+                        child: TextFormField(
+                          controller: store.emailController,
+                          cursorColor: Colors.green,
+                          decoration: const InputDecoration(
+                            hintText: 'Email ou Username',
+                            filled: true,
+                            fillColor: Colors.white,
+                            focusedBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: greenColor, width: 2.0),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
                             ),
-                            enabledBorder: const OutlineInputBorder(
+                            enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(25.0),
                               ),
                             ),
-                            suffixIcon: IconButton(
-                                icon: Icon(_showPassword
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                hoverColor: Colors.transparent,
-                                color: _showPassword ? Colors.grey : greenColor,
-                                onPressed: () {
-                                  setState(() {
-                                    _showPassword = !_showPassword;
-                                  });
-                                })),
-                        obscureText: _showPassword,
+                          ),
+                        ),
                       ),
-                    ),
-                    _ColumnSpace(0.04),
-                    Observer(builder: (_) {
-                      return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              fixedSize: Size(screen.width * 0.8, 50),
-                              primary: redColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25)),
-                              shadowColor: Colors.black),
-                          onPressed: () {
-                            store.login();
-                            if (!store.logged) {
-                              setState(() {
-                                _isLogging = true;
-                              });
-                            }
-                          },
-                          child: _isLogging
-                              ? const CircularProgressIndicator(
-                                  color: Colors.white,
-                                )
-                              : Text(
-                                  wordTranslated('login'),
-                                  style: const TextStyle(
-                                      fontFamily: 'Nunito',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
-                                ));
-                    }),
-                    _ColumnSpace(0.04),
-                    Observer(builder: (_) {
-                      return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              fixedSize: Size(screen.width * 0.8, 50),
-                              primary: blueColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25)),
-                              shadowColor: Colors.black),
-                          onPressed: () => Modular.to.navigate('/registration'),
-                          child: Text(
-                            wordTranslated('register'),
-                            style: const TextStyle(
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30),
-                          ));
-                    })
-                  ],
+                      _ColumnSpace(0.04),
+                      _Title(wordTranslated('password')),
+                      _ColumnSpace(0.02),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black38,
+                              blurRadius: 25,
+                              offset: Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        width: screen.width * 0.8,
+                        child: TextFormField(
+                          controller: store.passwordController,
+                          cursorColor: Colors.green,
+                          decoration: InputDecoration(
+                              hintText: 'Senha',
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: greenColor, width: 2.0),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(25.0),
+                                ),
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.transparent),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(25.0),
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                  icon: Icon(_showPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  hoverColor: Colors.transparent,
+                                  color: _showPassword ? Colors.grey : greenColor,
+                                  onPressed: () {
+                                    setState(() {
+                                      _showPassword = !_showPassword;
+                                    });
+                                  })),
+                          obscureText: _showPassword,
+                        ),
+                      ),
+                      _ColumnSpace(0.04),
+                      Observer(builder: (_) {
+                        return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                fixedSize: Size(screen.width * 0.8, 50),
+                                primary: redColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
+                                shadowColor: Colors.black),
+                            onPressed: () {
+                              store.login();
+                              if (!store.logged) {
+                                setState(() {
+                                  _isLogging = true;
+                                });
+                              }
+                            },
+                            child: _isLogging
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    wordTranslated('login'),
+                                    style: const TextStyle(
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30),
+                                  ));
+                      }),
+                      _ColumnSpace(0.04),
+                      Observer(builder: (_) {
+                        return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                fixedSize: Size(screen.width * 0.8, 50),
+                                primary: blueColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
+                                shadowColor: Colors.black),
+                            onPressed: () => Modular.to.navigate('/registration'),
+                            child: Text(
+                              wordTranslated('register'),
+                              style: const TextStyle(
+                                  fontFamily: 'Nunito',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30),
+                            ));
+                      })
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

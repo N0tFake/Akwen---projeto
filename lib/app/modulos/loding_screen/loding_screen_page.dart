@@ -30,6 +30,7 @@ class LodingScreenPageState extends State<LodingScreenPage> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Column(
           children: [
             Expanded(

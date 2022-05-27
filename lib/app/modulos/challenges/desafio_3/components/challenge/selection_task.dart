@@ -79,6 +79,7 @@ class _SelectionTasksState extends State<SelectionTasks> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Column(

@@ -62,6 +62,7 @@ class ResultadoPageState extends State<ResultadoPage> {
 
     return Scaffold(
       body: ImgBackground(
+        height: false,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

@@ -137,6 +137,7 @@ class RegistrationPageState extends State<RegistrationPage> {
       body: SingleChildScrollView(
         reverse: true,
         child: ImgBackground(
+          height: false,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: Form(
@@ -148,7 +149,8 @@ class RegistrationPageState extends State<RegistrationPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    _columnSpace('inputSpace'),
+                    //_columnSpace('inputSpace'),
+                    const SizedBox(height: 20),
                     Container(
                       width: screen.width * 0.8,
                       padding: const EdgeInsets.all(10),
