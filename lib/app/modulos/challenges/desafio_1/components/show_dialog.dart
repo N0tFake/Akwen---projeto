@@ -7,6 +7,16 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
+final TranslationStore translationStore = Modular.get();
+
+String wordTranslated(String word){
+  if(translationStore.translation == 'PT-BR'){
+    return translationStore.nextPTBR;
+  } else {
+    return translationStore.nextAkwe;
+  }
+}
+
 Future ShowDialogRight(
     BuildContext context,
     Function() _color,
@@ -98,7 +108,7 @@ Future ShowDialogRight(
                         storeGroup2.setPTS(10);
                       }
                     },
-                    child: Text('Proximo', style: _textStyle(false)))
+                    child: Text(wordTranslated(), style: _textStyle(false)))
               ],
             ),
           ),
@@ -189,7 +199,7 @@ Future ShowDialogError(
                         storeGroup2.setNumDesfio(1);
                       }
                     },
-                    child: Text('Proximo', style: _textStyle(false)))
+                    child: Text(wordTranslated(), style: _textStyle(false)))
               ],
             ),
           ),

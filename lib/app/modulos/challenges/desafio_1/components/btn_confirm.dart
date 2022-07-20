@@ -15,7 +15,7 @@ class _BtnConfirmState extends State<BtnConfirm> {
     Desafio1Store store = Modular.get();
     return ElevatedButton(
       onPressed: !store.isChosen ? null : tester(), 
-      child: Text('${store.opcEscolhida}')
+      child: Text(store.opcEscolhida)
     );
   }
 

@@ -25,7 +25,6 @@ class _PageDesafio03State extends State<PageDesafio03> {
             phraseCorrect: store.phrasePTBR1, 
             isAkwe: true
           );
-          break;
         default:
           return const Text('Error');
       }

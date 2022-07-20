@@ -14,20 +14,23 @@ Future ShowDialogRightDesafio03(
     final Size screen = MediaQuery.of(context).size;
 
     final TranslationStore translationStore = Modular.get();
-    String wordTranslated(bool _isRight) {
-      if(_isRight){
-        if (translationStore.translation == 'PT-BR') {
-          return translationStore.rightAnswerPTBR;
-        } else {
-          return translationStore.rightAnswerAkwe;
+    String wordTranslated(bool _isRight, String word) {
+      if (translationStore.translation == 'PT-BR'){
+        switch(word){
+          case 'next':
+             return translationStore.nextPTBR;
+          case 'answer':
+            return _isRight ? translationStore.rightAnswerPTBR : translationStore.wrongAnswerPTBR;
         }
-      }else {
-        if (translationStore.translation == 'PT-BR') {
-          return translationStore.wrongAnswerPTBR;
-        } else {
-          return translationStore.wrongAnswerAkwe;
+      }else{
+        switch(word){
+          case 'next':
+             return translationStore.nextAkwe;
+          case 'answer':
+            return _isRight ? translationStore.rightAnswerAkwe : translationStore.wrongAnswerAkwe;
         }
       }
+      return word;
     }
     return showGeneralDialog(
       barrierLabel: "Label",
@@ -52,7 +55,7 @@ Future ShowDialogRightDesafio03(
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(wordTranslated(isRight), 
+                      Text(wordTranslated(isRight, 'answer'), 
                         style: textStyle(),
                       ),
                       const SizedBox(width: 20,),
@@ -87,7 +90,7 @@ Future ShowDialogRightDesafio03(
                       store.answerReset();
                       Navigator.of(context).pop();
                     }, 
-                    child: Text('Proximo', style: textStyle())
+                    child: Text(wordTranslated(false ,"next"), style: textStyle())
                   )
 
                 ],

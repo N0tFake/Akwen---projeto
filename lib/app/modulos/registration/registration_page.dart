@@ -87,6 +87,12 @@ class RegistrationPageState extends State<RegistrationPage> {
   String wordTranslated(String word){
     if(translationStore.translation == 'PT-BR'){
       switch(word){
+        case 'cadastro':
+          return translationStore.cadastroPTBR;
+        case 'accountStudentNotEmail':
+          return translationStore.accountStudentNotEmailPTBR;
+        case 'accountStudent':
+          return translationStore.accountStudentPTBR;
         case 'name':
           return translationStore.namePTBR;
         case 'password':
@@ -98,6 +104,12 @@ class RegistrationPageState extends State<RegistrationPage> {
       }
     } else {
       switch(word){
+        case 'cadastro':
+          return translationStore.cadastroAkwe;
+        case 'accountStudentNotEmail':
+          return translationStore.accountStudentNotEmailAkwe;
+        case 'accountStudent':
+          return translationStore.accountStudentAkwe;
         case 'name':
           return translationStore.nameAkwe;
         case 'password':
@@ -116,8 +128,8 @@ class RegistrationPageState extends State<RegistrationPage> {
     final Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro', 
-          style: TextStyle(
+        title: Text(wordTranslated('cadastro'), 
+          style: const TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.bold,
             fontSize: 30
@@ -183,11 +195,11 @@ class RegistrationPageState extends State<RegistrationPage> {
                           const SizedBox(
                             width: 20,
                           ),
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              'Conta para estudante.\nObs: Contas para estudante não precisam de email.',
+                              wordTranslated('accountStudent') + ".\nObs: "+ wordTranslated('accountStudentNotEmail') + ".",
                               textAlign: TextAlign.start,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25
@@ -204,7 +216,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                       children: [
                         Observer(builder: (_) {
                           return Text(
-                            'Email',
+                            'E-mail',
                             style: TextStyle(
                               fontFamily: 'Nunito',
                               fontWeight: FontWeight.bold,
@@ -230,11 +242,11 @@ class RegistrationPageState extends State<RegistrationPage> {
                                 if(store.isStudent){
                                   return null;
                                 } else if(email != null && !EmailValidator.validate(email)){
-                                  return 'Email invalido';
+                                  return 'E-mail invalido';
                                 }
                                 return null;
                               },
-                              decoration:  InputDecorationCustom('email@mail.com'),
+                              decoration:  InputDecorationCustom('exemple@mail.com'),
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               controller: store.emailController,
                               onEditingComplete: _node.nextFocus,

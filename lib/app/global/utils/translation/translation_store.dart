@@ -32,6 +32,21 @@ abstract class _TranslationStoreBase with Store {
   String resgisterAkwe = 'Aisikuikrenã';
 
   @observable
+  String accountStudentNotEmailPTBR = 'Conta para estudante não precisa de e-mail';
+  @observable
+  String accountStudentNotEmailAkwe = 'Isanãmrkwai sbreze tô tamé tômkã e-mail';
+
+  @observable 
+  String accountStudentPTBR = 'Conta para estudante';
+  @observable
+  String accountStudentAkwe = 'Isanãmrkwai sbreze';
+  
+  @observable 
+  String cadastroPTBR = 'Cadastro';
+  @observable
+  String cadastroAkwe = 'Dasikuikre ze';
+
+  @observable
   String namePTBR = 'Nome';
   @observable
   String nameAkwe = 'Aisisize';
@@ -40,6 +55,26 @@ abstract class _TranslationStoreBase with Store {
   String confirmPasswordPTBR = 'Confirmar Senha';
   @observable
   String confirmPasswordAkwe = 'Ikmãtteze Watinã';
+
+  @observable 
+  String challengePTBR = 'Desafio';
+  @observable
+  String challengeAkwe = 'Dasikmãstombo ze';
+
+  @observable
+  String resultChallengePTBR = 'Resultado do desafio:';
+  @observable
+  String resultChallengeAkwe = 'Istõmhã dasikmãstombo ze:';
+
+  @observable 
+  String nextPTBR = 'Próximo';
+  @observable
+  String nextAkwe = 'Taparimhã';
+
+  /* @observable 
+  String accountStudentPTBR = 'Conta para estudante';
+  @observable
+  String accountStudentAkwe = 'Isanãmrkwai sbreze'; */
 
   @observable
   String rightAnswerPTBR = 'Resposta Correta';
