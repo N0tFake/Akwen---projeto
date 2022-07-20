@@ -15,4 +15,16 @@ abstract class _HomeStoreBase with Store {
   @observable
   String username = '';
 
+  @observable 
+  bool delete = false;
+  @action 
+  void setDelete() => delete = true;
+
+  @action 
+  void dispose(){
+    uid = '';
+    username = '';
+    delete = false;
+  }
+
 }

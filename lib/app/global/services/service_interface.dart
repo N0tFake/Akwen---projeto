@@ -7,4 +7,5 @@ abstract class IServices{
   Future<DocumentSnapshot> getDataUser(String docUid);
   Future<String> getUidUser();
   Future<DocumentSnapshot> getChallengeDoc(String doc);
+  Future<void> deleteAccount(var uid);
 }
