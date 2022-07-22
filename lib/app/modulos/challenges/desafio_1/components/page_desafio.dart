@@ -30,7 +30,8 @@ class _PageDesafioState extends State<PageDesafio> {
 
   void confirm(BuildContext context) {
     if(widget.challenge == 'desafio1'){
-      if (store.opcEscolhida == widget.data['akwe'][store.numPosition]) {
+      store.setAnswerCorrent(widget.data['akwe'][store.numPosition]);
+      if (store.opcEscolhida == store.answerCorrent) {
         playaudioChallenge(true);
         ShowDialogRight(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       } else {
@@ -38,7 +39,8 @@ class _PageDesafioState extends State<PageDesafio> {
         ShowDialogError(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       }
     }else if(widget.challenge == 'desafio2'){
-      if (store.opcEscolhida == widget.data['ptbr'][store.numPosition]) {
+      store.setAnswerCorrent(widget.data['ptbr'][store.numPosition]);
+      if (store.opcEscolhida == store.answerCorrent) {
         playaudioChallenge(true);
         ShowDialogRight(context, _color, _textStyle, store, storeGroup, storeGroup2, widget.challenge);
       } else {
@@ -64,9 +66,9 @@ class _PageDesafioState extends State<PageDesafio> {
     final Size screen = MediaQuery.of(context).size;
     String titleQuestion = 'Error';
     if(widget.challenge == 'desafio1'){
-      titleQuestion = 'Qual o nome em Akwẽ do(a) ${widget.data['ptbr'][store.numPosition]}';
+      titleQuestion = 'Qual o nome em Akwẽ do(a) ${widget.data['ptbr'][store.numPosition]}?';
     }else if(widget.challenge == 'desafio2'){
-      titleQuestion = 'Nanēp ${widget.data['akwe'][store.numPosition]} īsisize ktâwankõnã';
+      titleQuestion = 'Nanēp ${widget.data['akwe'][store.numPosition]} īsisize ktâwankõnã?';
     }
     return Scaffold(
       body: ImgBackground(

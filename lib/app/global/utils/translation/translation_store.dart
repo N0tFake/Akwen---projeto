@@ -71,11 +71,6 @@ abstract class _TranslationStoreBase with Store {
   @observable
   String nextAkwe = 'Taparimhã';
 
-  /* @observable 
-  String accountStudentPTBR = 'Conta para estudante';
-  @observable
-  String accountStudentAkwe = 'Isanãmrkwai sbreze'; */
-
   @observable
   String rightAnswerPTBR = 'Resposta Correta';
   @observable
@@ -86,6 +81,11 @@ abstract class _TranslationStoreBase with Store {
   @observable
   String wrongAnswerAkwe = 'Siwakru';
   
+  @observable 
+  String answerCorrectPTBR = 'Resposta certa';
+  @observable
+  String answerCorrectAkwe = 'Ikwãiba';
+
   @observable
   String youReceivedPTBR = 'Você Recebeu';
   @observable

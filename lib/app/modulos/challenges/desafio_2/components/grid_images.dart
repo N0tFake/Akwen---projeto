@@ -39,7 +39,6 @@ class _GridImagesState extends State<GridImages> {
                 List<int> tirados = [];
                 for(var i=0; i<3; i++){
                   if(Random().nextInt(2) == 1 && repete == false){
-                    print('imagem:  ${widget.corrent}');
                     listImagens.add(data['Imagens'][widget.corrent]);
                     tirados.add(widget.corrent);
                     repete = true;
@@ -63,6 +62,7 @@ class _GridImagesState extends State<GridImages> {
                   listImagens[2] = data['Imagens'][store.numPosition];
                   store.setPosCorrent(2);
                 }
+                store.answerCorrent = listImagens[store.posCorrent];
                 return RadioButtons(listImages: listImagens, challenge: widget.challenge,);
               } else {
                 return const Center(child: CircularProgressIndicator(),);

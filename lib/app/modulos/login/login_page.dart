@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: store.passwordController,
                           cursorColor: Colors.green,
                           decoration: InputDecoration(
-                              hintText: 'Senha',
+                              hintText: wordTranslated('password'),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: greenColor, width: 2.0),

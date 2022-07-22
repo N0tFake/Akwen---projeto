@@ -24,18 +24,18 @@ mixin _$Desafio1Store on _Desafio1StoreBase, Store {
     });
   }
 
-  final _$nameCorrentAtom = Atom(name: '_Desafio1StoreBase.nameCorrent');
+  final _$answerCorrentAtom = Atom(name: '_Desafio1StoreBase.answerCorrent');
 
   @override
-  String get nameCorrent {
-    _$nameCorrentAtom.reportRead();
-    return super.nameCorrent;
+  String get answerCorrent {
+    _$answerCorrentAtom.reportRead();
+    return super.answerCorrent;
   }
 
   @override
-  set nameCorrent(String value) {
-    _$nameCorrentAtom.reportWrite(value, super.nameCorrent, () {
-      super.nameCorrent = value;
+  set answerCorrent(String value) {
+    _$answerCorrentAtom.reportWrite(value, super.answerCorrent, () {
+      super.answerCorrent = value;
     });
   }
 
@@ -84,11 +84,11 @@ mixin _$Desafio1Store on _Desafio1StoreBase, Store {
   }
 
   @override
-  void setNameCorrent(String value) {
+  void setAnswerCorrent(String value) {
     final _$actionInfo = _$_Desafio1StoreBaseActionController.startAction(
-        name: '_Desafio1StoreBase.setNameCorrent');
+        name: '_Desafio1StoreBase.setAnswerCorrent');
     try {
-      return super.setNameCorrent(value);
+      return super.setAnswerCorrent(value);
     } finally {
       _$_Desafio1StoreBaseActionController.endAction(_$actionInfo);
     }
@@ -120,7 +120,7 @@ mixin _$Desafio1Store on _Desafio1StoreBase, Store {
   String toString() {
     return '''
 numPosition: ${numPosition},
-nameCorrent: ${nameCorrent},
+answerCorrent: ${answerCorrent},
 opcEscolhida: ${opcEscolhida},
 isChosen: ${isChosen}
     ''';

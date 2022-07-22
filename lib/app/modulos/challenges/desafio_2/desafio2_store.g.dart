@@ -24,6 +24,21 @@ mixin _$Desafio2Store on _Desafio2StoreBase, Store {
     });
   }
 
+  final _$answerCorrentAtom = Atom(name: '_Desafio2StoreBase.answerCorrent');
+
+  @override
+  String get answerCorrent {
+    _$answerCorrentAtom.reportRead();
+    return super.answerCorrent;
+  }
+
+  @override
+  set answerCorrent(String value) {
+    _$answerCorrentAtom.reportWrite(value, super.answerCorrent, () {
+      super.answerCorrent = value;
+    });
+  }
+
   final _$numPositionAtom = Atom(name: '_Desafio2StoreBase.numPosition');
 
   @override
@@ -84,6 +99,17 @@ mixin _$Desafio2Store on _Desafio2StoreBase, Store {
   }
 
   @override
+  void setAnswerCorrent(String value) {
+    final _$actionInfo = _$_Desafio2StoreBaseActionController.startAction(
+        name: '_Desafio2StoreBase.setAnswerCorrent');
+    try {
+      return super.setAnswerCorrent(value);
+    } finally {
+      _$_Desafio2StoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setNumPosition(int value) {
     final _$actionInfo = _$_Desafio2StoreBaseActionController.startAction(
         name: '_Desafio2StoreBase.setNumPosition');
@@ -120,6 +146,7 @@ mixin _$Desafio2Store on _Desafio2StoreBase, Store {
   String toString() {
     return '''
 posCorrent: ${posCorrent},
+answerCorrent: ${answerCorrent},
 numPosition: ${numPosition},
 isCorrent: ${isCorrent},
 isChosen: ${isChosen}

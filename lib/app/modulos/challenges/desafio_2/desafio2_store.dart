@@ -12,6 +12,12 @@ abstract class _Desafio2StoreBase with Store {
   void setPosCorrent(int value) => posCorrent = value;
 
   @observable
+  String answerCorrent = '';
+
+  @action
+  void setAnswerCorrent(String value) => answerCorrent = value;
+
+  @observable
   int numPosition = 0; // Posição da imagem certa
 
   @action

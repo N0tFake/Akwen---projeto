@@ -87,7 +87,7 @@ class _ButtonChallengeState extends State<ButtonChallenge> {
                   challengeTranslated() + ' ${widget.number}',
                   style: TextStyle(
                       fontFamily: 'Nunito',
-                      fontSize: translationStore.translation == 'PT-BR'? 70 : 44,
+                      fontSize: translationStore.translation == 'PT-BR'? 70 : 35,
                       fontWeight: FontWeight.w800),
                 ),
               );

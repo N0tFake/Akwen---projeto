@@ -10,6 +10,7 @@ Future ShowDialogRightDesafio03(
   Function textStyle, 
   Desafio3Store store,
   bool isRight,
+  String answerCorrect
   ){
     final Size screen = MediaQuery.of(context).size;
 
@@ -21,6 +22,8 @@ Future ShowDialogRightDesafio03(
              return translationStore.nextPTBR;
           case 'answer':
             return _isRight ? translationStore.rightAnswerPTBR : translationStore.wrongAnswerPTBR;
+          case 'correct':
+            return translationStore.answerCorrectPTBR;
         }
       }else{
         switch(word){
@@ -28,6 +31,8 @@ Future ShowDialogRightDesafio03(
              return translationStore.nextAkwe;
           case 'answer':
             return _isRight ? translationStore.rightAnswerAkwe : translationStore.wrongAnswerAkwe;
+          case 'correct':
+            return translationStore.answerCorrectAkwe;
         }
       }
       return word;
@@ -48,7 +53,7 @@ Future ShowDialogRightDesafio03(
             ),
             child: SizedBox(
               width: screen.width,
-              height: screen.height * 0.4,
+              height: screen.height * 0.5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -71,7 +76,16 @@ Future ShowDialogRightDesafio03(
                       const Icon(TablerIcons.fish, color: greenColor, size: 40,),
                     ],
                   )
-                  : Container(),
+                  : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(wordTranslated(false, 'correct') + ':', style: textStyle()
+                      ),
+                      const SizedBox(width: 10,),
+                      Text(answerCorrect, style: textStyle()
+                      ),
+                    ],
+                  ),
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
