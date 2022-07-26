@@ -7,6 +7,16 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
+final TranslationStore translationStore = Modular.get();
+
+String wordTranslated(String word){
+  if(translationStore.translation == 'PT-BR'){
+    return translationStore.nextPTBR;
+  } else {
+    return translationStore.nextAkwe;
+  }
+}
+
 Future ShowDialogRight(
     BuildContext context,
     Function() _color,
@@ -98,7 +108,7 @@ Future ShowDialogRight(
                         storeGroup2.setPTS(10);
                       }
                     },
-                    child: Text('Proximo', style: _textStyle(false)))
+                    child: Text(wordTranslated(), style: _textStyle(false)))
               ],
             ),
           ),
@@ -123,15 +133,31 @@ Future ShowDialogError(
     GroupStore storeGroup,
     Group2Store storeGroup2,
     String challenge) {
+
   final Size screen = MediaQuery.of(context).size;
 
   final TranslationStore translationStore = Modular.get();
-  String wordTranslated() {
+  String wordTranslated(String word) {
     if (translationStore.translation == 'PT-BR') {
-      return translationStore.wrongAnswerPTBR;
+      switch(word){
+        case 'answer':
+          return translationStore.wrongAnswerPTBR;
+        case 'correct':
+          return translationStore.answerCorrectPTBR;
+        case 'next':
+             return translationStore.nextPTBR;
+      }
     } else {
-      return translationStore.wrongAnswerAkwe;
+      switch(word){
+        case 'answer':
+          return translationStore.wrongAnswerAkwe;
+        case 'correct':
+          return translationStore.answerCorrectAkwe;
+        case 'next':
+             return translationStore.nextAkwe;
+      }
     }
+    return word;
   }
 
   return showGeneralDialog(
@@ -145,7 +171,7 @@ Future ShowDialogError(
         alignment: Alignment.bottomCenter,
         child: Material(
           borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           child: SizedBox(
             width: screen.width,
             height: screen.height * 0.4,
@@ -157,7 +183,7 @@ Future ShowDialogError(
                   children: [
                     Observer(builder: (_) {
                       return Text(
-                        wordTranslated(),
+                        wordTranslated('answer'),
                         style: _textStyle(false),
                       );
                     }),
@@ -169,6 +195,15 @@ Future ShowDialogError(
                       size: 50,
                       color: Colors.red,
                     ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(wordTranslated('correct') + ':', style: _textStyle(false)
+                    ),
+                    const SizedBox(width: 10,),
+                    Text(store.answerCorrent, style: _textStyle(false),)
                   ],
                 ),
                 ElevatedButton(
@@ -189,7 +224,7 @@ Future ShowDialogError(
                         storeGroup2.setNumDesfio(1);
                       }
                     },
-                    child: Text('Proximo', style: _textStyle(false)))
+                    child: Text(wordTranslated('next'), style: _textStyle(false)))
               ],
             ),
           ),

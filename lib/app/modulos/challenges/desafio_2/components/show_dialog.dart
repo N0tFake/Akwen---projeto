@@ -124,12 +124,27 @@ Future ShowDialogErrorDesafio02(
   final Size screen = MediaQuery.of(context).size;
 
   final TranslationStore translationStore = Modular.get();
-  String wordTranslated() {
+  String wordTranslated(String word) {
     if (translationStore.translation == 'PT-BR') {
-      return translationStore.wrongAnswerPTBR;
+      switch(word){
+        case 'answer':
+          return translationStore.wrongAnswerPTBR;
+        case 'correct':
+          return translationStore.answerCorrectPTBR;
+        case 'next':
+             return translationStore.nextPTBR;
+      }
     } else {
-      return translationStore.wrongAnswerAkwe;
+      switch(word){
+        case 'answer':
+          return translationStore.wrongAnswerAkwe;
+        case 'correct':
+          return translationStore.answerCorrectAkwe;
+        case 'next':
+             return translationStore.nextAkwe;
+      }
     }
+    return word;
   }
 
   return showGeneralDialog(
@@ -146,7 +161,7 @@ Future ShowDialogErrorDesafio02(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           child: SizedBox(
             width: screen.width,
-            height: screen.height * 0.4,
+            height: screen.height * 0.6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -155,7 +170,7 @@ Future ShowDialogErrorDesafio02(
                   children: [
                     Observer(builder: (_) {
                       return Text(
-                        wordTranslated(),
+                        wordTranslated('answer'),
                         style: _textStyle(false),
                       );
                     }),
@@ -167,6 +182,19 @@ Future ShowDialogErrorDesafio02(
                       size: 50,
                       color: Colors.red,
                     ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(wordTranslated('correct') + ':', style: _textStyle(false)
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 200,
+                      height: 200,
+                      child: Image.network(store.answerCorrent),
+                    )
                   ],
                 ),
                 ElevatedButton(

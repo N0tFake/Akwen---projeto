@@ -51,7 +51,7 @@ class Services implements IServices{
   @override
   Future<void> loginUser(String email, String password) async {
     try{
-      print('email: ${email}, senha: ${password}');
+      print('email: $email, senha: $password');
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email, 
         password: password
@@ -66,6 +66,7 @@ class Services implements IServices{
     }
   }
   /// [DESLOGAR]
+  @override
   Future deslogar() async{
     try{
       await FirebaseAuth.instance.signOut();
@@ -77,7 +78,8 @@ class Services implements IServices{
   }
 
  /// funções do [Firestore]
- Future<String> getUidUser() async{
+ @override
+  Future<String> getUidUser() async{
     try{
       final user = auth.currentUser;
       String userUid = user!.uid;
@@ -88,7 +90,8 @@ class Services implements IServices{
     return "Error";
  }
 
- Future<DocumentSnapshot> getDataUser(String docUid) async{
+ @override
+  Future<DocumentSnapshot> getDataUser(String docUid) async{
   CollectionReference collectionReference 
     = FirebaseFirestore
       .instance
@@ -102,7 +105,8 @@ class Services implements IServices{
   return snapshot;
  }
 
- Future<DocumentSnapshot> getChallengeDoc(String doc) async{
+ @override
+  Future<DocumentSnapshot> getChallengeDoc(String doc) async{
   CollectionReference collectionReference 
     = FirebaseFirestore
       .instance
@@ -114,6 +118,18 @@ class Services implements IServices{
     .get();
 
   return snapshot;
+ }
+
+ @override
+  Future<void> deleteAccount(var uid) async{
+    CollectionReference collectionReference 
+      = FirebaseFirestore
+        .instance
+        .collection('users');
+
+    await collectionReference.doc(uid).delete();
+  
+
  }
   
 }

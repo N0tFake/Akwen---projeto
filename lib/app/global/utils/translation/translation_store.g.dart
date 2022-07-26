@@ -114,6 +114,102 @@ mixin _$TranslationStore on _TranslationStoreBase, Store {
     });
   }
 
+  final _$accountStudentNotEmailPTBRAtom =
+      Atom(name: '_TranslationStoreBase.accountStudentNotEmailPTBR');
+
+  @override
+  String get accountStudentNotEmailPTBR {
+    _$accountStudentNotEmailPTBRAtom.reportRead();
+    return super.accountStudentNotEmailPTBR;
+  }
+
+  @override
+  set accountStudentNotEmailPTBR(String value) {
+    _$accountStudentNotEmailPTBRAtom
+        .reportWrite(value, super.accountStudentNotEmailPTBR, () {
+      super.accountStudentNotEmailPTBR = value;
+    });
+  }
+
+  final _$accountStudentNotEmailAkweAtom =
+      Atom(name: '_TranslationStoreBase.accountStudentNotEmailAkwe');
+
+  @override
+  String get accountStudentNotEmailAkwe {
+    _$accountStudentNotEmailAkweAtom.reportRead();
+    return super.accountStudentNotEmailAkwe;
+  }
+
+  @override
+  set accountStudentNotEmailAkwe(String value) {
+    _$accountStudentNotEmailAkweAtom
+        .reportWrite(value, super.accountStudentNotEmailAkwe, () {
+      super.accountStudentNotEmailAkwe = value;
+    });
+  }
+
+  final _$accountStudentPTBRAtom =
+      Atom(name: '_TranslationStoreBase.accountStudentPTBR');
+
+  @override
+  String get accountStudentPTBR {
+    _$accountStudentPTBRAtom.reportRead();
+    return super.accountStudentPTBR;
+  }
+
+  @override
+  set accountStudentPTBR(String value) {
+    _$accountStudentPTBRAtom.reportWrite(value, super.accountStudentPTBR, () {
+      super.accountStudentPTBR = value;
+    });
+  }
+
+  final _$accountStudentAkweAtom =
+      Atom(name: '_TranslationStoreBase.accountStudentAkwe');
+
+  @override
+  String get accountStudentAkwe {
+    _$accountStudentAkweAtom.reportRead();
+    return super.accountStudentAkwe;
+  }
+
+  @override
+  set accountStudentAkwe(String value) {
+    _$accountStudentAkweAtom.reportWrite(value, super.accountStudentAkwe, () {
+      super.accountStudentAkwe = value;
+    });
+  }
+
+  final _$cadastroPTBRAtom = Atom(name: '_TranslationStoreBase.cadastroPTBR');
+
+  @override
+  String get cadastroPTBR {
+    _$cadastroPTBRAtom.reportRead();
+    return super.cadastroPTBR;
+  }
+
+  @override
+  set cadastroPTBR(String value) {
+    _$cadastroPTBRAtom.reportWrite(value, super.cadastroPTBR, () {
+      super.cadastroPTBR = value;
+    });
+  }
+
+  final _$cadastroAkweAtom = Atom(name: '_TranslationStoreBase.cadastroAkwe');
+
+  @override
+  String get cadastroAkwe {
+    _$cadastroAkweAtom.reportRead();
+    return super.cadastroAkwe;
+  }
+
+  @override
+  set cadastroAkwe(String value) {
+    _$cadastroAkweAtom.reportWrite(value, super.cadastroAkwe, () {
+      super.cadastroAkwe = value;
+    });
+  }
+
   final _$namePTBRAtom = Atom(name: '_TranslationStoreBase.namePTBR');
 
   @override
@@ -173,6 +269,98 @@ mixin _$TranslationStore on _TranslationStoreBase, Store {
   set confirmPasswordAkwe(String value) {
     _$confirmPasswordAkweAtom.reportWrite(value, super.confirmPasswordAkwe, () {
       super.confirmPasswordAkwe = value;
+    });
+  }
+
+  final _$challengePTBRAtom = Atom(name: '_TranslationStoreBase.challengePTBR');
+
+  @override
+  String get challengePTBR {
+    _$challengePTBRAtom.reportRead();
+    return super.challengePTBR;
+  }
+
+  @override
+  set challengePTBR(String value) {
+    _$challengePTBRAtom.reportWrite(value, super.challengePTBR, () {
+      super.challengePTBR = value;
+    });
+  }
+
+  final _$challengeAkweAtom = Atom(name: '_TranslationStoreBase.challengeAkwe');
+
+  @override
+  String get challengeAkwe {
+    _$challengeAkweAtom.reportRead();
+    return super.challengeAkwe;
+  }
+
+  @override
+  set challengeAkwe(String value) {
+    _$challengeAkweAtom.reportWrite(value, super.challengeAkwe, () {
+      super.challengeAkwe = value;
+    });
+  }
+
+  final _$resultChallengePTBRAtom =
+      Atom(name: '_TranslationStoreBase.resultChallengePTBR');
+
+  @override
+  String get resultChallengePTBR {
+    _$resultChallengePTBRAtom.reportRead();
+    return super.resultChallengePTBR;
+  }
+
+  @override
+  set resultChallengePTBR(String value) {
+    _$resultChallengePTBRAtom.reportWrite(value, super.resultChallengePTBR, () {
+      super.resultChallengePTBR = value;
+    });
+  }
+
+  final _$resultChallengeAkweAtom =
+      Atom(name: '_TranslationStoreBase.resultChallengeAkwe');
+
+  @override
+  String get resultChallengeAkwe {
+    _$resultChallengeAkweAtom.reportRead();
+    return super.resultChallengeAkwe;
+  }
+
+  @override
+  set resultChallengeAkwe(String value) {
+    _$resultChallengeAkweAtom.reportWrite(value, super.resultChallengeAkwe, () {
+      super.resultChallengeAkwe = value;
+    });
+  }
+
+  final _$nextPTBRAtom = Atom(name: '_TranslationStoreBase.nextPTBR');
+
+  @override
+  String get nextPTBR {
+    _$nextPTBRAtom.reportRead();
+    return super.nextPTBR;
+  }
+
+  @override
+  set nextPTBR(String value) {
+    _$nextPTBRAtom.reportWrite(value, super.nextPTBR, () {
+      super.nextPTBR = value;
+    });
+  }
+
+  final _$nextAkweAtom = Atom(name: '_TranslationStoreBase.nextAkwe');
+
+  @override
+  String get nextAkwe {
+    _$nextAkweAtom.reportRead();
+    return super.nextAkwe;
+  }
+
+  @override
+  set nextAkwe(String value) {
+    _$nextAkweAtom.reportWrite(value, super.nextAkwe, () {
+      super.nextAkwe = value;
     });
   }
 
@@ -237,6 +425,38 @@ mixin _$TranslationStore on _TranslationStoreBase, Store {
   set wrongAnswerAkwe(String value) {
     _$wrongAnswerAkweAtom.reportWrite(value, super.wrongAnswerAkwe, () {
       super.wrongAnswerAkwe = value;
+    });
+  }
+
+  final _$answerCorrectPTBRAtom =
+      Atom(name: '_TranslationStoreBase.answerCorrectPTBR');
+
+  @override
+  String get answerCorrectPTBR {
+    _$answerCorrectPTBRAtom.reportRead();
+    return super.answerCorrectPTBR;
+  }
+
+  @override
+  set answerCorrectPTBR(String value) {
+    _$answerCorrectPTBRAtom.reportWrite(value, super.answerCorrectPTBR, () {
+      super.answerCorrectPTBR = value;
+    });
+  }
+
+  final _$answerCorrectAkweAtom =
+      Atom(name: '_TranslationStoreBase.answerCorrectAkwe');
+
+  @override
+  String get answerCorrectAkwe {
+    _$answerCorrectAkweAtom.reportRead();
+    return super.answerCorrectAkwe;
+  }
+
+  @override
+  set answerCorrectAkwe(String value) {
+    _$answerCorrectAkweAtom.reportWrite(value, super.answerCorrectAkwe, () {
+      super.answerCorrectAkwe = value;
     });
   }
 
@@ -456,14 +676,28 @@ loginPTBR: ${loginPTBR},
 loginAkwe: ${loginAkwe},
 resgisterPTBR: ${resgisterPTBR},
 resgisterAkwe: ${resgisterAkwe},
+accountStudentNotEmailPTBR: ${accountStudentNotEmailPTBR},
+accountStudentNotEmailAkwe: ${accountStudentNotEmailAkwe},
+accountStudentPTBR: ${accountStudentPTBR},
+accountStudentAkwe: ${accountStudentAkwe},
+cadastroPTBR: ${cadastroPTBR},
+cadastroAkwe: ${cadastroAkwe},
 namePTBR: ${namePTBR},
 nameAkwe: ${nameAkwe},
 confirmPasswordPTBR: ${confirmPasswordPTBR},
 confirmPasswordAkwe: ${confirmPasswordAkwe},
+challengePTBR: ${challengePTBR},
+challengeAkwe: ${challengeAkwe},
+resultChallengePTBR: ${resultChallengePTBR},
+resultChallengeAkwe: ${resultChallengeAkwe},
+nextPTBR: ${nextPTBR},
+nextAkwe: ${nextAkwe},
 rightAnswerPTBR: ${rightAnswerPTBR},
 rightAnswerAkwe: ${rightAnswerAkwe},
 wrongAnswerPTBR: ${wrongAnswerPTBR},
 wrongAnswerAkwe: ${wrongAnswerAkwe},
+answerCorrectPTBR: ${answerCorrectPTBR},
+answerCorrectAkwe: ${answerCorrectAkwe},
 youReceivedPTBR: ${youReceivedPTBR},
 youReceivedAkwe: ${youReceivedAkwe},
 backToStartPTBR: ${backToStartPTBR},

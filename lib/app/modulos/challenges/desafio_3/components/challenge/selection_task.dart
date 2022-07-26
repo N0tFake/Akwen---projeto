@@ -51,7 +51,7 @@ class _SelectionTasksState extends State<SelectionTasks> {
     }
 
     playaudioChallenge(isRight);
-    ShowDialogRightDesafio03(context, _textStyle, store, isRight);
+    ShowDialogRightDesafio03(context, _textStyle, store, isRight, widget.phraseCorrect);
     store.resetLists();
   }
 

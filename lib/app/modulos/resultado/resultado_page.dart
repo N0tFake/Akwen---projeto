@@ -44,6 +44,8 @@ class ResultadoPageState extends State<ResultadoPage> {
     String wordTranslated(String word) {
       if (translationStore.translation == 'PT-BR') {
         switch (word) {
+          case 'resultChallenge':
+            return translationStore.resultChallengePTBR;
           case 'received':
             return translationStore.youReceivedPTBR;
           case 'init':
@@ -51,6 +53,8 @@ class ResultadoPageState extends State<ResultadoPage> {
         }
       } else {
         switch (word) {
+          case 'resultChallenge':
+            return translationStore.resultChallengeAkwe;
           case 'received':
             return translationStore.youReceivedAkwe;
           case 'init':
@@ -67,7 +71,7 @@ class ResultadoPageState extends State<ResultadoPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'Resultado do desafio:',
+              wordTranslated('resultChallenge'),
               style: _textStyle(true, 40),
             ),
             Column(

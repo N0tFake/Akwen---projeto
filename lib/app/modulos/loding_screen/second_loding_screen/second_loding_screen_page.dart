@@ -37,7 +37,7 @@ class _SecondLodingScreenPageState extends State<SecondLodingScreenPage> {
           color: Colors.white24,
           child: Column(
             children: [
-              const Text('Parceiros',
+              const Text('Parceiros/Dasikramô',
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 40,

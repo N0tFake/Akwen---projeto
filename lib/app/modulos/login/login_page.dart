@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       _ColumnSpace(0.04),
-                      _Title('Email ou Username'),
+                      _Title('E-mail ou Username'),
                       _ColumnSpace(0.02),
                       Container(
                         decoration: const BoxDecoration(
@@ -202,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: store.emailController,
                           cursorColor: Colors.green,
                           decoration: const InputDecoration(
-                            hintText: 'Email ou Username',
+                            hintText: 'E-mail ou Username',
                             filled: true,
                             fillColor: Colors.white,
                             focusedBorder: OutlineInputBorder(
@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: store.passwordController,
                           cursorColor: Colors.green,
                           decoration: InputDecoration(
-                              hintText: 'Senha',
+                              hintText: wordTranslated('password'),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: greenColor, width: 2.0),

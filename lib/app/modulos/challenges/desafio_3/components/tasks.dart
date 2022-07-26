@@ -47,7 +47,7 @@ class _TasksState extends State<Tasks> {
       isRight = false;
     }
     playaudioChallenge(isRight);
-    ShowDialogRightDesafio03(context, _textStyle, store, isRight);
+    ShowDialogRightDesafio03(context, _textStyle, store, isRight, widget.phraseCorrect);
   }
 
   final TranslationStore translationStore = Modular.get();

@@ -10,24 +10,32 @@ Future ShowDialogRightDesafio03(
   Function textStyle, 
   Desafio3Store store,
   bool isRight,
+  String answerCorrect
   ){
     final Size screen = MediaQuery.of(context).size;
 
     final TranslationStore translationStore = Modular.get();
-    String wordTranslated(bool _isRight) {
-      if(_isRight){
-        if (translationStore.translation == 'PT-BR') {
-          return translationStore.rightAnswerPTBR;
-        } else {
-          return translationStore.rightAnswerAkwe;
+    String wordTranslated(bool _isRight, String word) {
+      if (translationStore.translation == 'PT-BR'){
+        switch(word){
+          case 'next':
+             return translationStore.nextPTBR;
+          case 'answer':
+            return _isRight ? translationStore.rightAnswerPTBR : translationStore.wrongAnswerPTBR;
+          case 'correct':
+            return translationStore.answerCorrectPTBR;
         }
-      }else {
-        if (translationStore.translation == 'PT-BR') {
-          return translationStore.wrongAnswerPTBR;
-        } else {
-          return translationStore.wrongAnswerAkwe;
+      }else{
+        switch(word){
+          case 'next':
+             return translationStore.nextAkwe;
+          case 'answer':
+            return _isRight ? translationStore.rightAnswerAkwe : translationStore.wrongAnswerAkwe;
+          case 'correct':
+            return translationStore.answerCorrectAkwe;
         }
       }
+      return word;
     }
     return showGeneralDialog(
       barrierLabel: "Label",
@@ -45,14 +53,14 @@ Future ShowDialogRightDesafio03(
             ),
             child: SizedBox(
               width: screen.width,
-              height: screen.height * 0.4,
+              height: screen.height * 0.5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(wordTranslated(isRight), 
+                      Text(wordTranslated(isRight, 'answer'), 
                         style: textStyle(),
                       ),
                       const SizedBox(width: 20,),
@@ -68,7 +76,16 @@ Future ShowDialogRightDesafio03(
                       const Icon(TablerIcons.fish, color: greenColor, size: 40,),
                     ],
                   )
-                  : Container(),
+                  : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(wordTranslated(false, 'correct') + ':', style: textStyle()
+                      ),
+                      const SizedBox(width: 10,),
+                      Text(answerCorrect, style: textStyle()
+                      ),
+                    ],
+                  ),
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -87,7 +104,7 @@ Future ShowDialogRightDesafio03(
                       store.answerReset();
                       Navigator.of(context).pop();
                     }, 
-                    child: Text('Proximo', style: textStyle())
+                    child: Text(wordTranslated(false ,"next"), style: textStyle())
                   )
 
                 ],
