@@ -56,7 +56,6 @@ class HomePageState extends State<HomePage> {
                 ),
                 onPressed: (){
                   delete();
-                  user?.delete();
                   Modular.to.navigate(LoginModule.routeName);
                 }, 
                 child: const Text('OK', 
