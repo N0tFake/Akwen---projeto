@@ -39,7 +39,7 @@ class _ButtonChallengeState extends State<ButtonChallenge> {
       } else {
         return translationStore.challengeAkwe;
       }
-    } translationStore.translation == 'PT-BR'? 70 : 44;
+    } 
 
     final Size screen = MediaQuery.of(context).size;
     return Container(
@@ -82,19 +82,19 @@ class _ButtonChallengeState extends State<ButtonChallenge> {
                 color: widget.number == 1 ? redColor : widget.color,
                 borderRadius: BorderRadius.circular(50)),
             child: Observer(builder: (_) {
-              return Expanded(
-                child: Text(
-                  challengeTranslated() + ' ${widget.number}',
-                  style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: translationStore.translation == 'PT-BR'? 70 : 35,
-                      fontWeight: FontWeight.w800),
-                ),
+              return Text(
+                challengeTranslated() + ' ${widget.number}',
+                style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: translationStore.translation == 'PT-BR' ? 70 : 35,
+                fontWeight: FontWeight.w800
+              )
               );
             }),
           )),
     );
   }
+
 
   Future alert(BuildContext context) {
     return showDialog(

@@ -30,9 +30,9 @@ Future ShowDialogRight(
 
   String wordTranslated() {
     if (translationStore.translation == 'PT-BR') {
-      return translationStore.rightAnswerPTBR;
+      return translationStore.nextPTBR;
     } else {
-      return translationStore.rightAnswerAkwe;
+      return translationStore.nextAkwe;
     }
   }
 

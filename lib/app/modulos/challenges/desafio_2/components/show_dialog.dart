@@ -18,12 +18,23 @@ Future ShowDialogRightDesafio02(
   final Size screen = MediaQuery.of(context).size;
 
   final TranslationStore translationStore = Modular.get();
-  String wordTranslated() {
+  String wordTranslated(String word) {
     if (translationStore.translation == 'PT-BR') {
-      return translationStore.rightAnswerPTBR;
+      switch(word){
+        case 'right':
+          return translationStore.rightAnswerPTBR;
+        case 'next':
+          return translationStore.nextPTBR;
+      }
     } else {
-      return translationStore.rightAnswerAkwe;
+      switch(word){
+        case 'right':
+          return translationStore.rightAnswerAkwe;
+        case 'next':
+          return translationStore.nextAkwe;
+      }
     }
+    return word;
   }
 
   return showGeneralDialog(
@@ -49,7 +60,7 @@ Future ShowDialogRightDesafio02(
                   children: [
                     Observer(builder: (_) {
                       return Text(
-                        wordTranslated(),
+                        wordTranslated('right'),
                         style: _textStyle(false),
                       );
                     }),
@@ -96,7 +107,7 @@ Future ShowDialogRightDesafio02(
                         storeGroup2.setPTS(10);
                       }
                     },
-                    child: Text('Proximo', style: _textStyle(false)))
+                    child: Text(wordTranslated('next'), style: _textStyle(false)))
               ],
             ),
           ),
@@ -213,7 +224,7 @@ Future ShowDialogErrorDesafio02(
                         storeGroup2.setNumDesfio(1);
                       }
                     },
-                    child: Text('Proximo', style: _textStyle(false)))
+                    child: Text(wordTranslated('next'), style: _textStyle(false)))
               ],
             ),
           ),
