@@ -106,6 +106,7 @@ Future ShowDialogRightDesafio02(
                         storeGroup2.setNumDesfio(1);
                         storeGroup2.setPTS(10);
                       }
+                      store.isChosen = false;
                     },
                     child: Text(wordTranslated('next'), style: _textStyle(false)))
               ],
@@ -223,6 +224,7 @@ Future ShowDialogErrorDesafio02(
                         Navigator.of(context).pop();
                         storeGroup2.setNumDesfio(1);
                       }
+                      store.isChosen = false;
                     },
                     child: Text(wordTranslated('next'), style: _textStyle(false)))
               ],
