@@ -28,12 +28,27 @@ Future ShowDialogRight(
   final Size screen = MediaQuery.of(context).size;
   final TranslationStore translationStore = Modular.get();
 
-  String wordTranslated() {
+  String wordTranslated(String word) {
     if (translationStore.translation == 'PT-BR') {
-      return translationStore.rightAnswerPTBR;
+      switch(word){
+        case 'answer':
+          return translationStore.rightAnswerPTBR;
+        case 'correct':
+          return translationStore.answerCorrectPTBR;
+        case 'next':
+             return translationStore.nextPTBR;
+      }
     } else {
-      return translationStore.rightAnswerAkwe;
+      switch(word){
+        case 'answer':
+          return translationStore.rightAnswerAkwe;
+        case 'correct':
+          return translationStore.answerCorrectAkwe;
+        case 'next':
+             return translationStore.nextAkwe;
+      }
     }
+    return word;
   }
 
   return showGeneralDialog(
@@ -59,7 +74,7 @@ Future ShowDialogRight(
                   children: [
                     Observer(builder: (_) {
                       return Text(
-                        wordTranslated(),
+                        wordTranslated('correct'),
                         style: _textStyle(false),
                       );
                     }),
@@ -108,7 +123,7 @@ Future ShowDialogRight(
                         storeGroup2.setPTS(10);
                       }
                     },
-                    child: Text(wordTranslated(), style: _textStyle(false)))
+                    child: Text(wordTranslated('next'), style: _textStyle(false)))
               ],
             ),
           ),
